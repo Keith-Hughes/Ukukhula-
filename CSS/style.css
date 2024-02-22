@@ -1,0 +1,152 @@
+body {
+  display: flex;
+  background-image: url("/Images/loginBackground.jpg");
+  background-repeat:no-repeat;
+  background-repeat: repeat;
+  font-size: 1.6rem;
+  font-family: "Open Sans", sans-serif;
+  color: #2b3e51;
+  justify-content: center;
+  margin: 0%;
+
+}
+
+#login-form-wrap h2{
+margin-top: 2%;
+}
+
+#login-form-wrap h2,h4{
+  color: #dedddd;
+  margin: 0;
+  font-size: 1.6rem;
+  font-family: monospace;}
+#login-form-wrap h4{
+  font-size: large;
+}
+
+
+
+
+p {
+  position: relative;
+}
+
+img {
+  width:30%;
+  margin: auto;
+}
+
+#login-form-wrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #babbba4b;
+  margin: 10% 5%;
+  width: 800px;
+  padding: 1vh .5vw 1vh;
+  border-radius: 9px;
+  justify-content: center;
+  box-shadow: 0px 30px 50px 0px rgba(255, 255, 255, 0.2);
+}
+
+#login-form {
+  padding: 0 2vw;
+}
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 4px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0 0 0 10px;
+  margin: 0;
+  color: #8a8b8e;
+  border: 1px solid #c2c0ca;
+  font-style: normal;
+  font-size: 1;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: relative;
+  display: inline-block;
+  background: none;
+}
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #3ca9e2;
+}
+input[type="email"]:focus:invalid,
+input[type="password"]:focus:invalid {
+  color: #cc1e2b;
+  border-color: #cc1e2b;
+}
+input[type="email"]:valid ~ .validation,
+input[type="password"]:valid ~ .validation {
+  display: block;
+  border-color: #0C0;
+}
+input[type="email"]:valid ~ .validation span,
+input[type="password"]:valid ~ .validation span {
+  background: #0C0;
+  position: absolute;
+  border-radius: 6px;
+}
+input[type="email"]:valid ~ .validation span:first-child,
+input[type="password"]:valid ~ .validation span:first-child {
+  top: 30px;
+  left: 14px;
+  width: 20px;
+  height: 3px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+input[type="email"]:valid ~ .validation span:last-child,
+input[type="password"]:valid ~ .validation span:last-child {
+  top: 35px;
+  left: 8px;
+  width: 11px;
+  height: 3px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.validation {
+  display: none;
+  position: absolute;
+  content: " ";
+  height: 60px;
+  width: 30px;
+  right: 15px;
+  top: 0px;
+}
+
+input[type="submit"] {
+  border: none;
+  display: block;
+  background-color: #0CF404;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  font-size: 18px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+input[type="submit"]:hover {
+  background-color: #048500;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
