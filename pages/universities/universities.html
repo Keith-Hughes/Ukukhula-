@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../CSS/dashboard.css">
     <script src="../../components/SidebarComponent.js" type="text/javascript" defer></script>
     <script src="../../js/dashboard.js"></script>
+    <script src="./js/universities.js"></script>
   </head>
   <body>
    <sidebar-component></sidebar-component>
@@ -17,52 +18,18 @@
       <p>This is where the main Dashboard stuff will go</p>
       <section id="UniversityRequests">
         <h2>University Requests</h2>
-        <table class="UniversitY-request-table">
+        <table id="UniversitY-request-table">
           <thead>
             <tr>
-              <td>ID</td>
+             
               <td>Name</td>
               <td>Province</td>
-              <td>Action<td>
               <td>Status</td>
+              <td>Action<td>
+            
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>University of Limpopo</td>
-              <td>Limpopo</td>
-              <td><button onclick="redirect()" class="View-application-button">View Application</button><td>
-              <td class="status-column-approved">Approved</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>University of Limpopo</td>
-              <td>Limpopo</td>
-              <td><button onclick="redirect()" class="View-application-button">View Application</button><td>
-              <td class="status-column-pending">Pending</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>University of Limpopo</td>
-              <td>Limpopo</td>
-              <td><button onclick="redirect()" class="View-application-button">View Application</button><td>
-                <td class="status-column-approved">Approved</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>University of Limpopo</td>
-              <td>Limpopo</td>
-              <td><button onclick="redirect()" class="View-application-button">View Application</button><td>
-                <td class="status-column-pending">Pending</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>University of Limpopo</td>
-              <td>Limpopo</td>
-              <td><button onclick="redirect()" class="View-application-button">View Application</button><td>
-                <td class="status-column-rejected">Rejected</td>
-            </tr>
           </tbody>
         </table>
       </section>
