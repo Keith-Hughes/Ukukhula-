@@ -34,21 +34,12 @@ function LoginFunction(event){
                 },
                 body: JSON.stringify(requestData),
               };
+            let jsonResponse = {}
             //check if email is in our database.
-            fetch("http://localhost:5263/api/Auth/Login", options).then(response => console.log(JSON.stringify(response)));
-          
-         
-            if(response.isSuccess == false){
-                alert(response.message);
-            }
-            else{
-                
-                sessionStorage.setItem("userId", response.Id);
-                sessionStorage.setItem("token", response.message);
-                sessionStorage.setItem("role", response.Role);
-                
-            }
-           
+            fetch("http://localhost:5263/api/Auth/Login", options)
+            .then( response => response.json())
+            .then(data => checkResponse(data));
+
         });
       }).fail(function(err) {
         //todo when the OAuth flow failed
@@ -60,6 +51,18 @@ function LoginFunction(event){
     
 } 
 
+function checkResponse(responseData){
+    if(responseData.isSuccess == false){
+        alert(responseData.message);
+    }
+    else{
+        
+        sessionStorage.setItem("userId", responseData.Id);
+        sessionStorage.setItem("token", responseData.message);
+        sessionStorage.setItem("role", responseData.Role);
+        
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () =>{
     googleButton = document.getElementById("google-login");
