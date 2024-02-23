@@ -131,6 +131,9 @@
     width: 250px;
     margin: 0% 1%;
   }
+  table {
+    border-bottom: 1px solid #ddd;
+  }
 
   @media (max-width: 768px) {
     .sidebar {
@@ -141,3 +144,22 @@
       left: 0;
     }
   }
+
+  .university-request-table{
+    width: 100%;
+    margin-bottom: 1.5em;
+    border-spacing: 0;
+  }
+  
+thead{
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  padding: 0;
+  border: 0;
+  height: 1px; 
+  width: 1px; 
+  overflow: hidden;
+}
+
+
+
