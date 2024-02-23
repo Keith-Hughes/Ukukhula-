@@ -18,12 +18,10 @@ function LoginFunction(event){
     event.preventDefault();
     console.log('button clicked');
     OAuth.popup('google').done(function(result) {
-        console.log("pop up");
         //make API calls with `google`
         // console.log(JSON.stringify(result));
         result.me().done(function(data) {
             const email = data.raw.email;
-            console.log(email);
             const requestData = {
                 Email: email
               };
@@ -34,12 +32,11 @@ function LoginFunction(event){
                 },
                 body: JSON.stringify(requestData),
               };
-            let jsonResponse = {}
             //check if email is in our database.
-            fetch("http://localhost:5263/api/Auth/Login", options)
+            console.log('sending request to check email: '+email);
+            fetch("http://localhost:5263/api/Auth/Login", options).catch(err => console.log(err))
             .then( response => response.json())
-            .then(data => checkResponse(data));
-
+            .then(data => checkResponse(data)).catch(err => console.log(err));
         });
       }).fail(function(err) {
         //todo when the OAuth flow failed
