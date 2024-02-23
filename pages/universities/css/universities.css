@@ -1,6 +1,21 @@
-table{
+table {
+    border-collapse: collapse;
     width: 100%;
-}
-tr:nth-child(even) {
-    background-color: #afb2b2;
+  }
+
+  thead{
+    background-color: #000000;
+    color: azure;
+
+  }
+  tr {
+    border-bottom: 1px solid #ddd;
+  }
+  tr:nth-child(even) {
+    background-color: #BABBBA;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
   }
