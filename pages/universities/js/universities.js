@@ -1,9 +1,3 @@
-
-  
-
-function filterApplicationsByStatus(applications, status){
-    return applications.filter(application=>application.status === status).map(({university,status})=>({id,university,status}))
-}
 const applications = [
     {
       "university": "University of Toronto",

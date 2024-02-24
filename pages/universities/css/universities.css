@@ -11,9 +11,7 @@ table {
   tr {
     border-bottom: 1px solid #ddd;
   }
-  tr:nth-child(even) {
-    background-color: #BABBBA;
-  }
+ 
   
   th, td {
     text-align: left;
