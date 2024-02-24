@@ -1,9 +1,11 @@
+
 // initialize the OAuth app.
 OAuth.initialize('CMe8Uc8Zy9TY3s1MX9R1_PC4TsA');
 
 //Get the options/configuration for the request and include the token from sessionStorage.
 function createOptions(method, bodyMessage) {
     bodyTemp = method == "POST" ? body : null;
+
     return ({
         method: method,
         headers: {
@@ -11,6 +13,7 @@ function createOptions(method, bodyMessage) {
 
         },
         bodyTemp: bodyMessage,
+
     });
     
 }
