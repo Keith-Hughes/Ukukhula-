@@ -1,3 +1,4 @@
+
 // initialize the OAuth app.
 OAuth.initialize('CMe8Uc8Zy9TY3s1MX9R1_PC4TsA');
 
@@ -7,7 +8,7 @@ OAuth.initialize('CMe8Uc8Zy9TY3s1MX9R1_PC4TsA');
     return (authenticatedPostOptions = {
       method: method,
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("jwtToken")}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
    
       },
       bodyTemp: bodyMessage,
