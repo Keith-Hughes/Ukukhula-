@@ -56,3 +56,4 @@ document.addEventListener("DOMContentLoaded", () => {
     display.appendChild(table);
   });
 });
+
