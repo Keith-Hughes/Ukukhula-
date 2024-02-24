@@ -2,72 +2,74 @@
 // initialize the OAuth app.
 OAuth.initialize('CMe8Uc8Zy9TY3s1MX9R1_PC4TsA');
 
-
-  function createOptions(method, bodyMessage) {
+//Get the options/configuration for the request and include the token from sessionStorage.
+function createOptions(method, bodyMessage) {
     bodyTemp = method == "POST" ? body : null;
-    return (authenticatedPostOptions = {
-      method: method,
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-   
-      },
-      bodyTemp: bodyMessage,
+
+    return ({
+        method: method,
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+
+        },
+        bodyTemp: bodyMessage,
+
     });
-  }
- 
-function LoginFunction(event){
+    
+}
+
+function LoginFunction(event) {
     event.preventDefault();
-    console.log('button clicked');
-    OAuth.popup('google').done(function(result) {
-        //make API calls with `google`
-        // console.log(JSON.stringify(result));
-        result.me().done(function(data) {
+    OAuth.popup('google').done(function (result) {
+        result.me().done(function (data) {
             const email = data.raw.email;
             const requestData = {
                 Email: email
-              };
-              const options = {
+            };
+            const options = {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(requestData),
-              };
+            };
             //check if email is in our database.
-            console.log('sending request to check email: '+email);
-            fetch("http://localhost:5263/api/Auth/Login", options).catch(err => console.log(err))
-            .then( response => response.json())
-            .then(data => checkResponse(data)).catch(err => console.log(err));
+            console.log('sending request to check email: ' + email);
+            fetch("http://localhost:5263/api/Auth/Login", options)
+                .then(response => response.json())
+                .then(data => checkResponse(data)).catch(err => console.log(err));
         });
-      }).fail(function(err) {
+    }).fail(function (err) {
         //todo when the OAuth flow failed
-      });
-    
-    
-       
-      
-    
-} 
+    });
 
-function checkResponse(responseData){
-    if(responseData.isSuccess == false){
+
+
+
+
+}
+
+function checkResponse(responseData) {
+    if (responseData.isSuccess == false) {
         alert(responseData.message);
     }
-    else{
-        
+    else {
+
         sessionStorage.setItem("userId", responseData.Id);
         sessionStorage.setItem("token", responseData.message);
-        sessionStorage.setItem("role", responseData.Role);
-        
+        sessionStorage.setItem("role", responseData.role);
+        // location.href = "dashboard.html";
     }
 }
 
-document.addEventListener("DOMContentLoaded", () =>{
+
+
+document.addEventListener("DOMContentLoaded", () => {
     googleButton = document.getElementById("google-login");
 
     googleButton.addEventListener("click", event => LoginFunction(event))
 
-   
+
 
 
 
@@ -86,4 +88,4 @@ document.addEventListener("DOMContentLoaded", () =>{
     // });
 
 
-} );
+});
