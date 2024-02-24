@@ -9,3 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.classList.toggle("active");
   });
 });
+
+function loadSection(sectionName) {
+  var sectionURL = sectionName.toLowerCase() + '.html';
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+              document.getElementById('main-content').innerHTML = xhr.responseText;
+          } else {
+              console.error('Error loading section:', xhr.status);
+          }
+      }
+  };
+  xhr.open('GET', sectionURL, true);
+  xhr.send();
+}
