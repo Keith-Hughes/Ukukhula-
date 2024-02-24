@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       sidebar.classList.toggle("active");
     });
   });
-  
+
 class Sidebar extends HTMLElement{
     constructor(){
         super();
@@ -130,4 +130,5 @@ class Sidebar extends HTMLElement{
         `
     }
 }
-costumElements.define('sidebar-component', Sidebar);
+
+//costumElements.define('sidebar-component', Sidebar);
