@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+if (typeof studentrequestBTN === "undefined") {
   const studentrequestBTN = document.getElementById("studentRequestBTN");
 
   studentrequestBTN.addEventListener("click", async () => {
@@ -51,4 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     display.appendChild(table);
   });
-});
+}

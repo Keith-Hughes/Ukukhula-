@@ -58,12 +58,12 @@ function loadSection(sectionName) {
 function loadScriptsBySection(sectionName) {
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = [
-        "/JS/universities.js",
-        "../../components/SidebarComponent.js",
-      ];
+      scriptPaths = ["/JS/universities.js"];
       loadScripts(scriptPaths);
       break;
+    case "StudentRequest":
+      scriptPaths = ["/JS/studentRequest.js"];
+      loadScripts(scriptPaths);
   }
 }
 
