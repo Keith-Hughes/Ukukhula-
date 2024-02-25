@@ -45,6 +45,7 @@ function loadSection(sectionName) {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         document.getElementById("main-content").innerHTML = xhr.responseText;
+        loadScriptsBySection(sectionName);
       } else {
         console.error("Error loading section:", xhr.status);
       }
@@ -52,4 +53,25 @@ function loadSection(sectionName) {
   };
   xhr.open("GET", sectionURL, true);
   xhr.send();
+}
+
+function loadScriptsBySection(sectionName) {
+  switch (sectionName) {
+    case "UniversityRequest":
+      scriptPaths = [
+        "/JS/universities.js",
+        "../../components/SidebarComponent.js",
+      ];
+      loadScripts(scriptPaths);
+      break;
+  }
+}
+
+function loadScripts(scriptPaths) {
+  scriptPaths.forEach(function (scriptPath) {
+    var script = document.createElement("script");
+    script.src = scriptPath;
+    script.type = "text/javascript";
+    document.body.appendChild(script);
+  });
 }
