@@ -8,4 +8,4 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleBtn.classList.toggle("active");
       sidebar.classList.toggle("active");
     });
-  
+})
