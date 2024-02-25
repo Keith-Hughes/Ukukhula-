@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.querySelector(".sidebar");
   const toggleBtn = document.querySelector(".toggle-btn");
@@ -13,18 +10,47 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function showLogoutMessage() {
+  document.querySelector(".sidebar").classList.toggle("active");
+  document.querySelector(".toggle-btn").classList.toggle("active");
+  // Create a div element for the message
+  document.getElementById("overlay").style.display = "block";
+
+  var logoutMessage = document.createElement("div");
+  logoutMessage.id = "logout-message";
+  logoutMessage.innerHTML =
+    '<p>Do you want to log out?</p><button id="agree" onclick="logout()">Yes</button><button onclick="closeLogoutMessage()" id="disagree">No</button>';
+
+  // Append the message to the body
+  document.body.appendChild(logoutMessage);
+}
+
+function logout() {
+  sessionStorage.clear();
+  location.href = "index.html";
+}
+
+function closeLogoutMessage() {
+  var logoutMessage = document.getElementById("logout-message");
+  logoutMessage.parentNode.removeChild(logoutMessage);
+  document.getElementById("overlay").style.display = "none";
+
+}
+
 function loadSection(sectionName) {
-  var sectionURL = sectionName.toLowerCase() + '.html';
+  document.querySelector(".sidebar").classList.toggle("active");
+  document.querySelector(".toggle-btn").classList.toggle("active");
+  var sectionURL = sectionName.toLowerCase() + ".html";
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-              document.getElementById('main-content').innerHTML = xhr.responseText;
-          } else {
-              console.error('Error loading section:', xhr.status);
-          }
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        document.getElementById("main-content").innerHTML = xhr.responseText;
+      } else {
+        console.error("Error loading section:", xhr.status);
       }
+    }
   };
-  xhr.open('GET', sectionURL, true);
+  xhr.open("GET", sectionURL, true);
   xhr.send();
 }

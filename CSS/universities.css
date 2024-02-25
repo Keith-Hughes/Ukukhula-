@@ -1,0 +1,38 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: #000000;
+  color: azure;
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+.View-application-button {
+  background-color: #04aa6d;
+  color: #ffffff;
+  border: none;
+  padding: 15px 32px;
+  border-radius: 12px;
+}
+
+.status-column-pending {
+  color: rgb(4, 13, 69);
+}
+
+.status-column-approved {
+  color: #04aa6d;
+}
+
+.status-column-rejected {
+  color: red;
+}
