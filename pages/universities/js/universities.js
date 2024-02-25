@@ -68,14 +68,14 @@ function populateTable(){
         status.textContent = application.status;
         tr.appendChild(status);
 
-        const actionCell = document.createElement('td');
+        const actionCell = document.createElement('td')
         const viewButton = document.createElement("button");
         viewButton.textContent = "View Application"
         viewButton.addEventListener("click",()=>{
             location.href = "university-request.html"
         });
 
-        viewButton.setAttribute("class","View-application-button");
+        viewButton.setAttribute("class","view-application-button");
 
         actionCell.appendChild(viewButton);
         tr.appendChild(actionCell);
