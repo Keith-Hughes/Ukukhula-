@@ -50,7 +50,7 @@ function checkResponse(responseData) {
     sessionStorage.setItem("userId", responseData.Id);
     sessionStorage.setItem("token", responseData.message);
     sessionStorage.setItem("role", responseData.role);
-    location.href = "dashboard.html";
+    location.href = "./dashboard-screens/dashboard.html";
   }
 }
 
