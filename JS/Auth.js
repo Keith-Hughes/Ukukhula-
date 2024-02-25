@@ -58,6 +58,10 @@ function checkResponse(responseData) {
         sessionStorage.setItem("userId", responseData.Id);
         sessionStorage.setItem("token", responseData.message);
         sessionStorage.setItem("role", responseData.role);
+        if(responseData.role === "University Admin"){
+            sessionStorage.setItem("universityId", responseData.UniversitId);
+            console.log(sessionStorage.getItem("universityId"));
+        }
         // location.href = "dashboard.html";
     }
 }

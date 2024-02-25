@@ -1,6 +1,10 @@
 const JwToken = sessionStorage.getItem("token");
 const role = sessionStorage.getItem("role");
-const JsonToken = parseJwt(JwToken);
+let JsonToken;
+if(JwToken){
+    JsonToken = parseJwt(JwToken);
+}
+
 checkTokenValidity();
 console.log(JsonToken);
 function checkTokenValidity() {
