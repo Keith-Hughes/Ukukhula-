@@ -1,0 +1,56 @@
+
+
+body {
+  background-color: black; /* Dark background */
+  background-image: url("/Images/loginBackground.jpg");
+  color: #fff; /* White text */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  background-color: #333; /* Darker header background */
+}
+
+button {
+  background-color: red; /* Green button */
+  color: #fff; /* White text */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.login-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+section {
+  margin: 20px;
+  max-width: 600px; /* Set a maximum width for content */
+  width: 100%;
+  text-align: center;
+}
+
+img {
+  width: 15%; /* Reduced logo size */
+  height: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333; /* Darker footer background */
+  width: 100%;
+}
