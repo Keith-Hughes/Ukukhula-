@@ -14,14 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
       options
     );
     const dataResponse2 = await response.json();
+    console.log(dataResponse2);
     const display = document.getElementById("StudentRequestPARA");
 
     const table = document.createElement("table");
 
-
     const headerRow = document.createElement("tr");
 
-   
     const keys = [
       "id",
       "firstName",
@@ -32,16 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "fundRequestStatus",
     ];
 
-
     keys.forEach((key) => {
       const th = document.createElement("th");
       th.textContent = key;
       headerRow.appendChild(th);
     });
 
-
     table.appendChild(headerRow);
-
 
     dataResponse2.forEach((obj) => {
       const row = document.createElement("tr");
@@ -53,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
       table.appendChild(row);
     });
 
-      display.appendChild(table);
-      
+    display.appendChild(table);
   });
 });

@@ -27,14 +27,13 @@ function showLogoutMessage() {
 
 function logout() {
   sessionStorage.clear();
-  location.href = "index.html";
+  location.href = "/index.html";
 }
 
 function closeLogoutMessage() {
   var logoutMessage = document.getElementById("logout-message");
   logoutMessage.parentNode.removeChild(logoutMessage);
   document.getElementById("overlay").style.display = "none";
-
 }
 
 function loadSection(sectionName) {

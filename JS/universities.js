@@ -67,12 +67,13 @@ function populateTable() {
     }
     status.textContent = application.status;
     tr.appendChild(status);
+    console.log(status);
 
     const actionCell = document.createElement("td");
     const viewButton = document.createElement("button");
     viewButton.textContent = "View Application";
     viewButton.addEventListener("click", () => {
-      location.href = "university-request.html";
+      location.href = "/pages/AdminDashboard/UniversityRequest.html";
     });
 
     viewButton.setAttribute("class", "View-application-button");
@@ -83,4 +84,4 @@ function populateTable() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", populateTable);
+populateTable();
