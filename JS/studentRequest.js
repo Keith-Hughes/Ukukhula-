@@ -1,13 +1,12 @@
 function createOptions(method, bodyMessage) {
-    bodyTemp = method == "POST" ? body : null;
-
     return ({
         method: method,
         headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
 
         },
-        bodyTemp: bodyMessage,
+        body: bodyMessage,
 
     });
     
@@ -16,22 +15,32 @@ function createOptions(method, bodyMessage) {
 
 document.addEventListener("DOMContentLoaded", function(){
     const form = document.getElementById("request-form");
-    form.addEventListener("submit", function(event){
+    form.addEventListener("submit",async function(event){
         event.preventDefault();
-        const FirstName = form.getElementById("firstName").value;
-        const lastName = form.getElementById("lastName").value;
-        const email = form.getElementById("email").value;
-        const phoneNumber = form.getElementById("phoneNumber").value;
-        const race = form.getElementById("race").value;
-        const gender = form.getElementById("gender").value;
-        const dob = form.getElementById("dob").value;
-        const idNumber = form.getElementById("idNumber").value;
-        const lastAveGrade = form.getElementById("lastAveGrade").value;
-        const amount = form.getElementById("amount").value;
         //We need the university ID which we should 
         //find in session storage if the user is logged in
-        fetch("http://localhost:5263/api/StudentFundRequest/")
+        const UniversitId =  parseInt(sessionStorage.getItem("universityId"));
+        console.log(UniversitId)
+        const requestData = {
+         firstName : document.getElementById("firstName").value,
+         lastName : document.getElementById("lastName").value,
+         email : document.getElementById("email").value,
+         phoneNumber : document.getElementById("phoneNumber").value,
+         raceName : document.getElementById("race").value,
+         genderName : document.getElementById("gender").value,
+         birthDate : document.getElementById("dob").value,
+         idNumber : document.getElementById("idNumber").value,
+         grade : parseInt(document.getElementById("lastAveGrade").value),
+         amount : parseInt(document.getElementById("amount").value),
 
+         universityID : UniversitId
+        };
+        
+        
+        const options = createOptions("POST", JSON.stringify(requestData));
+        fetch("http://localhost:5263/api/StudentFundRequest/create", options)
+        .then(respons=> respons.json())
+        .then(data=> window.alert(data.message));
 
 
 
