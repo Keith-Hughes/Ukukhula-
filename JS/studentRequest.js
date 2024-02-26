@@ -28,6 +28,7 @@ async function GetAllRequests() {
     "idNumber",
     "amount",
     "fundRequestStatus",
+    "requestCreatedDate",
   ];
 
   const columnHeadings = [
@@ -37,6 +38,7 @@ async function GetAllRequests() {
     "ID Number",
     "Amount",
     "Status",
+    "Date Submitted",
   ];
 
   columnHeadings.forEach((eachHeading) => {
@@ -50,13 +52,17 @@ async function GetAllRequests() {
   dataResponse2.forEach((obj) => {
     const row = document.createElement("tr");
     keys.forEach((key) => {
-      if (key === "firstName") {
         const cell = document.createElement("td");
+      if (key === "firstName") {
+        
         cell.textContent = obj[key] + " " + obj["lastName"];
         row.appendChild(cell);
       } else if (key === "lastName") {
+      } else if (key === "requestCreatedDate") {
+        
+        cell.textContent = obj[key].split("T")[0];
+        row.appendChild(cell);
       } else {
-        const cell = document.createElement("td");
         cell.textContent = obj[key];
         row.appendChild(cell);
       }
@@ -132,6 +138,8 @@ function filterTable() {
   // Get selected values from filters
   let universityFilter = document.getElementById("universityFilter").value;
   let statusFilter = document.getElementById("statusFilter").value;
+  let startDate = document.getElementById("startDate").value;
+  let endDate = document.getElementById("endDate").value;
 
   // Get the table and rows
   let table = document.getElementById("StudentRequestTable");
@@ -142,12 +150,14 @@ function filterTable() {
     let row = rows[i];
     let university = row.cells[2].textContent;
     let status = row.cells[5].textContent;
+    let date = row.cells[6].textContent;
 
     let universityMatch =
       universityFilter === "" || university === universityFilter;
     let statusMatch = statusFilter === "" || status === statusFilter;
+    let dateInRange = (startDate === '' || date >= startDate) && (endDate === '' || date <= endDate);
 
-    if (universityMatch && statusMatch) {
+    if (universityMatch && statusMatch && dateInRange) {
       row.style.display = ""; // Show the row
     } else {
       row.style.display = "none"; // Hide the row
@@ -160,13 +170,9 @@ function populateFilterOptions() {
   let statusFilter = document.getElementById("statusFilter");
 
   let universityValues = getUniqueColumnValues(
-    document.getElementById("StudentRequestTable"),
-    2
-  ); // Assuming university is in the third column
+    document.getElementById("StudentRequestTable"),2); 
   let statusValues = getUniqueColumnValues(
-    document.getElementById("StudentRequestTable"),
-    5
-  ); // Assuming status is in the sixth column
+    document.getElementById("StudentRequestTable"),5); 
 
   populateDropdown(universityFilter, universityValues);
   populateDropdown(statusFilter, statusValues);
