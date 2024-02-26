@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // add click event listener to the button
   toggleBtn.addEventListener("click", function () {
-    alert("toggleBtn clicked")
     // toggle the active class on the button and the sidebar
     toggleBtn.classList.toggle("active");
     sidebar.classList.toggle("active");
