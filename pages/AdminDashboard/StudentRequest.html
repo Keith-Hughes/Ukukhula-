@@ -1,7 +1,22 @@
 <section id="StudentRequest">
+  <script src="/JS/studentRequest.js"></script>
+  <link rel="stylesheet" href="/CSS/universities.css">
   <h2>Student Request Section</h2>
-  <button id="studentRequestBTN">Display Students</button> <br /><br />
+  <article class="filter-options">
+    <label for="universityFilter">Filter by University:</label>
+<select id="universityFilter" onchange="filterTable()">
+    <option value="">All</option>
+    <!-- Add other universities as needed -->
+</select>
+
+<label for="statusFilter">Filter by Status:</label>
+<select id="statusFilter" onchange="filterTable()">
+    <option value="">All</option>
+   
+    <!-- Add other statuses as needed -->
+</select>
+  </article>
   <p id="StudentRequestPARA">
-    This is where the Student Request Section stuff will go
+    <!-- This is where the Student Request Section stuff will go -->
   </p>
 </section>
