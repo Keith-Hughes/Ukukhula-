@@ -39,6 +39,7 @@ async function GetAllRequests() {
     "Amount",
     "Status",
     "Date Submitted",
+    "Action"
   ];
 
   columnHeadings.forEach((eachHeading) => {
@@ -51,11 +52,13 @@ async function GetAllRequests() {
 
   dataResponse2.forEach((obj) => {
     const row = document.createElement("tr");
+    let fullName = "";
     keys.forEach((key) => {
         const cell = document.createElement("td");
-      if (key === "firstName") {
         
-        cell.textContent = obj[key] + " " + obj["lastName"];
+      if (key === "firstName") {
+        fullName = obj[key] + " " + obj["lastName"];
+        cell.textContent = fullName;
         row.appendChild(cell);
       } else if (key === "lastName") {
       } else if (key === "requestCreatedDate") {
@@ -67,6 +70,14 @@ async function GetAllRequests() {
         row.appendChild(cell);
       }
     });
+    const actionCell = document.createElement("td");
+    const viewButton = document.createElement("button");
+      viewButton.textContent = "View Application";
+      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(fullName);});
+      viewButton.setAttribute("class", "View-application-button");
+      actionCell.appendChild(viewButton)
+      row.appendChild(actionCell);
+      
     table.appendChild(row);
   });
 
@@ -75,48 +86,7 @@ async function GetAllRequests() {
   return dataResponse2;
 }
 
-function createOptions(methodName, bodyMessage) {
-  bodyTemp = methodName === "POST" ? body : null;
-  return {
-    method: methodName,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-    },
-    bodyTemp: bodyMessage,
-  };
-}
 
-// function create
-
-document
-  .getElementById("request-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    //We need the university ID which we should
-    //find in session storage if the user is logged in
-    const UniversitId = parseInt(sessionStorage.getItem("universityId"));
-    console.log(UniversitId);
-    const requestData = {
-      firstName: document.getElementById("firstName").value,
-      lastName: document.getElementById("lastName").value,
-      email: document.getElementById("email").value,
-      phoneNumber: document.getElementById("phoneNumber").value,
-      raceName: document.getElementById("race").value,
-      genderName: document.getElementById("gender").value,
-      birthDate: document.getElementById("dob").value,
-      idNumber: document.getElementById("idNumber").value,
-      grade: parseInt(document.getElementById("lastAveGrade").value),
-      amount: parseInt(document.getElementById("amount").value),
-
-      universityID: UniversitId,
-    };
-
-    const options = createOptions("POST", JSON.stringify(requestData));
-    fetch("http://localhost:5263/api/StudentFundRequest/create", options)
-      .then((respons) => respons.json())
-      .then((data) => window.alert(data.message));
-  });
 
 function getUniqueColumnValues(table, columnIndex) {
   let values = [];
@@ -132,6 +102,34 @@ function getUniqueColumnValues(table, columnIndex) {
   }
 
   return values;
+}
+
+function openPopup(fullName) {
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+  const popupContent = document.getElementById('popupContent');
+
+  // Set the content of the popup (you can fetch the actual data here)
+  popupContent.textContent = `Details for ${fullName}`;
+
+  // Show the overlay and fade in the popup
+  overlay.style.display = 'block';
+  popup.style.display = 'block';
+  setTimeout(() => {
+      popup.style.opacity = 1;
+  }, 10);
+}
+
+function closePopup() {
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+
+  // Fade out the popup and hide the overlay
+  popup.style.opacity = 0;
+  setTimeout(() => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+  }, 300);
 }
 
 function filterTable() {
