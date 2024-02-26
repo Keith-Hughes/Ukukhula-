@@ -63,7 +63,7 @@ function checkResponse(responseData) {
             sessionStorage.setItem("universityId", responseData.universityID);
             console.log(sessionStorage.getItem("universityId"));
         }
-        location.href = "pages/students/student-request.html";
+        location.href = "/pages/AdminDashboard/dashboard.html";
     }
 }
 
@@ -74,23 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     googleButton.addEventListener("click", event => LoginFunction(event))
 
-
-
-
-
-
-
-
-
-    // LoginForm.addEventListener("submit",event => LoginFunction(event));
-
-    // const getBtn = document.getElementById("unis")
-
-    // getBtn.addEventListener("click",async()=>{
-    //     const dataResponse2 = await response.json();
-    //     const sec = document.getElementById("unis2");
-    //     sec.innerHTML =  JSON.stringify(dataResponse2[0]);
-    // });
 
 
 });
