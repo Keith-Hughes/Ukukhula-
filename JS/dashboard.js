@@ -64,6 +64,11 @@ function loadScriptsBySection(sectionName) {
     case "StudentRequest":
       scriptPaths = ["/JS/studentRequest.js"];
       loadScripts(scriptPaths);
+      break;
+    case "Universities":
+      scriptPaths = ["/JS/AllUniversities.js"];
+      loadScripts(scriptPaths);
+      break;
   }
 }
 
