@@ -7,6 +7,10 @@
 body {
   overflow: hidden;
   font-family: Arial, sans-serif;
+  background-image: url("/Images/dashboardBackground.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left top;
   background-color: #f0f0f0;
 }
 .signout:hover {
@@ -94,7 +98,6 @@ main {
 }
 
 section {
-  overflow: scroll;
   height: 100vh;
 }
 /* section {
