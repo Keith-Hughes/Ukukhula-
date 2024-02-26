@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/CSS/students.css" />
+<script src="/JS/studentRequest.js"></script>
+</head>
+<Section id="submit-student-request">
+    
+    <header class="section">
+        <h1>Submit A Bursary Request</h1>
+    </header>
+    <article id="request-form" class="section">
+        <form id="request-form">
+
+            <article class="row">
+                <article class="col-1">
+                    <label for="firstName">First Name:</label>
+                </article>
+                <article class="col-2">
+                    <input type="text" id="firstName" name="firstName" required>
+                </article>
+            </article>
+
+            <article class="row">
+                <article class="col-1">
+                    <label for="lastName">Last Name:</label>
+                </article>
+                <article class="col-2">
+                    <input type="text" id="lastName" name="lastName" required>
+                </article>
+            </article>
+                
+            <artice class="row">
+                <article class="col-1">
+                    <label for="email">Email:</label>
+                </article>
+                <article class="col-2">
+                    <input type="email" id="email" name="email" required>
+                </article>
+            </artice>
+            
+            <article class="row">
+                <article class="col-1">
+                    <label for="phoneNumber">Phone Number:</label>
+                </article>
+                <article class="col-2">
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                </article>
+            </article>
+               
+            <article class="row">
+                <article class="col-1">
+                    <label for="race">Race:</label>
+                </article>
+                <article class="col-2">
+                    <select id="race" name="race" required>
+                        <option value="black">Black</option>
+                        <option value="coloured">Coloured</option>
+                        <option value="indian">Indian</option>
+                    </select>
+                </article>
+            </article>
+            
+            <article class="row">
+                <article class="col-1">
+                    <label for="gender">Gender:</label>
+                </article>
+                <article class="col-2">
+                    <select id="gender" name="gender"  required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </article>
+            </article>
+            
+            <article class="row">
+                <article class="col-1">
+                    <label for="dob">Date of Birth:</label>
+                </article>
+                <article class="col-2">
+                    <input type="date" id="dob" name="dob" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm") required>
+                </article>
+            </article>
+            
+            <article class="row">
+                <article class="col-1">
+                    <label for="idNumber">ID Number:</label>
+                </article>
+                <article class="col-2">
+                    <input type="text" id="idNumber" name="idNumber" required>
+                </article>
+            </article>
+               
+            <article class="row">
+                <article class="col-1">
+                    <label for="lastAveGrade">Last Average Grade:</label>
+                </article>
+                <article class="col-2">
+                    <input type="number" id="lastAveGrade" name="lastAveGrade" required>
+                </article>
+            </article>
+            
+            <article class="row">
+                <article class="col-1">
+                    <label for="amount">Amount:</label>
+                </article>
+                <article class="col-2">
+                    <input type="number" id="amount" name="amount" required>
+                </article>
+            </article>
+            
+            <article class="row">
+                <button type="submit" id="submit">Submit</button>
+            </article>
+            
+        </form>
+    </article>
+    
+</Section>
+</html>

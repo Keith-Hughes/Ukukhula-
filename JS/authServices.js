@@ -1,12 +1,21 @@
 const JwToken = sessionStorage.getItem("token");
 const role = sessionStorage.getItem("role");
-const JsonToken = parseJwt(JwToken);
+let JsonToken;
+if(JwToken){
+    JsonToken = parseJwt(JwToken);
+}
+
 checkTokenValidity();
 console.log(JsonToken);
-function checkTokenValidity() {
+async function  checkTokenValidity() {
     if (!JsonToken) {
         // Token is invalid or not present, redirect to login page
-        window.location.href = "/index.html";
+
+        window.location.href = "/unauthorized.html";
+        
+       
+
+        
         return;
     }
 
@@ -27,7 +36,7 @@ function checkTokenValidity() {
     console.log(JsonToken.exp);
     if (JsonToken.exp && JsonToken.exp < currentTimestamp) {
         // Token has expired, redirect to login page
-        window.location.href = "/index.html";
+        window.location.href = "/login.html";
         return;
     }
 }
