@@ -18,6 +18,7 @@ function createOptions(method, bodyMessage) {
     
 }
 
+
 function LoginFunction(event) {
     event.preventDefault();
     OAuth.popup('google').done(function (result) {
@@ -61,8 +62,11 @@ function checkResponse(responseData) {
         console.log(responseData);
         if(responseData.role === "University Admin"){
             sessionStorage.setItem("universityId", responseData.universityID);
-            console.log(sessionStorage.getItem("universityId"));
-        }
+          console.log(sessionStorage.getItem("universityId"));
+          location.href = "/pages/UniversityDashboard/dashboard.html";
+      }
+      
+      
         location.href = "/pages/AdminDashboard/dashboard.html";
     }
 }
