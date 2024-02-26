@@ -1,9 +1,14 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  overflow: scroll;
 }
 tr {
   border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #000000;
+  color: azure;
 }
 thead {
   background-color: #000000;
@@ -37,4 +42,9 @@ td {
 
 .status-column-rejected {
   color: red;
+}
+
+.scrollable-dropdown {
+  max-height: 40%;
+  overflow-y: scroll;
 }
