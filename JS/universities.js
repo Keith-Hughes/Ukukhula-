@@ -1,88 +1,72 @@
+const fetchApplications = async()=>{
+    const options = {
+      method: "GET",
+      headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+  };
+ const response = await fetch(
+    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
+    options
+  );
+  const applications = await response.json();
+  return applications;
+}
+
+
+
 if (typeof applications === "undefined") {
-  const applications = [
-    {
-      university: "University of Toronto",
-      province: "Ontario",
-      amount: 5000,
-      status: "Approved",
-      dateCreated: "2024-02-23T12:19:20.676Z",
-      comment: "Excellent academic performance",
-    },
-    {
-      university: "McGill University",
-      province: "Quebec",
-      amount: 4000,
-      status: "Pending",
-      dateCreated: "2024-02-22T12:19:20.676Z",
-      comment: "Strong recommendation letters",
-    },
-    {
-      university: "University of British Columbia",
-      province: "British Columbia",
-      amount: 3000,
-      status: "Rejected",
-      dateCreated: "2024-02-21T12:19:20.676Z",
-      comment: "Needs improvement in essay",
-    },
-    {
-      university: "University of Alberta",
-      province: "Alberta",
-      amount: 2000,
-      status: "Approved",
-      dateCreated: "2024-02-20T12:19:20.676Z",
-      comment: "Highly qualified candidate",
-    },
-    {
-      university: "University of Saskatchewan",
-      province: "Saskatchewan",
-      amount: 1000,
-      status: "Pending",
-      dateCreated: "2024-02-19T12:19:20.676Z",
-      comment: "Good grades and work experience",
-    },
-  ];
+  (async function populateTable() {
+ 
+  const applications =await fetchApplications()
+  const tbody = document.querySelector("#UniversitY-request-table tbody");
 
-  function populateTable() {
-    const tbody = document.querySelector("#UniversitY-request-table tbody");
-    applications.forEach((application) => {
-      const tr = document.createElement("tr");
+  tbody.innerHTML = '';
 
-      const university = document.createElement("td");
-      university.textContent = application.university;
-      tr.appendChild(university);
+   const applicationGroups = {
+      Approved: [],
+      Rejected: [],
+      Review: []
+  };
 
-      const province = document.createElement("td");
-      province.textContent = application.province;
-      tr.appendChild(province);
+  // Group applications based on status
+  applications.forEach(application => {
+      applicationGroups[application.status].push(application);
+  });
 
-      const status = document.createElement("td");
-      switch (application.status) {
-        case "Approved":
-          status.setAttribute("class", "status-column-approved");
-          break;
-        case "Rejected":
-          status.setAttribute("class", "status-column-rejected");
-          break;
-        default:
-          status.setAttribute("class", "status-column-pending");
-      }
-      status.textContent = application.status;
-      tr.appendChild(status);
+  // Populate dropdowns for each status
+  Object.keys(applicationGroups).forEach(status => {
+      const trDropdown = document.createElement('tr');
+      trDropdown.innerHTML = `
+          <td colspan="4" class="status-dropdown" data-status="${status.toLowerCase()}">
+         
+              <details> <select><option>University Of Limpopo</option></select>
+                  <summary>${status} (${applicationGroups[status].length} applications)</summary>
+                  <table class="status-detail" data-status="${status.toLowerCase()}">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Province</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          ${applicationGroups[status].map(application => `
+                              <tr>
+                                  <td>${application.university}</td>
+                                  <td>${application.province}</td>
+                                  <td>${status}</td>
+                                  <td>
+                                      <button class="view-application-button" onclick="location.href='../universities/university-request.html'">View Application</button>
+                                  </td>
+                              </tr>`).join('')}
+                      </tbody>
+                  </table>
+              </details>
+          </td>`;
+      tbody.appendChild(trDropdown);
+  });
+  })()
 
-      const actionCell = document.createElement("td");
-      const viewButton = document.createElement("button");
-      viewButton.textContent = "View Application";
-      viewButton.addEventListener("click", () => {
-        location.href = "/pages/AdminDashboard/UniversityRequest.html";
-      });
-
-      viewButton.setAttribute("class", "View-application-button");
-
-      actionCell.appendChild(viewButton);
-      tr.appendChild(actionCell);
-      tbody.appendChild(tr);
-    });
-  }
-
-  populateTable();
 }
