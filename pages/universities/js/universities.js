@@ -11,14 +11,12 @@ const populateTable = async () => {
         options
     );
     const applications = await response.json();
-
+    console.log(applications);
     const tbody = document.querySelector("#UniversitY-request-table tbody");
 
-    // Clear the table body before repopulating it
     tbody.innerHTML = '';
 
-    // Create objects to store applications based on status
-    const applicationGroups = {
+     const applicationGroups = {
         Approved: [],
         Rejected: [],
         Review: []
@@ -34,7 +32,8 @@ const populateTable = async () => {
         const trDropdown = document.createElement('tr');
         trDropdown.innerHTML = `
             <td colspan="4" class="status-dropdown" data-status="${status.toLowerCase()}">
-                <details>
+           
+                <details> <select><option>University Of Limpopo</option></select>
                     <summary>${status} (${applicationGroups[status].length} applications)</summary>
                     <table class="status-detail" data-status="${status.toLowerCase()}">
                         <thead>
@@ -52,14 +51,13 @@ const populateTable = async () => {
                                     <td>${application.province}</td>
                                     <td>${status}</td>
                                     <td>
-                                        <button class="view-application-button">View Application</button>
+                                        <button class="view-application-button" onclick="location.href='../universities/university-request.html'">View Application</button>
                                     </td>
                                 </tr>`).join('')}
                         </tbody>
                     </table>
                 </details>
             </td>`;
-        
         tbody.appendChild(trDropdown);
     });
 }
