@@ -43,6 +43,38 @@ td {
   z-index: 0;
 }
 
+.row{
+  display: flex;
+  
+}
+
+.col-title{
+  width: 25%;
+  margin: 0 20px 0 0;
+ 
+}
+
+.edit-mode{
+  border: 1px solid #ffcc00; /* Change the border color or add any other styles you want */
+  background-color: #ffffcc; /* Change the background color or add any other styles you want */
+}
+#popup h2{
+  background-color: black;
+  color: #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 600px) {
+  .col-title{
+    width: 100%;
+    margin-top: 0;
+  }
+  .row{
+    flex-direction: column;
+  }
+
+}
+
 #popup {
   display: none;
   position: fixed;
@@ -52,10 +84,15 @@ td {
   background-color: white;
   padding: 20px;
   border: 1px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.993);
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 1;
+  width:80%;
+  margin:0 12px;
+}
+.row{
+  width: 100%;
 }
 
 .View-application-button:hover{
@@ -78,4 +115,12 @@ td {
 .scrollable-dropdown {
   max-height: 40%;
   overflow-y: scroll;
+}
+.status-buttons{
+  margin: 12px;
+  display: flex;
+  justify-content: center;
+}
+#reject{
+  background-color: #c8323c;
 }
