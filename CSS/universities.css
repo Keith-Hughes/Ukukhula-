@@ -120,13 +120,17 @@ td {
   margin: 12px;
   display: flex;
   justify-content: center;
+
   
+
 }
 #reject{
   background-color: #c8323c;
 }
 
+
 #reject:hover{
   background-color: #5a070c;
   cursor:pointer;
 }
+

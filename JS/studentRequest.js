@@ -1,3 +1,4 @@
+
 if(globalResponseData === undefined){
 var globalResponseData = [];
 }
@@ -118,7 +119,10 @@ function openPopup(row) {
   
   // Set the content of the popup (you can fetch the actual data here)
   popupContent.innerHTML = 
+
   `<table id="allRequests">
+
+
   <tr class="row">
       <td class="col-title"><b>Full Name:</b> ${row.cells[1].textContent}</td>
       
@@ -143,6 +147,7 @@ function openPopup(row) {
       <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
       
       <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
+
 
       <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
   </tr>
