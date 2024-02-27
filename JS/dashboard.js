@@ -27,7 +27,7 @@ function showLogoutMessage() {
 
 function logout() {
   sessionStorage.clear();
-  location.href = "../index.html";
+  location.href = "../../index.html";
 }
 
 function closeLogoutMessage() {
@@ -58,15 +58,18 @@ function loadSection(sectionName) {
 function loadScriptsBySection(sectionName) {
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = ["./universities.js"];
+      scriptPaths = ["../../JS/universities.js"];
       loadScripts(scriptPaths);
       break;
     case "StudentRequest":
-      scriptPaths = ["./studentRequest.js","./html2pdf.bundle.min.js"];
+      scriptPaths = [
+        "../../JS/studentRequest.js",
+        "../../JS/html2pdf.bundle.min.js",
+      ];
       loadScripts(scriptPaths);
       break;
     case "Universities":
-      scriptPaths = ["./AllUniversities.js"];
+      scriptPaths = ["../../JS/AllUniversities.js"];
       loadScripts(scriptPaths);
       break;
   }
