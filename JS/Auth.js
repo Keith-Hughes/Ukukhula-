@@ -26,7 +26,8 @@ function LoginFunction(event) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "accept": "*/*"
+            "accept": "*/*",
+            "Permissions-Policy": "interest-cohort=()"
           },
           body: JSON.stringify(requestData),
         };
