@@ -1,3 +1,0 @@
-const fetchData =async(endpoint)=>{
-  
-}

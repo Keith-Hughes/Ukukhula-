@@ -19,8 +19,7 @@ if (typeof applications === "undefined") {
   (async function populateTable() {
  
   const applications =await fetchApplications()
-  const tbody = document.querySelector("#UniversitY-request-table tbody");
-
+  const tbody = document.querySelector("#university-request-table tbody");
   tbody.innerHTML = '';
 
    const applicationGroups = {
@@ -29,12 +28,12 @@ if (typeof applications === "undefined") {
       Review: []
   };
 
-  // Group applications based on status
+
   applications.forEach(application => {
       applicationGroups[application.status].push(application);
   });
 
-  // Populate dropdowns for each status
+
   Object.keys(applicationGroups).forEach(status => {
       const trDropdown = document.createElement('tr');
       trDropdown.innerHTML = `
