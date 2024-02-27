@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Quinfo_regular';
+  src: local('Quinfo_regular'), url('../Fonts/Quinfo/Quinfo.otf') format('opentype');
+ 
+}
+
+@font-face {
+  font-family: 'Quinfo_bold';
+  src: local('Quinfo_bold'), url('../Fonts/Quinfo/QuinfoBOLD.otf') format('opentype');
+ 
+}
+
+@font-face {
+  font-family: 'Quinfo_extralight';
+  src: local('Quinfo_extralight'), url('../Fonts/Quinfo/QuinfoEXTRALIGHT.otf') format('opentype');
+ 
+}
+
 body {
   display: flex;
   background-image: url("../Images/loginBackground.jpg");
@@ -8,25 +26,30 @@ body {
   color: #2b3e51;
   justify-content: center;
   margin: 0%;
-
 }
 #unis2{
   
   color: white;
 }
 
-#login-form-wrap h2{
-margin-top: 2%;
-}
+
 
 #login-form-wrap h2,h4{
   color: #dedddd;
   margin: 0;
   font-size: 1.6rem;
-  font-family: monospace;}
+  font-family: "Quinfo_bold", sans-serif;
+  letter-spacing: 2px;  
+}
 #login-form-wrap h4{
   font-size: large;
 }
+#login-form-wrap h2{
+  margin-top: 2%;
+  font-size: 2rem;
+  font-weight:800;
+  
+  }
 
 
 

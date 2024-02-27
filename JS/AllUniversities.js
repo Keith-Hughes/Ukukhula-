@@ -16,7 +16,7 @@ async function getAllUniversity() {
     createOptions("GET", {})
   );
   const dataResponse = await response.json();
-  console.log(dataResponse);
+  //   console.log(dataResponse);
   const display = document.getElementById("AllUniversities");
 
   const table = document.createElement("table");
@@ -51,6 +51,19 @@ async function getAllUniversity() {
         content = obj["dateCreated"].split("T")[0];
       } else if (key.toLowerCase() === "amount") {
         content = "R" + obj[key.toLowerCase()];
+      } else if (key.toLowerCase() === "status") {
+        content = obj[key.toLowerCase()];
+        switch (content) {
+          case "Approved":
+            cell.style.color = "#04aa6d";
+            break;
+          case "Rejected":
+            cell.style.color = "red";
+            break;
+          case "Review":
+            cell.style.color = "orange";
+            break;
+        }
       } else {
         content = obj[key.toLowerCase()];
       }
