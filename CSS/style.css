@@ -1,6 +1,6 @@
 body {
   display: flex;
-  background-image: url("/Images/loginBackground.jpg");
+  background-image: url("../Images/loginBackground.jpg");
   background-repeat:no-repeat;
   background-repeat: repeat;
   font-size: 1.6rem;
