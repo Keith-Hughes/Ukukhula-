@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/CSS/universities.css" />
+<section id="Universities">
+  <h2>Universities Section</h2>
+  <article class="">
+    <label for="FilterByUniversity">Filter by University:</label>
+    <select
+      id="FilterByUniversity"
+      onchange="filterTable()"
+      class="scrollable-dropdown"
+    >
+      <option value="">All</option>
+      <!-- Add other universities as needed -->
+    </select>
+
+    <label for="ProvinceFilter">Filter by Province:</label>
+    <select
+      id="ProvinceFilter"
+      onchange="filterTable()"
+      class="scrollable-dropdown"
+    >
+      <option value="">All</option>
+
+      <!-- Add other statuses as needed -->
+    </select>
+  </article>
+  <br /><br />
+  <p id="AllUniversities"><br /><br /></p>
+</section>

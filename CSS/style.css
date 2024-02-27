@@ -40,7 +40,7 @@ img {
   margin: auto;
 }
 
-#login-form-wrap {
+#login-form-wrap  {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -152,5 +152,9 @@ input[type="submit"]:hover {
   background-color: #048500;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+}
+
+.filter-options{
+  
 }
 

@@ -1,0 +1,34 @@
+<section id="StudentRequest">
+  <script src="/JS/studentRequest.js"></script>
+  <link rel="stylesheet" href="/CSS/universities.css">
+  <link rel="stylesheet" href="/CSS/students.css">
+  <h2>Student Request Section</h2>
+  <article class="filter-options">
+    <label for="universityFilter">Filter by University:</label>
+    <select id="universityFilter" onchange="filterTable()">
+        <option value="">All</option>
+    </select>
+
+    <label for="statusFilter">Filter by Status:</label>
+    <select id="statusFilter" onchange="filterTable()">
+        <option value="">All</option>
+    </select>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" onchange="filterTable()">
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" onchange="filterTable()">
+  </article>
+  <br>
+  <p id="StudentRequestPARA">
+    <!-- This is where the Student Request Section stuff will go -->
+  </p>
+  <article class="overlay" id="overlay" onclick="closePopup()"></article>
+
+<article class="popup" id="popup">
+    <h2>Application Details</h2>
+    <p id="popupContent">Loading...</p>
+    <button onclick="closePopup()">Close</button>
+</article>
+</section>
