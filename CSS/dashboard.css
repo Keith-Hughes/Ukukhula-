@@ -36,7 +36,7 @@ body {
   size: 3%;
 }
 #logout-message {
-  background-image: url("/Images/loginBackground.jpg");
+  background-image: url("../Images/loginBackground.jpg");
   position: fixed;
   top: 50%;
   left: 50%;

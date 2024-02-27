@@ -39,7 +39,7 @@ function closeLogoutMessage() {
 function loadSection(sectionName) {
   document.querySelector(".sidebar").classList.toggle("active");
   document.querySelector(".toggle-btn").classList.toggle("active");
-  var sectionURL = "./" + sectionName.toLowerCase() + ".html";
+  var sectionURL = "./" + sectionName + ".html";
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
