@@ -1,23 +1,22 @@
-let dataResponse2=GetAllRequests();
+GetAllRequests();
 
-
-
-
-async function GetAllRequests(){
-    const options = {
+async function GetAllRequests() {
+  const options = {
     method: "GET",
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   };
-  
-  const response = await fetch("http://localhost:5263/api/StudentFundRequest",options);
+
+  const response = await fetch(
+    "http://localhost:5263/api/StudentFundRequest",
+    options
+  );
   const dataResponse2 = await response.json();
-  console.log(dataResponse2);
   const display = document.getElementById("StudentRequestPARA");
 
   const table = document.createElement("table");
-  table.setAttribute('id', 'StudentRequestTable')
+  table.setAttribute("id", "StudentRequestTable");
 
   const headerRow = document.createElement("tr");
 
@@ -29,20 +28,21 @@ async function GetAllRequests(){
     "idNumber",
     "amount",
     "fundRequestStatus",
+    "requestCreatedDate",
   ];
 
   const columnHeadings = [
-      "id",
-      "Full Name",
-      "university",
-      "ID Number",
-      "Amount",
-      "Status",
-    ];
+    "id",
+    "Full Name",
+    "university",
+    "ID Number",
+    "Amount",
+    "Status",
+    "Date Submitted",
+    "Action"
+  ];
 
-  
-
-    columnHeadings.forEach((eachHeading) => {
+  columnHeadings.forEach((eachHeading) => {
     const th = document.createElement("th");
     th.textContent = eachHeading;
     headerRow.appendChild(th);
@@ -52,146 +52,136 @@ async function GetAllRequests(){
 
   dataResponse2.forEach((obj) => {
     const row = document.createElement("tr");
+    let fullName = "";
     keys.forEach((key) => {
-      if(key === "firstName"){
-          const cell = document.createElement("td");
-          cell.textContent = obj[key]+" "+obj["lastName"];
-          row.appendChild(cell);
-      }
-      else if(key === "lastName"){
-          
-      }
-
-      else{
-      const cell = document.createElement("td");
-      cell.textContent = obj[key];
-      row.appendChild(cell);
+        const cell = document.createElement("td");
+        
+      if (key === "firstName") {
+        fullName = obj[key] + " " + obj["lastName"];
+        cell.textContent = fullName;
+        row.appendChild(cell);
+      } else if (key === "lastName") {
+      } else if (key === "requestCreatedDate") {
+        
+        cell.textContent = obj[key].split("T")[0];
+        row.appendChild(cell);
+      } else {
+        cell.textContent = obj[key];
+        row.appendChild(cell);
       }
     });
+    const actionCell = document.createElement("td");
+    const viewButton = document.createElement("button");
+      viewButton.textContent = "View Application";
+      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(fullName);});
+      viewButton.setAttribute("class", "View-application-button");
+      actionCell.appendChild(viewButton)
+      row.appendChild(actionCell);
+      
     table.appendChild(row);
   });
 
   display.appendChild(table);
   populateFilterOptions();
-  return dataResponse2
+  return dataResponse2;
 }
-
-function createOptions(methodName, bodyMessage) {
-    bodyTemp = methodName === "POST" ? body : null;
-    return ({
-        method: methodName,
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-
-        },
-        bodyTemp: bodyMessage,
-
-    });
-    
-    
-}
-
-// function create
-   
-    const form = document.getElementById("request-form");
-    form.addEventListener("submit", function(event){
-        event.preventDefault();
-        //We need the university ID which we should 
-        //find in session storage if the user is logged in
-        const UniversitId =  parseInt(sessionStorage.getItem("universityId"));
-        console.log(UniversitId)
-        const requestData = {
-         firstName : document.getElementById("firstName").value,
-         lastName : document.getElementById("lastName").value,
-         email : document.getElementById("email").value,
-         phoneNumber : document.getElementById("phoneNumber").value,
-         raceName : document.getElementById("race").value,
-         genderName : document.getElementById("gender").value,
-         birthDate : document.getElementById("dob").value,
-         idNumber : document.getElementById("idNumber").value,
-         grade : parseInt(document.getElementById("lastAveGrade").value),
-         amount : parseInt(document.getElementById("amount").value),
-
-         universityID : UniversitId
-        };
-        
-        
-        const options = createOptions("POST", JSON.stringify(requestData));
-        fetch("http://localhost:5263/api/StudentFundRequest/create", options)
-        .then(respons=> respons.json())
-        .then(data=> window.alert(data.message));
-    })
-
-
-
-
-
-    
 
 
 
 function getUniqueColumnValues(table, columnIndex) {
-    var values = [];
-    var rows = table.getElementsByTagName("tr");
+  let values = [];
+  let rows = table.getElementsByTagName("tr");
 
-    for (var i = 1; i < rows.length; i++) {
-        var row = rows[i];
-        var cellValue = row.cells[columnIndex].textContent;
+  for (let i = 1; i < rows.length; i++) {
+    let row = rows[i];
+    let cellValue = row.cells[columnIndex].textContent;
 
-        if (!values.includes(cellValue)) {
-            values.push(cellValue);
-        }
+    if (!values.includes(cellValue)) {
+      values.push(cellValue);
     }
+  }
 
-    return values;
+  return values;
+}
+
+function openPopup(fullName) {
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+  const popupContent = document.getElementById('popupContent');
+
+  // Set the content of the popup (you can fetch the actual data here)
+  popupContent.textContent = `Details for ${fullName}`;
+
+  // Show the overlay and fade in the popup
+  overlay.style.display = 'block';
+  popup.style.display = 'block';
+  setTimeout(() => {
+      popup.style.opacity = 1;
+  }, 10);
+}
+
+function closePopup() {
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+
+  // Fade out the popup and hide the overlay
+  popup.style.opacity = 0;
+  setTimeout(() => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+  }, 300);
 }
 
 function filterTable() {
-    // Get selected values from filters
-    var universityFilter = document.getElementById("universityFilter").value;
-    var statusFilter = document.getElementById("statusFilter").value;
+  // Get selected values from filters
+  let universityFilter = document.getElementById("universityFilter").value;
+  let statusFilter = document.getElementById("statusFilter").value;
+  let startDate = document.getElementById("startDate").value;
+  let endDate = document.getElementById("endDate").value;
 
-    // Get the table and rows
-    var table = document.getElementById("StudentRequestTable");
-    var rows = table.getElementsByTagName("tr");
+  // Get the table and rows
+  let table = document.getElementById("StudentRequestTable");
+  let rows = table.getElementsByTagName("tr");
 
-    // Loop through all table rows, hide those that don't match the filter criteria
-    for (var i = 1; i < rows.length; i++) {
-        var row = rows[i];
-        var university = row.cells[2].textContent;
-        var status = row.cells[5].textContent;
+  // Loop through all table rows, hide those that don't match the filter criteria
+  for (let i = 1; i < rows.length; i++) {
+    let row = rows[i];
+    let university = row.cells[2].textContent;
+    let status = row.cells[5].textContent;
+    let date = row.cells[6].textContent;
 
-        var universityMatch = universityFilter === '' || university === universityFilter;
-        var statusMatch = statusFilter === '' || status === statusFilter;
+    let universityMatch =
+      universityFilter === "" || university === universityFilter;
+    let statusMatch = statusFilter === "" || status === statusFilter;
+    let dateInRange = (startDate === '' || date >= startDate) && (endDate === '' || date <= endDate);
 
-        if (universityMatch && statusMatch) {
-            row.style.display = "";  // Show the row
-        } else {
-            row.style.display = "none";  // Hide the row
-        }
+    if (universityMatch && statusMatch && dateInRange) {
+      row.style.display = ""; // Show the row
+    } else {
+      row.style.display = "none"; // Hide the row
     }
+  }
 }
 
 function populateFilterOptions() {
-    var universityFilter = document.getElementById("universityFilter");
-    var statusFilter = document.getElementById("statusFilter");
+  let universityFilter = document.getElementById("universityFilter");
+  let statusFilter = document.getElementById("statusFilter");
 
-    var universityValues = getUniqueColumnValues(document.getElementById("StudentRequestTable"), 2); // Assuming university is in the third column
-    var statusValues = getUniqueColumnValues(document.getElementById("StudentRequestTable"), 5); // Assuming status is in the sixth column
+  let universityValues = getUniqueColumnValues(
+    document.getElementById("StudentRequestTable"),2); 
+  let statusValues = getUniqueColumnValues(
+    document.getElementById("StudentRequestTable"),5); 
 
-    populateDropdown(universityFilter, universityValues);
-    populateDropdown(statusFilter, statusValues);
+  populateDropdown(universityFilter, universityValues);
+  populateDropdown(statusFilter, statusValues);
 }
 
 // Helper function to populate a dropdown with options
 function populateDropdown(selectElement, values) {
-    values.forEach(function(value) {
-        var option = document.createElement("option");
-        option.value = value;
-        option.textContent = value;
-        selectElement.appendChild(option);
-    });
+  values.forEach(function (value) {
+    let option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    selectElement.appendChild(option);
+  });
 }
-
-
