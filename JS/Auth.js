@@ -1,5 +1,4 @@
 // initialize the OAuth app.
-OAuth.initialize("CMe8Uc8Zy9TY3s1MX9R1_PC4TsA");
 
 //Get the options/configuration for the request and include the token from sessionStorage.
 function createOptions(method, bodyMessage) {
@@ -64,6 +63,7 @@ function checkResponse(responseData) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  OAuth.initialize("CMe8Uc8Zy9TY3s1MX9R1_PC4TsA");
   googleButton = document.getElementById("google-login");
 
   googleButton.addEventListener("click", (event) => LoginFunction(event));
