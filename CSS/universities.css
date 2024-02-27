@@ -1,9 +1,14 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  overflow: scroll;
 }
 tr {
   border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #000000;
+  color: azure;
 }
 thead {
   background-color: #000000;
@@ -23,8 +28,39 @@ td {
   background-color: #04aa6d;
   color: #ffffff;
   border: none;
-  padding: 15px 32px;
+  padding: 8px 10px;
   border-radius: 12px;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.View-application-button:hover{
+  background-color: #0CF404;
+  cursor: pointer;
 }
 
 .status-column-pending {
@@ -37,4 +73,9 @@ td {
 
 .status-column-rejected {
   color: red;
+}
+
+.scrollable-dropdown {
+  max-height: 40%;
+  overflow-y: scroll;
 }
