@@ -1,3 +1,4 @@
+let globalResponseData = [];
 GetAllRequests();
 
 async function GetAllRequests() {
@@ -13,6 +14,8 @@ async function GetAllRequests() {
     options
   );
   const dataResponse2 = await response.json();
+  globalResponseData = dataResponse2;
+
   const display = document.getElementById("StudentRequestPARA");
 
   const table = document.createElement("table");
@@ -34,7 +37,7 @@ async function GetAllRequests() {
   const columnHeadings = [
     "id",
     "Full Name",
-    "university",
+    "University",
     "ID Number",
     "Amount",
     "Status",
@@ -73,7 +76,7 @@ async function GetAllRequests() {
     const actionCell = document.createElement("td");
     const viewButton = document.createElement("button");
       viewButton.textContent = "View Application";
-      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(fullName);});
+      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(row);});
       viewButton.setAttribute("class", "View-application-button");
       actionCell.appendChild(viewButton)
       row.appendChild(actionCell);
@@ -104,13 +107,53 @@ function getUniqueColumnValues(table, columnIndex) {
   return values;
 }
 
-function openPopup(fullName) {
+function openPopup(row) {
   const popup = document.getElementById('popup');
   const overlay = document.getElementById('overlay');
   const popupContent = document.getElementById('popupContent');
-
+  
   // Set the content of the popup (you can fetch the actual data here)
-  popupContent.textContent = `Details for ${fullName}`;
+  popupContent.innerHTML = 
+  `<table>
+  <tr class="row">
+      <td class="col-title"><b>Full Name:</b> ${row.cells[1].textContent}</td>
+      
+      <td class="col-title"><b>ID Number:</b> ${row.cells[3].textContent}</td>
+      
+      <td class="col-title"><b>Contact Number:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["phoneNumber"]}</td>
+
+      <td class="col-title"><b>Email:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"]}</td>  
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount">${row.cells[4].textContent}<span></td>
+      
+      <td class="col-title"><b>Date Submitted:</b> ${row.cells[6].textContent}</td>
+      
+      <td class="col-title"><b>University:</b> ${row.cells[2].textContent}</td>
+
+      <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"]}<span></td>  
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Age:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"]}</td>
+      
+      <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
+      
+      <td class="col-title"><b>Gender:</b> ${row.cells[2].textContent}</td>
+
+      <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Request Status</b>:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"]}</td>
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"]}<span></td> 
+        
+  </tr>
+  </table>
+  <article class=status-buttons>
+  <button id="approve" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
+  <button id="reject" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
+  </article>`;
 
   // Show the overlay and fade in the popup
   overlay.style.display = 'block';
@@ -130,6 +173,41 @@ function closePopup() {
       popup.style.display = 'none';
       overlay.style.display = 'none';
   }, 300);
+}
+
+// Function to toggle editability of fields
+function toggleEdit() {
+  const editableFields = document.querySelectorAll('.editable-field');
+  const editButton = document.querySelector('.edit-button');
+
+  // Toggle contentEditable for all editable fields
+  editableFields.forEach(field => {
+      field.contentEditable = field.contentEditable === 'true' ? 'false' : 'true';
+  });
+
+  // Change the edit button text based on the current state
+  const isEditing = editableFields[0].contentEditable === 'true'; // Check the state of one of the fields
+  
+  editableFields.forEach(field => {
+    if (isEditing) {
+        field.classList.add('edit-mode');
+    } else {
+        field.classList.remove('edit-mode');
+    }
+});
+  
+  editButton.textContent = isEditing ? 'Save' : 'Edit';
+
+  // Save the edited content or perform any necessary action
+  if (!isEditing) {
+      saveEditedContent();
+  }
+}
+
+// Function to save edited content (you can customize this based on your needs)
+function saveEditedContent() {
+  // Add logic to save the edited content to the backend or perform other actions
+  console.log("Saving edited content");
 }
 
 function filterTable() {
