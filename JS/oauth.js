@@ -142,7 +142,7 @@ var cookies, oauthio_requests, sha1;
 
 cookies = require("../tools/cookies");
 
-oauthio_requests = require("./request.js");
+oauthio_requests = require("./request");
 
 sha1 = require("../tools/sha1");
 
@@ -154,7 +154,7 @@ module.exports = function(OAuthio) {
   window = OAuthio.getWindow();
   $ = OAuthio.getJquery();
   cache = OAuthio.getCache();
-  providers_api = require('./providers.js')(OAuthio);
+  providers_api = require('./providers')(OAuthio);
   config.oauthd_base = Url.getAbsUrl(config.oauthd_url).match(/^.{2,5}:\/\/[^\/]+/)[0];
   client_states = [];
   oauth_result = void 0;
@@ -1316,10 +1316,10 @@ module.exports = function(OAuthio) {
 (function() {
   var OAuthio, jquery;
   jquery = require('./tools/jquery-lite.js');
-  OAuthio = require('./lib/core.js')(window, document, jquery, navigator);
-  OAuthio.extend('OAuth', require('./lib/oauth.js'));
-  OAuthio.extend('API', require('./lib/api.js'));
-  OAuthio.extend('User', require('./lib/user.js'));
+  OAuthio = require('./lib/core')(window, document, jquery, navigator);
+  OAuthio.extend('OAuth', require('./lib/oauth'));
+  OAuthio.extend('API', require('./lib/api'));
+  OAuthio.extend('User', require('./lib/user'));
   if (typeof angular !== "undefined" && angular !== null) {
     angular.module('oauthio', []).factory('OAuth', [
       function() {
