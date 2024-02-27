@@ -14,6 +14,9 @@ function createOptions(method, bodyMessage) {
 }
 
 function LoginFunction(event) {
+  document.getElementById("loading-screen").style.display = "block";
+  document.getElementById("loading-video").style.display = "block";
+
   event.preventDefault();
   OAuth.popup("google")
     .done(function (result) {
@@ -26,8 +29,8 @@ function LoginFunction(event) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "accept": "*/*",
-            "Permissions-Policy": "interest-cohort=()"
+            accept: "*/*",
+            "Permissions-Policy": "interest-cohort=()",
           },
           body: JSON.stringify(requestData),
         };
@@ -52,7 +55,8 @@ function checkResponse(responseData) {
     sessionStorage.setItem("token", responseData.message);
     sessionStorage.setItem("role", responseData.role);
     console.log(responseData);
-
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("loading-video").style.display = "none";
     if (responseData.role === "University Admin") {
       sessionStorage.setItem("universityId", responseData.universityID);
       console.log(sessionStorage.getItem("universityId"));
