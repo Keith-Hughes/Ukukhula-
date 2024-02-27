@@ -11,7 +11,7 @@ async function  checkTokenValidity() {
     if (!JsonToken) {
         // Token is invalid or not present, redirect to login page
 
-        window.location.href = "/unauthorized.html";
+        window.location.href = "../unauthorized.html";
         
        
 
@@ -26,7 +26,7 @@ async function  checkTokenValidity() {
         console.log(JsonToken.role);
         console.log(role);
         // Redirect or handle unauthorized access
-        window.location.href = "/unauthorized.html";
+        window.location.href = "../unauthorized.html";
         return;
     }
 
@@ -36,7 +36,7 @@ async function  checkTokenValidity() {
     console.log(JsonToken.exp);
     if (JsonToken.exp && JsonToken.exp < currentTimestamp) {
         // Token has expired, redirect to login page
-        window.location.href = "/login.html";
+        window.location.href = "../login.html";
         return;
     }
 }
