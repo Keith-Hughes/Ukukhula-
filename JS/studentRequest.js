@@ -114,7 +114,7 @@ function openPopup(row) {
   
   // Set the content of the popup (you can fetch the actual data here)
   popupContent.innerHTML = 
-  `<table>
+  `<table id="allRequests">
   <tr class="row">
       <td class="col-title"><b>Full Name:</b> ${row.cells[1].textContent}</td>
       
@@ -263,3 +263,28 @@ function populateDropdown(selectElement, values) {
     selectElement.appendChild(option);
   });
 }
+
+document.getElementById('downloadButton').addEventListener('click', () => {
+  const table = document.getElementById('StudentRequestPARA');
+  console.log("Table retreived" +table);
+  
+  // Options for pdf generation
+  const pdfOptions = {
+      margin: 10,
+      filename: 'table-export.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+  console.log("options created");
+  html2pdf().from(table).save();
+  // Use html2pdf.js to generate PDF
+  // html2pdf().from(table).set(pdfOptions).outputPdf().then(pdf => {
+  //     // Trigger the download
+  //     const blob = new Blob([pdf], { type: 'application/pdf' });
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(blob);
+  //     link.download = pdfOptions.filename;
+  //     link.click();
+  // }).save();
+});
