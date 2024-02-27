@@ -1,7 +1,11 @@
-let globalResponseData = [];
+if(globalResponseData === undefined){
+var globalResponseData = [];
+}
+
 GetAllRequests();
 
 async function GetAllRequests() {
+  
   const options = {
     method: "GET",
     headers: {
@@ -138,7 +142,7 @@ function openPopup(row) {
       
       <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
       
-      <td class="col-title"><b>Gender:</b> ${row.cells[2].textContent}</td>
+      <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
 
       <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
   </tr>
@@ -277,14 +281,14 @@ document.getElementById('downloadButton').addEventListener('click', () => {
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
   console.log("options created");
-  html2pdf().from(table).save();
+  // html2pdf().from(table).save();
   // Use html2pdf.js to generate PDF
-  // html2pdf().from(table).set(pdfOptions).outputPdf().then(pdf => {
-  //     // Trigger the download
-  //     const blob = new Blob([pdf], { type: 'application/pdf' });
-  //     const link = document.createElement('a');
-  //     link.href = URL.createObjectURL(blob);
-  //     link.download = pdfOptions.filename;
-  //     link.click();
-  // }).save();
+  html2pdf().from(table).set(pdfOptions).outputPdf().then(pdf => {
+      // Trigger the download
+      const blob = new Blob([pdf], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = pdfOptions.filename;
+      link.click();
+  });
 });
