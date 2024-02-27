@@ -27,12 +27,29 @@ body {
   z-index: 9998;
 }
 #agree {
-  background-color: green;
+  background-color: #04aa6d;
+  color: #ffffff;
+  border: none;
+  padding: 8px 10px;
+  margin-right: 7%;
+  border-radius: 12px;
 
   size: 3%;
 }
-#disagree {
+#agree:hover{
+  background-color: #0CF404;
+  cursor: pointer;
+}
+#disagree:hover{
   background-color: red;
+  cursor: pointer;
+}
+#disagree {
+  background-color: rgb(150, 26, 26);
+  color: #ffffff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 12px;
   size: 3%;
 }
 #logout-message {

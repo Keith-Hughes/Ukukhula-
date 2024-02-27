@@ -19,7 +19,7 @@ function showLogoutMessage() {
   var logoutMessage = document.createElement("div");
   logoutMessage.id = "logout-message";
   logoutMessage.innerHTML =
-    '<p>Do you want to log out?</p><button id="agree" onclick="logout()">Yes</button><button onclick="closeLogoutMessage()" id="disagree">No</button>';
+    '<p>Do you want to log out? <br><br></p><button id="agree" onclick="logout()">Yes</button><button onclick="closeLogoutMessage()" id="disagree">No</button>';
 
   // Append the message to the body
   document.body.appendChild(logoutMessage);
