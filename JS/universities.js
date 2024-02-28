@@ -41,6 +41,10 @@ async function fetchUnivesities(){
       status.textContent = application.status;
       tr.appendChild(status);
 
+      const dateCreated = document.createElement("td");
+      dateCreated.textContent = application.dateCreated.split("T")[0];
+      tr.appendChild(dateCreated);
+
       const actionCell = document.createElement("td");
       const viewButton = document.createElement("button");
       viewButton.textContent = "View Application";
@@ -87,9 +91,9 @@ function filterTable() {
   // Loop through all table rows, hide those that don't match the filter criteria
   for (let i = 1; i < rows.length; i++) {
     let row = rows[i];
-    let university = row.cells[2].textContent;
-    let status = row.cells[5].textContent;
-    let date = row.cells[6].textContent;
+    let university = row.cells[0].textContent;
+    let status = row.cells[2].textContent;
+    let date = row.cells[3].textContent;
 
     let universityMatch =
       universityFilter === "" || university === universityFilter;
