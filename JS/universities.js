@@ -19,6 +19,10 @@ async function fetchUnivesities(){
     applications.forEach((application) => {
       const tr = document.createElement("tr");
 
+      const requestID = document.createElement("td");
+      requestID.textContent = application.requestID;
+      tr.appendChild(requestID);
+
       const university = document.createElement("td");
       university.textContent = application.university;
       tr.appendChild(university);
@@ -91,9 +95,9 @@ function filterTable() {
   // Loop through all table rows, hide those that don't match the filter criteria
   for (let i = 1; i < rows.length; i++) {
     let row = rows[i];
-    let university = row.cells[0].textContent;
-    let status = row.cells[2].textContent;
-    let date = row.cells[3].textContent;
+    let university = row.cells[1].textContent;
+    let status = row.cells[3].textContent;
+    let date = row.cells[4].textContent;
 
     let universityMatch =
       universityFilter === "" || university === universityFilter;
@@ -114,8 +118,8 @@ function populateFilterOptions() {
   const table = document.getElementById("UniversitY-request-table");
   
 
-  let universityValues = getUniqueColumnValues(table,0); 
-  let statusValues = getUniqueColumnValues(table,2); 
+  let universityValues = getUniqueColumnValues(table,1); 
+  let statusValues = getUniqueColumnValues(table,3); 
 
   populateDropdown(universityFilter, universityValues);
   populateDropdown(statusFilter, statusValues);
