@@ -56,30 +56,36 @@ function loadSection(sectionName) {
 }
 
 function loadScriptsBySection(sectionName) {
+  scriptPaths = ["../../JS/authServices.js"];
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = ["../../JS/universities.js"];
-      loadScripts(scriptPaths);
+      scriptPaths.push("../../JS/universities.js");
       break;
     case "StudentRequest":
-      scriptPaths = [
-        "../../JS/studentRequest.js",
-        "../../JS/html2pdf.bundle.min.js",
-      ];
-      loadScripts(scriptPaths);
+      scriptPaths.push("../../JS/studentRequest.js");
+      scriptPaths.push("../../JS/html2pdf.bundle.min.js");
+
       break;
     case "Universities":
-      scriptPaths = ["../../JS/AllUniversities.js"];
-      loadScripts(scriptPaths);
+      scriptPaths.push("../../JS/AllUniversities.js");
+      break;
+    case "NewHOD":
+      scriptPaths.push("../../JS/NewHOD.js");
+
+      break;
+    case "NewAdmin":
+      scriptPaths.push("../../JS/NewAdmin.js");
+
       break;
   }
+  loadScripts(scriptPaths);
 }
 
 function loadScripts(scriptPaths) {
   scriptPaths.forEach(function (scriptPath) {
     var script = document.createElement("script");
     script.src = scriptPath;
-    script.type = "text/javascript";
+    // script.type = "text/javascript";
     document.body.appendChild(script);
   });
 }
