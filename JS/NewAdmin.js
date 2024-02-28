@@ -19,42 +19,6 @@ function createOptions(methodName, bodyMessage) {
   }
 }
 
-function populateDropdown(selectElement, values) {
-  values.forEach(function (value) {
-    let option = document.createElement("option");
-    option.value = value;
-    option.textContent = value;
-    selectElement.appendChild(option);
-  });
-}
-
-if (universitiesDict === undefined) {
-  var universitiesDict = {};
-}
-async function getUniversityName() {
-  try {
-    const universitiesObject = await fetch(
-      "http://localhost:5263/api/Admin/GetAllUniversities",
-      createOptions("GET", {})
-    );
-    const universities = await universitiesObject.json();
-
-    universities.forEach(function (university) {
-      universitiesDict[university.id] = university.name;
-    });
-
-    let universityFilter = document.getElementById("universityFilter");
-    populateDropdown(universityFilter, Object.values(universitiesDict));
-  } catch (error) {
-    console.error("Error fetching universities:", error);
-  }
-}
-function getKeyByValue(object, value) {
-  return Object.keys(object).find((key) => object[key] === value);
-}
-
-getUniversityName();
-
 async function registerAdmin(
   emailText,
   phoneNumberText,
@@ -62,16 +26,13 @@ async function registerAdmin(
   lastNameText
 ) {
   try {
-    let universityID = getKeyByValue(
-      universitiesDict,
-      document.getElementById("universityFilter").value
-    );
+    let universityID = 0;
     const registerRequest = {
       phoneNumber: phoneNumberText,
       firstName: firstNameText,
       lastName: lastNameText,
       email: emailText,
-      role: "University Admin",
+      role: "BBD Admin",
     };
     const registerResponseObject = await fetch(
       "http://localhost:5263/api/Auth/Register?universityID=" + universityID,
@@ -82,7 +43,7 @@ async function registerAdmin(
     console.log(registerResponse);
     alert("Successfully Registered " + firstNameText + " " + lastNameText);
   } catch (error) {
-    console.error("Error registering University Admin:", error);
+    console.error("Error registering BBD Admin:", error);
   }
 }
 
