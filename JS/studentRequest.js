@@ -170,6 +170,56 @@ function openPopup(row) {
   setTimeout(() => {
       popup.style.opacity = 1;
   }, 10);
+  const rejectBtn = document.getElementById("reject");
+  const commentPopup = document.getElementById("popup-content");
+
+  rejectBtn.addEventListener("click",async function(event){
+    event.preventDefault();
+    console.log(rejectBtn.getAttribute("data-value"));
+    const commentElement = popupContent.querySelector('.editable-field[data-field="comment"]');
+    const commentContent = commentElement.textContent.trim();
+    document.querySelector('.modal').style.display = 'block';
+    document.querySelector('.overlay2').style.display = 'block';
+    const modalForm = document.getElementById("modal-form");
+    modalForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const reason = document.getElementById("reject-reason").value;
+
+      if (reason == "") {
+        // Handle the case when the reason is empty
+        alert("Please provide a reason for rejection.");
+        return;
+      }
+
+      // Continue with your logic here
+      console.log(reason);
+
+      const options = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body:"",
+      };
+
+      const response = await fetch("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason, options);
+      const data = await response.json();
+      console.log(data);
+
+      // Hide the modal after submission
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
+    });
+
+    const cancelButton = document.getElementById("cancel-button");
+    cancelButton.addEventListener("click", function() {
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
+    });
+
+  });
 }
 
 function closePopup() {
@@ -278,22 +328,23 @@ document.getElementById('downloadButton').addEventListener('click', () => {
   console.log("Table retreived" +table);
   
   // Options for pdf generation
-  const pdfOptions = {
-      margin: 10,
-      filename: 'table-export.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
+  // const pdfOptions = {
+  //     margin: 10,
+  //     filename: 'table-export.pdf',
+  //     html2canvas: { scale: 2 },
+  //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  // };
   console.log("options created");
-  // html2pdf().from(table).save();
+  html2pdf().from(table).save();
   // Use html2pdf.js to generate PDF
-  html2pdf().from(table).set(pdfOptions).outputPdf().then(pdf => {
-      // Trigger the download
-      const blob = new Blob([pdf], { type: 'application/pdf' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = pdfOptions.filename;
-      link.click();
-  });
+  // html2pdf().from(table).set(pdfOptions).outputPdf().then(pdf => {
+  //     // Trigger the download
+  //     const blob = new Blob([pdf], { type: 'application/pdf' });
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(blob);
+  //     link.download = pdfOptions.filename;
+  //     link.click();
+  // });
 });
+
+document.getElementById

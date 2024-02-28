@@ -1,7 +1,7 @@
 <section id="StudentRequest">
 
-  <link rel="stylesheet" href="/CSS/universities.css">
-  <link rel="stylesheet" href="/CSS/students.css">
+  <link rel="stylesheet" href="../../CSS/universities.css">
+  <link rel="stylesheet" href="../../CSS/students.css">
   <h2>Student Request Section</h2>
   <article class="filter-options">
     <label for="universityFilter">Filter by University:</label>
@@ -33,4 +33,16 @@
     <button onclick="closePopup()" class ="View-application-button">Close</button>
     <button class="edit-button View-application-button" onclick="toggleEdit()">Edit</button>
 </article>
+<article class="overlay2"></article>
+<article class="overlay"></article>
+  <article class="modal" id="popup-content">
+    <h2>Reason for Rejecting</h2>
+    <form id="modal-form">
+      <label for="reject-reason">Reason:</label>
+      <input type="text" id="reject-reason" name="reject-reason" required>
+      <button type="submit">Submit</button>
+      <button type="button" id="cancel-button">Cancel</button>
+    </form>
+  </article>
+
 </section>
