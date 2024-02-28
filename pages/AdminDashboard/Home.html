@@ -1,5 +1,128 @@
 <section id="Home">
   <h2>Ukukhula Dashboard</h2>
-  <p>This is where the main Dashboard stuff will go</p>
 
-</section>
+  <style>
+        #BursaryInfo {
+      display: flex; /* Use flexbox */
+      flex-wrap: wrap; /* Allow wrapping */
+      justify-content: center; /* Center align items horizontally */
+      margin-top: 50px; /* Add margin to the top */
+    }
+
+    .box {
+      background-color: #f0f0f0;
+      padding: 10px; /* Reduce padding to make the boxes smaller */
+      margin: 10px;
+      border-radius: 5px;
+      width: 150px; /* Set smaller width for the boxes */
+      height: 140px; /* Set smaller height for the boxes */
+      border: 1px solid #ccc; /* Add border */
+      text-align: center; /* Center align text */
+      display: inline-flex; /* Display as inline flexbox */
+      flex-direction: column; /* Align content vertically */
+      align-items: center; /* Center align content horizontally */
+    }
+
+    .box h2 {
+      margin-top: 0;
+      font-size: 10px; /* Increase font size for better readability */
+    }
+    
+    table {
+      width: 70%; /* Set table width */
+      border-collapse: collapse;
+      font-size: 16px; /* Increase font size */
+      border-radius: 10px; /* Add rounded corners */
+      overflow: hidden; /* Hide overflow */
+      float: left; /* Float table to the left */
+      margin-right: 20px; /* Add margin between tables */
+      margin-bottom: 20px; /* Add margin below the table */
+    }
+    
+    th, td {
+      padding: 12px; /* Increase padding */
+      text-align: center; /* Center align text */
+      background-color: #b3b0b0; /* Set background color */
+      font-weight: bold; /* Make font bold */
+    }
+    
+    th {
+      background-color: green; /* Set background color for header cells */
+    }
+
+    .review-button {
+      margin-top: 5px; /* Adjust top margin */
+      margin-left: 20px; /* Adjust left margin */
+      padding: 10px 20px; /* Add padding */
+      background-color: green; /* Set background color */
+      color: white; /* Set text color */
+      border: none; /* Remove border */
+      border-radius: 5px; /* Add border radius */
+      font-size: 16px; /* Set font size */
+      cursor: pointer; /* Set cursor to pointer */
+    }
+
+    .review-text {
+      display: none; /* Hide by default */
+      margin-top: 10px; /* Add margin to the top */
+      margin-left: 20px; /* Adjust left margin */
+      width: 70%; /* Set width */
+      padding: 10px; /* Add padding */
+      border: 1px solid #ccc; /* Add border */
+      border-radius: 5px; /* Add border radius */
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th> University Information</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Universities Available</td>
+    <td>39</td>
+  </tr>
+  <tr>
+    <td>Total Bursary Amount</td>
+    <td>R1,000,000</td>
+  </tr>
+  <tr>
+    <td>Total Approved Applications</td>
+    <td>0</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Criteria</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Age Cap</td>
+    <td>35</td>
+  </tr>
+  <tr>
+    <td>Race</td>
+    <td>Black, Indian, Coloured</td>
+  </tr>
+  <tr>
+    <td>Grade</td>
+    <td>65% and above</td>
+  </tr>
+</table>
+
+<button class="review-button" onclick="toggleReview()">Add Review</button>
+<textarea id="review-text" class="review-text" placeholder="Write your review here..."></textarea>
+
+<script>
+  function toggleReview() {
+    var reviewText = document.getElementById('review-text');
+    reviewText.classList.toggle('show');
+  }
+</script>
+
+</body>
+</html>
+
