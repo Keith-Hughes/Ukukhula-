@@ -1,5 +1,22 @@
 <section id="UniversityRequest">
   <h2>University Requests</h2>
+  <article class="filter-options">
+    <label for="universityFilter">Filter by University:</label>
+    <select id="universityFilter" onchange="filterTable()">
+        <option value="">All</option>
+    </select>
+
+    <label for="statusFilter">Filter by Status:</label>
+    <select id="statusFilter" onchange="filterTable()">
+        <option value="">All</option>
+    </select>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" onchange="filterTable()">
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" onchange="filterTable()">
+  </article>
   <table id="UniversitY-request-table">
     <thead>
       <th>Name</th>
