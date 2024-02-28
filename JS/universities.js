@@ -81,9 +81,14 @@ async function fetchUnivesities(){
         
         <td class="col-title"><b>Amount:</b> ${applications.amount}</td>
   
-        <td class="col-title"><b>DateCreated:</b> ${applications.datecreated}</td> 
+        <td class="col-title"><b>DateCreated:</b> ${applications.dateCreated.split("T")[0]}</td> 
     </tr> 
-     
+    <tr class="row">
+        <td class="col-title"><b>comment:</b> ${applications.comment}</td> 
+
+        <td class="col-title"><b>status:</b> ${applications.status}</td>
+  
+   
     </table>
     <article class=status-buttons>
     <button id="approve" class="View-application-button" data-value= university>Approve</button>
