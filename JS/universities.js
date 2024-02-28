@@ -44,10 +44,7 @@ if (typeof applications === "undefined") {
       const actionCell = document.createElement("td");
       const viewButton = document.createElement("button");
       viewButton.textContent = "View Application";
-      viewButton.addEventListener("click", () => {
-        location.href = "/pages/AdminDashboard/UniversityRequest.html";
-      });
-
+      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(application);});
       viewButton.setAttribute("class", "View-application-button");
 
       actionCell.appendChild(viewButton);
@@ -57,4 +54,54 @@ if (typeof applications === "undefined") {
   }
 
   populateTable();
+}
+
+function openPopup(applications) {
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+  const popupContent = document.getElementById('popupContent');
+  
+  // Set the content of the popup (you can fetch the actual data here)
+  popupContent.innerHTML = 
+
+  `<table id="allRequests">
+
+
+  <tr class="row">
+      <td class="col-title"><b>University Name:</b> ${applications.university}</td>
+      
+      <td class="col-title"><b>Province:</b> ${applications.province}</td>
+      
+      <td class="col-title"><b>Amount:</b> ${applications.amount}</td>
+
+      <td class="col-title"><b>DateCreated:</b> ${applications.datecreated}</td> 
+  </tr> 
+  <tr class="row"
+      <td class="col-title"><b>comment:</b> ${applications.comment}</td> 
+
+ 
+  </table>
+  <article class=status-buttons>
+  <button id="approve" class="View-application-button" data-value= university>Approve</button>
+  <button id="reject" class="View-application-button" data-value= university>Reject</button>
+  </article>`;
+
+  // Show the overlay and fade in the popup
+  overlay.style.display = 'block';
+  popup.style.display = 'block';
+  setTimeout(() => {
+      popup.style.opacity = 1;
+  }, 10);
+}
+
+function closePopup() {
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+
+  // Fade out the popup and hide the overlay
+  popup.style.opacity = 0;
+  setTimeout(() => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+  }, 300);
 }
