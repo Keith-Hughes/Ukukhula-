@@ -170,6 +170,56 @@ function openPopup(row) {
   setTimeout(() => {
       popup.style.opacity = 1;
   }, 10);
+  const rejectBtn = document.getElementById("reject");
+  const commentPopup = document.getElementById("popup-content");
+
+  rejectBtn.addEventListener("click",async function(event){
+    event.preventDefault();
+    console.log(rejectBtn.getAttribute("data-value"));
+    const commentElement = popupContent.querySelector('.editable-field[data-field="comment"]');
+    const commentContent = commentElement.textContent.trim();
+    document.querySelector('.modal').style.display = 'block';
+    document.querySelector('.overlay2').style.display = 'block';
+    const modalForm = document.getElementById("modal-form");
+    modalForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const reason = document.getElementById("reject-reason").value;
+
+      if (reason == "") {
+        // Handle the case when the reason is empty
+        alert("Please provide a reason for rejection.");
+        return;
+      }
+
+      // Continue with your logic here
+      console.log(reason);
+
+      const options = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body:"",
+      };
+
+      const response = await fetch("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason, options);
+      const data = await response.json();
+      console.log(data);
+
+      // Hide the modal after submission
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
+    });
+
+    const cancelButton = document.getElementById("cancel-button");
+    cancelButton.addEventListener("click", function() {
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
+    });
+
+  });
 }
 
 function closePopup() {
@@ -296,3 +346,5 @@ document.getElementById('downloadButton').addEventListener('click', () => {
   //     link.click();
   // });
 });
+
+document.getElementById
