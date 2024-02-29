@@ -1,4 +1,6 @@
-checkTokenValidity();
+// checkTokenValidity();
+
+
 async function checkTokenValidity() {
   let JsonToken;
   if (sessionStorage.getItem("token")) {
@@ -50,3 +52,5 @@ function parseJwt(token) {
 
   return JSON.parse(jsonPayload);
 }
+
+// window.checkTokenValidity = checkTokenValidity;

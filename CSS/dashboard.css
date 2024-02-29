@@ -3,10 +3,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+@font-face {
+  font-family: "Quinfo_bold";
+  src: local("Quinfo_bold"),
+    url("../Fonts/Quinfo/QuinfoBOLD.otf") format("opentype");
+}
+tr {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: normal;
+}
 
 body {
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: Quinfo_bold, sans-serif;
+  letter-spacing: ;
   background-image: url("../Images/dashboardBackground.jpg");
   background-size: cover;
   background-repeat: no-repeat;

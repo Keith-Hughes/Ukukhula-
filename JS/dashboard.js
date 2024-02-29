@@ -76,8 +76,13 @@ function loadScriptsBySection(sectionName) {
 }
 
 function loadScripts(scriptPaths) {
+  //Load the AuthService script before all other scripts
+  let script = document.createElement("script");
+  script.src = "../../JS/authServices.js";
+  script.type = "text/javascript";
+  document.body.appendChild(script);
   scriptPaths.forEach(function (scriptPath) {
-    const script = document.createElement("script");
+    script = document.createElement("script");
     script.src = scriptPath;
     script.type = "text/javascript";
     document.body.appendChild(script);
