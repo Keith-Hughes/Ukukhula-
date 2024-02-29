@@ -1,20 +1,5 @@
-async function fetchUnivesities(){
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-    },
-  };
-  const response = await fetch(
-    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
-    options
-  );
-  return await response.json();
-}
-
- 
-  async function populateTable() {
-    const applications = await fetchUnivesities();
+async function populateTable() {
+    const applications =await fetchData("http://localhost:5263/api/Admin/GetAllUniversityRequests","GET");
     const tbody = document.querySelector("#UniversitY-request-table tbody");
     applications.forEach((application) => {
       const tr = document.createElement("tr");
@@ -52,10 +37,7 @@ async function fetchUnivesities(){
       const actionCell = document.createElement("td");
       const viewButton = document.createElement("button");
       viewButton.textContent = "View Application";
-      viewButton.addEventListener("click", () => {
-        location.href = "/pages/AdminDashboard/UniversityRequest.html";
-      });
-
+      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(application);});
       viewButton.setAttribute("class", "View-application-button");
 
       actionCell.appendChild(viewButton);
@@ -63,9 +45,94 @@ async function fetchUnivesities(){
       tbody.appendChild(tr);
     });
     populateFilterOptions()
-  } 
+  }
   populateTable();
+
+  function openPopup(applications) {
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+    const popupContent = document.getElementById('popupContent');
+    
+    // Set the content of the popup (you can fetch the actual data here)
+    popupContent.innerHTML = 
   
+    `<table id="allRequests">
+  
+  
+    <tr class="row">
+        <td class="col-title"><b>University Name:</b> ${applications.university}</td>
+        
+        <td class="col-title"><b>Province:</b> ${applications.province}</td>
+        
+        <td class="col-title"><b>Amount:</b> ${applications.amount}</td>
+  
+        <td class="col-title"><b>DateCreated:</b> ${applications.dateCreated.split("T")[0]}</td> 
+    </tr> 
+    <tr class="row">
+        <td class="col-title"><b>comment:</b> ${applications.comment}</td> 
+
+        <td class="col-title"><b>status:</b> ${applications.status}</td>
+  
+   
+    </table>
+    <article class=status-buttons>
+    <button id="approve" class="View-application-button" data-value= university>Approve</button>
+    <button id="reject" class="View-application-button" data-value= university>Reject</button>
+    </article>`;
+  
+    // Show the overlay and fade in the popup
+    overlay.style.display = 'block';
+    popup.style.display = 'block';
+    setTimeout(() => {
+        popup.style.opacity = 1;
+    }, 10);
+  }
+  
+  function closePopup() {
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+  
+    // Fade out the popup and hide the overlay
+    popup.style.opacity = 0;
+    setTimeout(() => {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+    }, 300);
+  }
+  // Function to toggle editability of fields
+function toggleEdit() {
+  const editableFields = document.querySelectorAll('.editable-field');
+  const editButton = document.querySelector('.edit-button');
+
+  // Toggle contentEditable for all editable fields
+  editableFields.forEach(field => {
+      field.contentEditable = field.contentEditable === 'true' ? 'false' : 'true';
+  });
+
+  // Change the edit button text based on the current state
+  const isEditing = editableFields[0].contentEditable === 'true'; // Check the state of one of the fields
+  
+  editableFields.forEach(field => {
+    if (isEditing) {
+        field.classList.add('edit-mode');
+    } else {
+        field.classList.remove('edit-mode');
+    }
+});
+  
+  editButton.textContent = isEditing ? 'Save' : 'Edit';
+
+  // Save the edited content or perform any necessary action
+  if (!isEditing) {
+      saveEditedContent();
+  }
+}
+
+// Function to save edited content (you can customize this based on your needs)
+function saveEditedContent() {
+  // Add logic to save the edited content to the backend or perform other actions
+  console.log("Saving edited content");
+}
 
 
 function getUniqueColumnValues(table, columnIndex) {

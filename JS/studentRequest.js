@@ -5,19 +5,10 @@ var globalResponseData = [];
 GetAllRequests();
 
 async function GetAllRequests() {
-  checkTokenValidity();
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-    },
-  };
+  
+  const response = await fetchData("http://localhost:5263/api/StudentFundRequest","GET",{})
 
-  const response = await fetch(
-    "http://localhost:5263/api/StudentFundRequest",
-    options
-  );
-  const dataResponse2 = await response.json();
+  const dataResponse2 = response;
   globalResponseData = dataResponse2;
 
   const display = document.getElementById("StudentRequestPARA");
