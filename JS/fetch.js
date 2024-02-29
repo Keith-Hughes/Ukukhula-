@@ -11,10 +11,10 @@ function createOptions(methodName, bodyMessage) {
   };
 }
 
-async function fetchUnivesities(methodName, bodyMessage){
+async function fetchData(url,methodName, bodyMessage){
   const options = createOptions(methodName,bodyMessage);
   const response = await fetch(
-    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
+    url,
     options
   );
   return await response.json();

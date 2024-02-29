@@ -62,7 +62,7 @@ function loadScriptsBySection(sectionName) {
       loadScripts(scriptPaths);
       break;
     case "StudentRequest":
-      scriptPaths = [
+      scriptPaths = ["../../JS/fetch.js",
         "../../JS/studentRequest.js",
         "../../JS/html2pdf.bundle.min.js",
       ];
