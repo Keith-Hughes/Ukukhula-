@@ -1,10 +1,17 @@
-
-
 <section id="UniversityRequest">
-  <link rel="stylesheet"  href="../../CSS/universities.css">
+  <link rel="stylesheet" href="../../CSS/universities.css">
   <link rel="stylesheet" href="../../CSS/students.css">
-  <link rel="stylesheet" href="../../CSS/dashboard.css" />
   <h2>University Applications</h2>
+
+  <article class="overlay" id="overlay" onclick="closePopup()"></article>
+  <article class="popup" id="popup">
+    <h2>Application Details</h2>
+    <p id="popupContent">Loading...</p>
+    <button onclick="closePopup()" class ="View-application-button">Close</button>
+    <button class="edit-button View-application-button" onclick="toggleEdit()">Edit</button>
+  </article>
+
+
   <article class="filter-options">
     <label for="universityFilter">Filter by University:</label>
     <select id="universityFilter" onchange="filterTable()">
@@ -35,4 +42,6 @@
     <tbody></tbody>
   </table>
 </section>
-
+<link rel="stylesheet" href="../../CSS/universities.css" />
+<link rel="stylesheet" href="../../CSS/dashboard.css" />
+<link rel="stylesheet" href="../../CSS/students.css">
