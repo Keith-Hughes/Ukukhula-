@@ -1,13 +1,23 @@
 function createOptions(methodName, bodyMessage) {
-    bodyTemp = methodName === "POST" ? body : null;
+  if (methodName.toLowerCase() == "post"){
     return {
       method: methodName,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
-      bodyTemp: bodyMessage,
+      body: bodyMessage,
     };
+  }
+    else {
+      return {
+        method: methodName,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        }
+      };
+    }
   }
 
 document.addEventListener("DOMContentLoaded", function (event) {

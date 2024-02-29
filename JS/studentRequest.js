@@ -122,7 +122,7 @@ function openPopup(row) {
   document.getElementById("document").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"];
   document.getElementById("status").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
   document.getElementById("comment").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"];
-
+  document.getElementById("reject").setAttribute("data-value", row.cells[0].textContent)
   const status = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
   const statusButtons = document.getElementById("status-buttons");
   const editBtn = document.getElementById("edit-request")
@@ -130,41 +130,10 @@ function openPopup(row) {
     statusButtons.style.display = "Flex";
     editBtn.style.display="block"
   }
-  // Set the content of the popup (you can fetch the actual data here)
-  
-  //     <td class="col-title"><b>Email:</b> ${}</td>  
-  // </tr>
-  // <tr class="row">
-  //     <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount">${}<span></td>
-      
-  //     <td class="col-title"><b>Date Submitted:</b> ${row.cells[6].textContent}</td>
-      
-  //     <td class="col-title"><b>University:</b> ${row.cells[2].textContent}</td>
-
-  //     <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"]}<span></td>  
-  // </tr>
-  // <tr class="row">
-  //     <td class="col-title"><b>Age:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"]}</td>
-      
-  //     <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
-      
-  //     <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
-
-
-  //     <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
-  // </tr>
-  // <tr class="row">
-  //     <td class="col-title"><b>Request Status</b>:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"]}</td>
-  // </tr>
-  // <tr class="row">
-  //     <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"]}<span></td> 
-        
-  // </tr>
-  // </table>
-  // <article class=status-buttons>
-  // <button id="approve" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
-  // <button id="reject" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
-  // </article>`;
+  else{
+    statusButtons.style.display = "none";
+    editBtn.style.display="none"
+  }
 
   // Show the overlay and fade in the popup
   overlay.style.display = 'block';
@@ -173,13 +142,9 @@ function openPopup(row) {
       popup.style.opacity = 1;
   }, 10);
   const rejectBtn = document.getElementById("reject");
-  const commentPopup = document.getElementById("popup-content");
-
   rejectBtn.addEventListener("click",async function(event){
     event.preventDefault();
     console.log(rejectBtn.getAttribute("data-value"));
-    const commentElement = popupContent.querySelector('.editable-field[data-field="comment"]');
-    const commentContent = commentElement.textContent.trim();
     document.querySelector('.modal').style.display = 'block';
     document.querySelector('.overlay2').style.display = 'block';
     const modalForm = document.getElementById("modal-form");

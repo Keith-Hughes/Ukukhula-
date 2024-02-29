@@ -53,4 +53,4 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-window.checkTokenValidity = checkTokenValidity;
+// window.checkTokenValidity = checkTokenValidity;
