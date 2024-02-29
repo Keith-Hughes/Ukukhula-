@@ -1,0 +1,124 @@
+<section id="ManageUsers">
+  <span id="UsersSection"></span>
+  <article class="overlay"></article>
+  <button id="NewButton" onclick="showAdmin()">Add New BBD Admin</button>
+  <button id="NewButton" onclick="showHOD()">Add New University Admin</button>
+  <span id="NewAdmin">
+    <h2>REGISTER A BBD ADMIN</h2>
+    <br />
+    <br />
+    <br />
+    <h5 id="responseMessageAdmin"></h5>
+    <form id="admin-registration-form" method="post">
+      <input
+        placeholder="First Name"
+        type="text"
+        id="admin-first-name"
+        name="admin-first-name"
+        pattern="[A-Za-z]+"
+        title="Please enter alphabetic characters only"
+        required
+      />
+      <span class="error-message" id="admin-first-name-error"></span>
+
+      <input
+        placeholder="Last Name"
+        type="text"
+        id="admin-last-name"
+        name="admin-last-name"
+        pattern="[A-Za-z]+"
+        title="Please enter alphabetic characters only"
+        required
+      />
+      <span class="error-message" id="admin-last-name-error"></span>
+
+      <input
+        placeholder="Email"
+        type="email"
+        id="admin-email"
+        name="admin-email"
+        required
+      />
+      <span class="error-message" id="admin-email-error"></span>
+
+      <input
+        placeholder="Phone Number"
+        type="tel"
+        id="admin-phone-number"
+        name="admin-phone-number"
+        pattern="[0-9]{10}"
+        title="Please enter a 10-digit phone number"
+        required
+      />
+      <span class="error-message" id="admin-phone-number-error"></span>
+      <br />
+      <span id="buttons">
+        <input type="submit" value="Create Admin" />
+        <button id="cancel" onclick=" closePopup()">Cancel</button>
+      </span>
+    </form>
+  </span>
+
+  <span id="NewHOD">
+    <h2>REGISTER A HOD</h2>
+    <br />
+    <label for="universityFilter">Select University:</label>
+    <select id="universityFilter">
+      <option value="">All</option>
+    </select>
+    <br />
+    <br />
+
+    <form id="registration-form" method="post">
+      <input
+        placeholder="First Name"
+        type="text"
+        id="first-name"
+        name="first-name"
+        pattern="[A-Za-z]+"
+        title="Please enter alphabetic characters only"
+        required
+      />
+      <span class="error-message" id="first-name-error"></span>
+
+      <input
+        placeholder="Last Name"
+        type="text"
+        id="last-name"
+        name="last-name"
+        pattern="[A-Za-z]+"
+        title="Please enter alphabetic characters only"
+        required
+      />
+      <span class="error-message" id="last-name-error"></span>
+
+      <input
+        placeholder="Email"
+        type="email"
+        id="email"
+        name="email"
+        required
+      />
+      <span class="error-message" id="email-error"></span>
+
+      <input
+        placeholder="Phone Number"
+        type="tel"
+        id="phone-number"
+        name="phone-number"
+        pattern="[0-9]{10}"
+        title="Please enter a 10-digit phone number"
+        required
+      />
+      <span class="error-message" id="phone-number-error"></span>
+      <br />
+      <span id="buttons">
+        <input type="submit" value="Create Admin" />
+        <button id="cancel" onclick=" closePopup()">Cancel</button>
+      </span>
+    </form>
+  </span>
+</section>
+
+<link rel="stylesheet" href="../../CSS/ManageUsers.css" />
+<link rel="stylesheet" href="../../CSS/NewHOD.css" />
