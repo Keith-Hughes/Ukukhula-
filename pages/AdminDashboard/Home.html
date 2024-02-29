@@ -2,7 +2,7 @@
   <h2>Ukukhula Dashboard</h2>
 
   <style>
-        #BursaryInfo {
+    #BursaryInfo {
       display: flex; /* Use flexbox */
       flex-wrap: wrap; /* Allow wrapping */
       justify-content: center; /* Center align items horizontally */
@@ -41,7 +41,6 @@
     
     th, td {
       padding: 12px; /* Increase padding */
-      text-align: center; /* Center align text */
       background-color: #b3b0b0; /* Set background color */
       font-weight: bold; /* Make font bold */
     }
@@ -70,6 +69,18 @@
       padding: 10px; /* Add padding */
       border: 1px solid #ccc; /* Add border */
       border-radius: 5px; /* Add border radius */
+    }
+
+    /* Align text in the first column to the left */
+    table td:first-child,
+    table th:first-child {
+      text-align: left;
+    }
+
+    /* Align "Value" header and data in the second column to the right */
+    table th:nth-child(2),
+    table td:nth-child(2) {
+      text-align: right;
     }
   </style>
 </head>
