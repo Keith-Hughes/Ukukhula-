@@ -142,7 +142,7 @@ function openPopup(row) {
       popup.style.opacity = 1;
   }, 10);
   const rejectBtn = document.getElementById("reject");
-  rejectBtn.addEventListener("click",async function(event){
+  rejectBtn.addEventListener("click", function(event){
     event.preventDefault();
     console.log(rejectBtn.getAttribute("data-value"));
     document.querySelector('.modal').style.display = 'block';
@@ -161,18 +161,9 @@ function openPopup(row) {
 
       // Continue with your logic here
       console.log(reason);
-
-      const options = {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body:"",
-      };
-
-      const response = await fetch("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason, options);
-      const data = await response.json();
+      
+      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
+      
       console.log(data);
 
       // Hide the modal after submission
