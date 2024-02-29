@@ -1,20 +1,5 @@
-async function fetchUnivesities(){
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-    },
-  };
-  const response = await fetch(
-    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
-    options
-  );
-  return await response.json();
-}
-
- 
-  async function populateTable() {
-    const applications = await fetchUnivesities();
+async function populateTable() {
+    const applications =await fetchData("http://localhost:5263/api/Admin/GetAllUniversityRequests","GET");
     const tbody = document.querySelector("#UniversitY-request-table tbody");
     applications.forEach((application) => {
       const tr = document.createElement("tr");
@@ -60,7 +45,7 @@ async function fetchUnivesities(){
       tbody.appendChild(tr);
     });
     populateFilterOptions()
-  } 
+  }
   populateTable();
 
   function openPopup(applications) {
