@@ -1,5 +1,5 @@
 async function populateTable() {
-    const applications =await fetchData("http://localhost:5263/api/Admin/GetAllUniversityRequests","GET",{});
+    const applications =await fetchData("http://localhost:5263/api/Admin/GetAllUniversityRequests","GET");
     const tbody = document.querySelector("#UniversitY-request-table tbody");
     applications.forEach((application) => {
       const tr = document.createElement("tr");

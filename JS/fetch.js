@@ -1,21 +1,30 @@
-function createOptions(methodName, bodyMessage) {
-  bodyTemp = methodName === "POST" ? body : null;
-  const token = sessionStorage.getItem("token");
-  return {
-    method: methodName,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    bodyTemp: bodyMessage,
-  };
-}
+async function fetchData(url,methodName ="GET", body = null){
+    const token = sessionStorage.getItem("token");
+  const options = {
+    method : methodName,
+    headers :{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+    }
+  }
 
-async function fetchData(url,methodName, bodyMessage){
-  const options = createOptions(methodName,bodyMessage);
-  const response = await fetch(
-    url,
-    options
-  );
-  return await response.json();
+  if(methodName !== 'GET' && body!==null){
+    options.body = JSON.stringify(body);
+  }
+
+  try{
+    const response = await fetch(
+        url,
+        options
+      );
+
+      if(!response.ok){
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error; // Re-throw the error to handle it in the calling code
+ }
 }

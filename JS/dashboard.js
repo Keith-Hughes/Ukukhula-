@@ -77,7 +77,7 @@ function loadScriptsBySection(sectionName) {
 
 function loadScripts(scriptPaths) {
   scriptPaths.forEach(function (scriptPath) {
-    var script = document.createElement("script");
+    const script = document.createElement("script");
     script.src = scriptPath;
     script.type = "text/javascript";
     document.body.appendChild(script);
