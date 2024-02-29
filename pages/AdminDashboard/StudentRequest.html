@@ -29,9 +29,53 @@
 
 <article class="popup" id="popup">
     <h2>Application Details</h2>
-    <p id="popupContent">Loading...</p>
+    <p id="popupContent">
+      <table id="allRequests">
+
+
+        <tr class="row">
+            <td class="col-title"><b>Full Name:</b><span id="fullName"></span></td>
+            
+            <td class="col-title"><b>ID Number:</b><span id="idNumber"></span></td>
+            
+            <td class="col-title"><b>Contact Number:</b><span id="contact"></span></td>
+      
+            <td class="col-title"><b>Email:</b><span id="email"></span></td>  
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount" id="amount"><span></td>
+            
+            <td class="col-title"><b>Date Submitted:</b><span id="date-created"></span></td>
+            
+            <td class="col-title"><b>University:</b><span id="university"></span></td>
+      
+            <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade" id="grade"> ${}<span></td>  
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Age:</b><span id="age"></span></td>
+            
+            <td class="col-title"><b>Race:</b> <span id="race"></span></td>
+            
+            <td class="col-title"><b>Gender:</b> <span id="gender"></span></td>
+      
+      
+            <td class="col-title"><b>Document Status:</b><span id="document"></span></td>  
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Request Status</b>:</b><span id="status"></span></td>
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment" id="comment"><span></td> 
+              
+        </tr>
+        </table>
+        <article class=status-buttons id="status-buttons">
+        <button id="approve" type="submit" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
+        <button id="reject"  type="submit" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
+        </article>
+    </p>
     <button onclick="closePopup()" class ="View-application-button">Close</button>
-    <button class="edit-button View-application-button" onclick="toggleEdit()">Edit</button>
+    <button class="edit-button View-application-button" id="edit-request" onclick="toggleEdit()">Edit</button>
 </article>
 <article class="overlay2"></article>
 <article class="overlay"></article>

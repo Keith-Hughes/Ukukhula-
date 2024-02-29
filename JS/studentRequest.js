@@ -1,4 +1,3 @@
-
 if(globalResponseData === undefined){
 var globalResponseData = [];
 }
@@ -6,7 +5,7 @@ var globalResponseData = [];
 GetAllRequests();
 
 async function GetAllRequests() {
-  
+  checkTokenValidity();
   const options = {
     method: "GET",
     headers: {
@@ -113,56 +112,68 @@ function getUniqueColumnValues(table, columnIndex) {
 }
 
 function openPopup(row) {
+  checkTokenValidity();
   const popup = document.getElementById('popup');
   const overlay = document.getElementById('overlay');
   const popupContent = document.getElementById('popupContent');
   
+  document.getElementById("fullName").innerHTML =  row.cells[1].textContent;
+  document.getElementById("idNumber").innerHTML =  row.cells[3].textContent;
+  document.getElementById("contact").innerHTML =  globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["phoneNumber"];
+  document.getElementById("email").innerHTML =  globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"];
+  document.getElementById("amount").innerHTML = row.cells[4].textContent;
+  document.getElementById("date-created").innerHTML = row.cells[6].textContent;
+  document.getElementById("university").innerHTML = row.cells[2].textContent;
+  document.getElementById("grade").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"];
+  document.getElementById("age").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"];
+  document.getElementById("race").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"];
+  document.getElementById("gender").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"];
+  document.getElementById("document").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"];
+  document.getElementById("status").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
+  document.getElementById("comment").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"];
+
+  const status = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
+  const statusButtons = document.getElementById("status-buttons");
+  const editBtn = document.getElementById("edit-request")
+  if(status == "Review"){
+    statusButtons.style.display = "Flex";
+    editBtn.style.display="block"
+  }
   // Set the content of the popup (you can fetch the actual data here)
-  popupContent.innerHTML = 
-
-  `<table id="allRequests">
-
-
-  <tr class="row">
-      <td class="col-title"><b>Full Name:</b> ${row.cells[1].textContent}</td>
+  
+  //     <td class="col-title"><b>Email:</b> ${}</td>  
+  // </tr>
+  // <tr class="row">
+  //     <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount">${}<span></td>
       
-      <td class="col-title"><b>ID Number:</b> ${row.cells[3].textContent}</td>
+  //     <td class="col-title"><b>Date Submitted:</b> ${row.cells[6].textContent}</td>
       
-      <td class="col-title"><b>Contact Number:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["phoneNumber"]}</td>
+  //     <td class="col-title"><b>University:</b> ${row.cells[2].textContent}</td>
 
-      <td class="col-title"><b>Email:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"]}</td>  
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount">${row.cells[4].textContent}<span></td>
+  //     <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"]}<span></td>  
+  // </tr>
+  // <tr class="row">
+  //     <td class="col-title"><b>Age:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"]}</td>
       
-      <td class="col-title"><b>Date Submitted:</b> ${row.cells[6].textContent}</td>
+  //     <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
       
-      <td class="col-title"><b>University:</b> ${row.cells[2].textContent}</td>
-
-      <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"]}<span></td>  
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Age:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"]}</td>
-      
-      <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
-      
-      <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
+  //     <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
 
 
-      <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Request Status</b>:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"]}</td>
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"]}<span></td> 
+  //     <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
+  // </tr>
+  // <tr class="row">
+  //     <td class="col-title"><b>Request Status</b>:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"]}</td>
+  // </tr>
+  // <tr class="row">
+  //     <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"]}<span></td> 
         
-  </tr>
-  </table>
-  <article class=status-buttons>
-  <button id="approve" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
-  <button id="reject" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
-  </article>`;
+  // </tr>
+  // </table>
+  // <article class=status-buttons>
+  // <button id="approve" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
+  // <button id="reject" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
+  // </article>`;
 
   // Show the overlay and fade in the popup
   overlay.style.display = 'block';
