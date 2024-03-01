@@ -1,86 +1,51 @@
-<section id="Home">
-  <h2>Ukukhula</h2>
-<style>
-  html {
-    font-family: 'Quinfo' sans-serif;
-  }
-  
-  body {
-    margin: 0;
-  }
-  
-  header {
-    padding: 20px;
-    background: #059800;
-    height: 100px;
-    width: 1550px;
-    text-align: center; /* Center the content horizontally */
-    border-bottom: 2px solid black; /* Add border to the bottom of the header */
-  }
-  
-  h1 {
-    color: white;
-    line-height: 80px;
-    margin: 0;
-    height: 200px;
-  }
-  
-  article {
-    padding: 20px;
-    margin: 8px;
-    background: rgb(255, 255, 255);
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ukukhula Application Information</title>
+  <link rel="stylesheet" href="/CSS/home.css"> 
+</head>
+<body>
+  <section id="Home">
+    <h2>Ukukhula</h2>
+    <header>
+      <h1>Application Information</h1>
+    </header>
 
-  /* Added styles for the new flexbox */
-  .flex-container {
-    display: flex;
-    justify-content: space-around;
-  }
+    <section>
+      <article>
+        <h2>General Information</h2>
+        <ul>
+          <li>UNIVERSITIES AVAILABLE: <b>39</b></li>
+          <li>TOTAL BURSARY AMOUNT :  <b>R 1,000,000</b></li>
+          <li>TOTAL APPROVED APPLICATIONS: <b>14</b></li>
+          <li>TOTAL REJECTED APPLICATIONS: <b>13</b></li>
+        </ul>
+      </article>
 
-  .flex-item {
-    text-align: center;
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px; /* Add rounded corners */
-  }
-</style>
+      <article>
+        <h2>Criteria for eligibility</h2>
+        <ul>
+          <li>AGE CAP: <b>35</b></li>
+          <li>RACE: <b>Black, Indian, Coloured</b></li>
+          <li>GRADE: <b>65% or Above</b></li>
+        </ul>
+      </article>
 
-<header>
-  <h1>Application Information</h1>
-</header>
+      <article class="flex-container">
+        <article class="flex-item">
+          <h2>Approved applicants</h2>
+          <p>64%</p>
+        </article>
+        
+        <article class="flex-item">
+          <h2>Rejected applicants</h2>
+          <p>36%</p>
+        </article>
+      </article>
+    </section>
 
-<section>
-  <article>
-    <h2>General Information</h2>
-    <ul>
-      <li>UNIVERSITIES AVAILABLE: <b>39</b></li>
-      <li>TOTAL BURSARY AMOUNT :  <b>R 1,000,000</b></li>
-      <li>TOTAL APPROVED APPLICATIONS: <b>14</b></li>
-      <li>TOTAL REJECTED APPLICATIONS: <b>13</b></li>
-    </ul>
-  </article>
-
-  <article>
-    <h2>Criteria for eligibility</h2>
-    <ul>
-      <li>AGE CAP: <b>35</b></li>
-      <li>RACE: <b>Black, Indian, Coloured</b></li>
-      <li>GRADE: <b>65% or Above</b></li>
-    </ul>
-  </article>
-
-  <article class="flex-container">
-    <article class="flex-item">
-      <h2>Approved applicants</h2>
-      <p>64%</p>
-    </article>
-    
-    <article class="flex-item">
-      <h2>Rejected applicants</h2>
-      <p>36%</p>
-    </article>
-  </article>
-</section>
-
-</section>
+  </section>
+</body>
+</html>
