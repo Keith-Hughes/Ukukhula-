@@ -2,15 +2,33 @@
   <link rel="stylesheet" href="../../CSS/universities.css">
   <link rel="stylesheet" href="../../CSS/students.css">
   <h2>University Applications</h2>
-
   <article class="overlay" id="overlay" onclick="closePopup()"></article>
   <article class="popup" id="popup">
     <h2>Application Details</h2>
-    <p id="popupContent">Loading...</p>
-    <button onclick="closePopup()" class ="View-application-button">Close</button>
-    <button class="edit-button View-application-button" onclick="toggleEdit()">Edit</button>
+    <span id="popupContent">
+    <table id="allRequests">
+      <tr class="row">
+          <td class="col-title"><b>University Name:</b><span id="universityName"></span></td>
+          
+          <td class="col-title"><b>Province:</b><span id="province"></span></td>
+          
+          <td class="col-title"><b>Amount:</b><span id="amount"></span></td>
+    
+          <td class="col-title"><b>DateCreated:</b><span id="dateCreated"></span></td> 
+      </tr> 
+      <tr class="row">
+          <td class="col-title"><b>comment:</b><span id="comment"></span></td> 
+  
+          <td class="col-title"><b>status:</b><span id="status"></span></td>
+      </table>
+      <article class="status-buttons" class="status-buttons">
+      <button id="approve" class="View-application-button" data-value= "university">Approve</button>
+      <button id="reject" class="View-application-button" data-value= "university">Reject</button>
+      </article>
+    </span>
+    <button onclick="closePopup()" class ="View-application-button" id="cancel-button">Close</button>
+    <button class="View-application-button" onclick="toggleEdit()">Edit</button>
   </article>
-
 
   <article class="filter-options">
     <label for="universityFilter">Filter by University:</label>
