@@ -85,7 +85,6 @@ function loadScriptsBySection(sectionName) {
   switch (sectionName) {
     case "UniversityRequest":
       scriptPaths = ["../../JS/fetch.js", "../../JS/universities.js"];
-      loadScripts(scriptPaths);
       break;
     case "StudentRequest":
       scriptPaths = [
