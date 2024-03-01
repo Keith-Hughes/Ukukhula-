@@ -7,6 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // toggle the active class on the button and the sidebar
     toggleBtn.classList.toggle("active");
     sidebar.classList.toggle("active");
+
+    const mainElements = document.getElementsByTagName("main");
+
+    // Loop through each main element
+    for (let i = 0; i < mainElements.length; i++) {
+      const mainElement = mainElements[i];
+
+      // Toggle the 'mainChanged' class based on the state of the toggle button
+      if (!toggleBtn.classList.contains("active")) {
+        mainElement.classList.add("mainChanged");
+      } else {
+        mainElement.classList.remove("mainChanged");
+      }
+    }
   });
 });
 
@@ -39,6 +53,17 @@ function closeLogoutMessage() {
 function loadSection(sectionName) {
   document.querySelector(".sidebar").classList.toggle("active");
   document.querySelector(".toggle-btn").classList.toggle("active");
+  const mainElements = document.getElementsByTagName("main");
+
+  for (let i = 0; i < mainElements.length; i++) {
+    const mainElement = mainElements[i];
+
+    if (!document.querySelector(".toggle-btn").classList.contains("active")) {
+      mainElement.classList.add("mainChanged");
+    } else {
+      mainElement.classList.remove("mainChanged");
+    }
+  }
   var sectionURL = "./" + sectionName + ".html";
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
