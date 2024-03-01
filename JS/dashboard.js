@@ -56,23 +56,28 @@ function loadSection(sectionName) {
 }
 
 function loadScriptsBySection(sectionName) {
+  let scriptPaths = [];
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = ["../../JS/fetch.js","../../JS/universities.js"];
+      scriptPaths = ["../../JS/fetch.js", "../../JS/universities.js"];
       loadScripts(scriptPaths);
       break;
     case "StudentRequest":
-      scriptPaths = ["../../JS/fetch.js",
+      scriptPaths = [
+        "../../JS/fetch.js",
         "../../JS/studentRequest.js",
         "../../JS/html2pdf.bundle.min.js",
       ];
-      loadScripts(scriptPaths);
+
       break;
     case "Universities":
       scriptPaths = ["../../JS/AllUniversities.js"];
-      loadScripts(scriptPaths);
+      break;
+    case "ManageUsers":
+      scriptPaths = ["../../JS/ManageUsers.js"];
       break;
   }
+  loadScripts(scriptPaths);
 }
 
 function loadScripts(scriptPaths) {

@@ -16,7 +16,7 @@ tr {
 body {
   overflow: hidden;
   font-family: Quinfo_bold, sans-serif;
-  letter-spacing: ;
+  /* letter-spacing: ; */
   background-image: url("../Images/dashboardBackground.jpg");
   background-size: cover;
   background-repeat: no-repeat;

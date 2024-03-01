@@ -1,3 +1,13 @@
+"../../JS/NewAdmin.js";
+function loadScripts(scriptPaths) {
+  scriptPaths.forEach(function (scriptPath) {
+    var script = document.createElement("script");
+    script.src = scriptPath;
+    // script.type = "text/javascript";
+    document.body.appendChild(script);
+  });
+}
+
 function createOptions(methodName, bodyMessage) {
   if (methodName === "POST") {
     return {
@@ -41,40 +51,57 @@ async function registerAdmin(
     const registerResponse = await registerResponseObject.json();
 
     console.log(registerResponse);
-    alert("Successfully Registered " + firstNameText + " " + lastNameText);
+    if (registerResponse["message"] === "Error inserting into contacts table") {
+      document.getElementById("responseMessageAdmin").style.color = "red";
+      const errorMessage =
+        "Error registering BBD Admin : A user with the same email or phone number alreadly exists.";
+      document.getElementById("responseMessageAdmin").innerHTML = errorMessage;
+      return;
+    }
+    document.getElementById("responseMessageAdmin").style.color = "green";
+    document.getElementById("responseMessageAdmin").innerHTML =
+      "Successfully Registered " +
+      firstNameText +
+      " " +
+      lastNameText +
+      " as a BBD Admin";
+    document.getElementById("admin-registration-form").reset();
   } catch (error) {
-    console.error("Error registering BBD Admin:", error);
+    // const errorMessage = "Error registering BBD Admin:" + error;
+    if (JSON.stringify(error).includes("Error inserting into contacts table")) {
+    }
+
+    // console.error("Error registering BBD Admin:", error);
   }
 }
-
 document
-  .getElementById("registration-form")
+  .getElementById("admin-registration-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    let firstNameInput = document.getElementById("first-name");
+    let firstNameInput = document.getElementById("admin-first-name");
     if (!/^[A-Za-z]+$/.test(firstNameInput.value)) {
-      document.getElementById("first-name-error").textContent =
+      document.getElementById("admin-first-name-error").textContent =
         "Please enter alphabetic characters only";
     } else {
-      document.getElementById("first-name-error").textContent = "";
+      document.getElementById("admin-first-name-error").textContent = "";
     }
 
-    var lastNameInput = document.getElementById("last-name");
+    var lastNameInput = document.getElementById("admin-last-name");
     if (!/^[A-Za-z]+$/.test(lastNameInput.value)) {
-      document.getElementById("last-name-error").textContent =
+      document.getElementById("admin-last-name-error").textContent =
         "Please enter alphabetic characters only";
     } else {
-      document.getElementById("last-name-error").textContent = "";
+      document.getElementById("admin-last-name-error").textContent = "";
     }
 
-    let emailInput = document.getElementById("email");
+    let emailInput = document.getElementById("admin-email");
 
-    let phoneNumberInput = document.getElementById("phone-number");
+    let phoneNumberInput = document.getElementById("admin-phone-number");
     if (!/^[0-9]{10}$/.test(phoneNumberInput.value)) {
-      document.getElementById("phone-number-error").textContent =
+      document.getElementById("admin-phone-number-error").textContent =
         "Please enter a 10-digit phone number";
     } else {
-      document.getElementById("phone-number-error").textContent = "";
+      document.getElementById("admin-phone-number-error").textContent = "";
     }
     registerAdmin(
       emailInput.value,
