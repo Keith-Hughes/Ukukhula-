@@ -16,6 +16,7 @@
     url("../Fonts/Quinfo/QuinfoEXTRALIGHT.otf") format("opentype");
 }
 
+
 body {
   display: flex;
   background-image: url("../Images/loginBackground.jpg");

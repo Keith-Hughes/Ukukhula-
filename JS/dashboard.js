@@ -86,6 +86,7 @@ function loadScripts(scriptPaths) {
   script.src = "../../JS/authServices.js";
   script.type = "text/javascript";
   document.body.appendChild(script);
+  checkTokenValidity();
   scriptPaths.forEach(function (scriptPath) {
     script = document.createElement("script");
     script.src = scriptPath;

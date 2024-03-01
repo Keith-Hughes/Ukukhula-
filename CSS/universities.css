@@ -27,11 +27,13 @@ td {
 }
 
 .View-application-button {
-  background-color: #04aa6d;
+  background-color: #999999;
   color: #ffffff;
   border: none;
   padding: 8px 10px;
-  border-radius: 12px;
+  border-radius: 25px;
+  width: 100px;
+  margin-top: 5px;
 }
 
 #overlay {
@@ -82,6 +84,7 @@ td {
 }
 
 #popup {
+  border-radius: 25px;
   display: none;
   position: fixed;
   top: 50%;
@@ -97,9 +100,8 @@ td {
   width:80%;
   margin:0 12px;
 }
-.row{
-  width: 100%;
-}
+
+
 
 .View-application-button:hover{
   background-color: #0CF404;
