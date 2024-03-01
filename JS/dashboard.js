@@ -84,11 +84,10 @@ function loadScriptsBySection(sectionName) {
   let scriptPaths = [];
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = [ "../../JS/universities.js"];
+      scriptPaths = ["../../JS/universities.js"];
       break;
     case "StudentRequest":
       scriptPaths = [
-
         "../../JS/studentRequest.js",
         "../../JS/html2pdf.bundle.min.js",
       ];
@@ -99,6 +98,9 @@ function loadScriptsBySection(sectionName) {
       break;
     case "ManageUsers":
       scriptPaths = ["../../JS/ManageUsers.js"];
+      break;
+    case "Funds":
+      scriptPaths = ["../../JS/Funds.js"];
       break;
   }
   loadScripts(scriptPaths);

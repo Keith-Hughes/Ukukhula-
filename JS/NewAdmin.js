@@ -110,8 +110,10 @@ document
       lastNameInput.value
     );
 
-    document.getElementById("cancel").addEventListener("click", function(event){
-      event.preventDefault();
-      closePopup("NewAdmin");
-    })
+   
   });
+
+  document.getElementById("cancel").addEventListener("click", function(event){
+    event.preventDefault();
+    closePopup("NewAdmin");
+  })
