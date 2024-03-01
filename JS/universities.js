@@ -1,5 +1,20 @@
-async function populateTable() {
-    const applications =await fetchData("http://localhost:5263/api/Admin/GetAllUniversityRequests","GET");
+async function fetchUnivesities(){
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  };
+  const response = await fetch(
+    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
+    options
+  );
+  return await response.json();
+}
+
+ 
+  async function populateTable() {
+    const applications = await fetchUnivesities();
     const tbody = document.querySelector("#UniversitY-request-table tbody");
     applications.forEach((application) => {
       const tr = document.createElement("tr");
@@ -45,7 +60,7 @@ async function populateTable() {
       tbody.appendChild(tr);
     });
     populateFilterOptions()
-  }
+  } 
   populateTable();
 
 function openPopup(applications) {
@@ -87,40 +102,7 @@ document.getElementById("status").innerHTML=applications.status;
         overlay.style.display = 'none';
     }, 300);
   }
-  // Function to toggle editability of fields
-function toggleEdit() {
-  const editableFields = document.querySelectorAll('.editable-field');
-  const editButton = document.querySelector('.edit-button');
-
-  // Toggle contentEditable for all editable fields
-  editableFields.forEach(field => {
-      field.contentEditable = field.contentEditable === 'true' ? 'false' : 'true';
-  });
-
-  // Change the edit button text based on the current state
-  const isEditing = editableFields[0].contentEditable === 'true'; // Check the state of one of the fields
   
-  editableFields.forEach(field => {
-    if (isEditing) {
-        field.classList.add('edit-mode');
-    } else {
-        field.classList.remove('edit-mode');
-    }
-});
-  
-  editButton.textContent = isEditing ? 'Save' : 'Edit';
-
-  // Save the edited content or perform any necessary action
-  if (!isEditing) {
-      saveEditedContent();
-  }
-}
-
-// Function to save edited content (you can customize this based on your needs)
-function saveEditedContent() {
-  // Add logic to save the edited content to the backend or perform other actions
-  console.log("Saving edited content");
-}
 
 
 function getUniqueColumnValues(table, columnIndex) {
