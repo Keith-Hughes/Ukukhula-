@@ -109,4 +109,9 @@ document
       firstNameInput.value,
       lastNameInput.value
     );
+
+    document.getElementById("cancel").addEventListener("click", function(event){
+      event.preventDefault();
+      closePopup("NewAdmin");
+    })
   });

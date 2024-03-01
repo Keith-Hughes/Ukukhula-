@@ -4,7 +4,9 @@
     justify-content: center;
     align-items: center;
 }
-
+table {
+  margin-bottom: 8vw; 
+}
 .section{
     align-self: center;
     border-radius: 10px;
@@ -82,6 +84,8 @@ button#cancel-button{
 
 }
 
+
+
 button#cancel-button:hover{
     background-color: #501014;
     
@@ -103,6 +107,7 @@ button#cancel-button:hover{
     display: table;
     clear: both;
 }  
+
 
 
 
@@ -135,3 +140,4 @@ button#cancel-button:hover{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
   }
+  

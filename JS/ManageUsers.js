@@ -114,9 +114,9 @@ function showHOD() {
   document.getElementById("NewHOD").style.flexDirection = "column";
 }
 
-function closePopup() {
-    removeScript(["../../JS/NewAdmin.js"]);
-    removeScript(["../../JS/NewHOD.js"]);
-  document.getElementById("NewAdmin").style.display = "none";
-  document.getElementById("NewHOD").style.display = "none";
+function closePopup(form) {
+  removeScript(["../../JS/"+form+".js"]);
+
+  document.getElementById(form).style.display = "none";
+  
 }

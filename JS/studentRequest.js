@@ -158,14 +158,11 @@ function openPopup(row) {
         alert("Please provide a reason for rejection.");
         return;
       }
-
-      // Continue with your logic here
-      console.log(reason);
       
       const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
       
       console.log(data);
-
+      loadSection("StudentRequest");
       // Hide the modal after submission
       document.querySelector('.modal').style.display = 'none';
       document.querySelector('.overlay2').style.display = 'none';

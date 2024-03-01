@@ -121,7 +121,8 @@ main {
   font-size: 1rem;
   height: 100vh;
   margin-left: 12%;
-  padding: 5% 0.5% 10% 5%;
+  
+  padding: 5% 0.5% 0% 5%;
 }
 
 section {
@@ -214,6 +215,4 @@ section {
     left: 0;
   }
 }
-#main-content{
-  
-}
+
