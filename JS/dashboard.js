@@ -84,11 +84,11 @@ function loadScriptsBySection(sectionName) {
   let scriptPaths = [];
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = ["../../JS/fetch.js", "../../JS/universities.js"];
+      scriptPaths = [ "../../JS/universities.js"];
       break;
     case "StudentRequest":
       scriptPaths = [
-        "../../JS/fetch.js",
+
         "../../JS/studentRequest.js",
         "../../JS/html2pdf.bundle.min.js",
       ];
@@ -109,7 +109,11 @@ function loadScripts(scriptPaths) {
   let script = document.createElement("script");
   script.src = "../../JS/authServices.js";
   script.type = "text/javascript";
+  let fetchScript = document.createElement("script");
+  fetchScript.src = "../../JS/fetch.js";
+  fetchScript.type = "text/javascript";
   document.body.appendChild(script);
+  document.body.appendChild(fetchScript);
   checkTokenValidity();
   scriptPaths.forEach(function (scriptPath) {
     script = document.createElement("script");

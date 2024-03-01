@@ -44,7 +44,7 @@ td {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
+  z-index: 998;
 }
 
 .row{
@@ -96,7 +96,7 @@ td {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.993);
   opacity: 0;
   transition: opacity 0.3s;
-  z-index: 998;
+  z-index: 9998;
   width:80%;
   margin:0 12px;
 }
@@ -124,9 +124,9 @@ td {
   max-height: 40%;
   overflow-y: scroll;
 }
+
 .status-buttons{
   margin: 12px;
-  display: none;
   justify-content: center
 }
 #reject{
@@ -139,3 +139,6 @@ td {
   cursor:pointer;
 }
 
+button#cancel-button:hover{
+  background-color: #501014;
+}

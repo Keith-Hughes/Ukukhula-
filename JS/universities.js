@@ -48,37 +48,25 @@ async function populateTable() {
   }
   populateTable();
 
-  function openPopup(applications) {
+function openPopup(applications) {
     const popup = document.getElementById('popup');
     const overlay = document.getElementById('overlay');
     const popupContent = document.getElementById('popupContent');
     
     // Set the content of the popup (you can fetch the actual data here)
-    popupContent.innerHTML = 
-  
-    `<table id="allRequests">
-  
-  
-    <tr class="row">
-        <td class="col-title"><b>University Name:</b> ${applications.university}</td>
-        
-        <td class="col-title"><b>Province:</b> ${applications.province}</td>
-        
-        <td class="col-title"><b>Amount:</b> ${applications.amount}</td>
-  
-        <td class="col-title"><b>DateCreated:</b> ${applications.dateCreated.split("T")[0]}</td> 
-    </tr> 
-    <tr class="row">
-        <td class="col-title"><b>comment:</b> ${applications.comment}</td> 
 
-        <td class="col-title"><b>status:</b> ${applications.status}</td>
+document.getElementById("universityName").innerHTML=applications.university;    
+document.getElementById("province").innerHTML=applications.province;
+        
+document.getElementById("amount").innerHTML=applications.amount;
+  
+document.getElementById("dateCreated").innerHTML=applications.dateCreated.split("T")[0];
+document.getElementById("comment").innerHTML=applications.comment;
+
+document.getElementById("status").innerHTML=applications.status;
   
    
-    </table>
-    <article class=status-buttons>
-    <button id="approve" class="View-application-button" data-value= university>Approve</button>
-    <button id="reject" class="View-application-button" data-value= university>Reject</button>
-    </article>`;
+    
   
     // Show the overlay and fade in the popup
     overlay.style.display = 'block';
