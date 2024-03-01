@@ -10,23 +10,40 @@
   }
   
   header {
-    padding: 20PX;
+    padding: 20px;
     background: #059800;
     height: 100px;
-    width: 1220px;
+    width: 1550px;
+    text-align: center; /* Center the content horizontally */
+    border-bottom: 2px solid black; /* Add border to the bottom of the header */
   }
   
   h1 {
-    text-align: center;
     color: white;
-    line-height: 100px;
+    line-height: 80px;
     margin: 0;
+    height: 200px;
   }
   
   article {
     padding: 20px;
     margin: 8px;
     background: rgb(255, 255, 255);
+  }
+
+  /* Added styles for the new flexbox */
+  .flex-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ccc;
+  }
+
+  .flex-item {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Add rounded corners */
   }
 </style>
 
@@ -38,21 +55,36 @@
   <article>
     <h2>General Information</h2>
     <ul>
-      <li>UNIVERSITIES AVAILABLE:  <b>39</b></li>
-      <li>TOTAL BURSARY AMOUNT:  <b>R1,000,000</b></li>
+      <li>UNIVERSITIES AVAILABLE: <b>39</b></li>
+      <li>TOTAL BURSARY AMOUNT :  <b>R 1,000,000</b></li>
       <li>TOTAL APPROVED APPLICATIONS: <b>14</b></li>
       <li>TOTAL REJECTED APPLICATIONS: <b>13</b></li>
     </ul>
   </article>
 
   <article>
-    <h2>Criteria for eligibilty</h2>
+    <h2>Criteria for eligibility</h2>
     <ul>
       <li>AGE CAP: <b>35</b></li>
       <li>RACE: <b>Black, Indian, Coloured</b></li>
       <li>GRADE: <b>65% or Above</b></li>
     </ul>
   </article>
+
+
+  <div class="flex-container">
+    <div class="flex-item">
+      <h2>Approved applicants</h2>
+      <p>64%</p>
+    </div>
+  </div>
+
+  <div class="flex-container">
+    <div class="flex-item">
+      <h2>Rejected applicants</h2>
+      <p>36%</p>
+    </div>
+  </div>
 </section>
 
-
+</section>
