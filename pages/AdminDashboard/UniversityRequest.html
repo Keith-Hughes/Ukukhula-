@@ -21,15 +21,14 @@
   
           <td class="col-title"><b>status:</b><span id="status"></span></td>
       </table>
-      <article class=status-buttons class="status-buttons">
+      <article class="status-buttons" class="status-buttons">
       <button id="approve" class="View-application-button" data-value= "university">Approve</button>
       <button id="reject" class="View-application-button" data-value= "university">Reject</button>
       </article>
     </span>
-    <button onclick="closePopup()" class ="View-application-button">Close</button>
-    <button class="edit-button View-application-button" id="edit-request" onclick="toggleEdit()">Edit</button>
+    <button onclick="closePopup()" class ="View-application-button" id="cancel-button">Close</button>
+    <button class="View-application-button" onclick="toggleEdit()">Edit</button>
   </article>
-
 
   <article class="filter-options">
     <label for="universityFilter">Filter by University:</label>

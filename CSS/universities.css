@@ -124,9 +124,9 @@ td {
   max-height: 40%;
   overflow-y: scroll;
 }
+
 .status-buttons{
   margin: 12px;
-  display: none;
   justify-content: center
 }
 #reject{
@@ -139,3 +139,6 @@ td {
   cursor:pointer;
 }
 
+button#cancel-button:hover{
+  background-color: #501014;
+}
