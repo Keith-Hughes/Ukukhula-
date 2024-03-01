@@ -29,7 +29,7 @@ async function setData() {
     style: "currency",
     currency: "ZAR",
   });
-
+  document.getElementById("year").innerHTML = new Date().getFullYear();
   document.getElementById("BudgetDB").innerHTML = budget;
   document.getElementById("FundsDB").innerHTML = funds;
   document.getElementById("fundsSpent").innerHTML = response[

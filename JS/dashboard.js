@@ -50,9 +50,19 @@ function closeLogoutMessage() {
   document.getElementById("overlay").style.display = "none";
 }
 
+function toggleSubMenu(id) {
+  const subMenu = document.getElementById(id);
+  if (subMenu.style.display === "none") {
+    subMenu.style.display = "block";
+  } else {
+    subMenu.style.display = "none";
+  }
+}
+
 function loadSection(sectionName) {
   document.querySelector(".sidebar").classList.toggle("active");
   document.querySelector(".toggle-btn").classList.toggle("active");
+  document.getElementById("sub-menu").style.display = "none";
   const mainElements = document.getElementsByTagName("main");
 
   for (let i = 0; i < mainElements.length; i++) {
