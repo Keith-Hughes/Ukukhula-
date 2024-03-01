@@ -110,7 +110,7 @@ document
       lastNameInput.value
     );
 
-    
+
   });
 
   document.getElementById("cancel").addEventListener("click", function(event){
