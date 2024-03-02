@@ -37,7 +37,7 @@ async function populateTable() {
       const actionCell = document.createElement("td");
       const viewButton = document.createElement("button");
       viewButton.textContent = "View Application";
-      viewButton.addEventListener("click", function(event){event.preventDefault();openPopup(application);});
+      viewButton.addEventListener("click", async function(event){event.preventDefault();openPopup(application);});
       viewButton.setAttribute("class", "View-application-button");
 
       actionCell.appendChild(viewButton);
@@ -48,26 +48,25 @@ async function populateTable() {
   }
   populateTable();
 
-function openPopup(applications) {
+function openPopup(application) {
     const popup = document.getElementById('popup');
     const overlay = document.getElementById('overlay');
     const popupContent = document.getElementById('popupContent');
     
     // Set the content of the popup (you can fetch the actual data here)
 
-document.getElementById("universityName").innerHTML=applications.university;    
-document.getElementById("province").innerHTML=applications.province;
+document.getElementById("universityName").innerHTML=application.university;    
+document.getElementById("province").innerHTML=application.province;
         
-document.getElementById("amount").innerHTML=applications.amount;
+document.getElementById("amount").innerHTML=application.amount;
   
-document.getElementById("dateCreated").innerHTML=applications.dateCreated.split("T")[0];
-document.getElementById("comment").innerHTML=applications.comment;
+document.getElementById("dateCreated").innerHTML=application.dateCreated.split("T")[0];
+document.getElementById("comment").innerHTML=application.comment;
 
-document.getElementById("status").innerHTML=applications.status;
-  
-   
-    
-  
+document.getElementById("status").innerHTML=application.status;
+
+const approveButton = document.getElementById("approveButton");
+approveButton.addEventListener("click",async (event)=>{event.preventDefault();await approveApplication(application.requestID)});
     // Show the overlay and fade in the popup
     overlay.style.display = 'block';
     popup.style.display = 'block';
@@ -76,7 +75,22 @@ document.getElementById("status").innerHTML=applications.status;
     }, 10);
   }
   
-  function closePopup() {
+async function approveApplication(requestId){
+  try {
+    const url = `http://localhost:5263/api/Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
+    const data = await fetchData(url, "PUT",{});
+    console.log(data);
+   
+ } catch (error) {
+    console.error("Failed to update request:", error);
+ }
+}
+
+
+
+
+
+function closePopup() {
     const popup = document.getElementById('popup');
     const overlay = document.getElementById('overlay');
   
