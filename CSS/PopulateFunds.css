@@ -1,0 +1,22 @@
+#populateFundsButton {
+  align-items: center;
+  background-color: #45a049;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+#populateFundsButton:hover {
+  background-color: #27de31;
+}
+
+#PopulateFunds {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
