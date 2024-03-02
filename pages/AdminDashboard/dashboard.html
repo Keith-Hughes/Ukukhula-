@@ -39,10 +39,26 @@
           >
         </li>
         <li>
-          <a onclick="loadSection('Funds')" class="signout"
+          <a onclick="toggleSubMenu('sub-menu')" class="signout"
             ><i class="uil uil-share"></i>Manage Funds</a
           >
         </li>
+        <ul id="sub-menu" style="display: none">
+          <li id="funds-tabs">
+            <a onclick="loadSection('Funds')"><i></i>-Funds Overview</a>
+          </li>
+          <li id="funds-tabs">
+            <a onclick="loadSection('Funds')" id="allocate-equally"
+              ><i></i>-Disperse Funds Equally</a
+            >
+          </li>
+
+          <li id="funds-tabs">
+            <a onclick="loadSection('Funds')" id="allocate-one"
+              ><i></i>-Allocate a university</a
+            >
+          </li>
+        </ul>
         <li>
           <a onclick="showLogoutMessage()" class="signout"
             ><i class="signout"></i>Logout</a

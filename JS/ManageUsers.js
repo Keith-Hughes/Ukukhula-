@@ -115,8 +115,9 @@ function showHOD() {
 }
 
 function closePopup(form) {
-  removeScript(["../../JS/"+form+".js"]);
+  document.getElementById("responseMessageHOD").innerHTML = "";
+  document.getElementById("responseMessageAdmin").innerHTML = "";
+  removeScript(["../../JS/" + form + ".js"]);
 
   document.getElementById(form).style.display = "none";
-  
 }
