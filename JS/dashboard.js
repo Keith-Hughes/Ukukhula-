@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  checkTokenValidity();
   const sidebar = document.querySelector(".sidebar");
   const toggleBtn = document.querySelector(".toggle-btn");
 
@@ -50,9 +51,19 @@ function closeLogoutMessage() {
   document.getElementById("overlay").style.display = "none";
 }
 
+function toggleSubMenu(id) {
+  const subMenu = document.getElementById(id);
+  if (subMenu.style.display === "none") {
+    subMenu.style.display = "block";
+  } else {
+    subMenu.style.display = "none";
+  }
+}
+
 function loadSection(sectionName) {
   document.querySelector(".sidebar").classList.toggle("active");
   document.querySelector(".toggle-btn").classList.toggle("active");
+  document.getElementById("sub-menu").style.display = "none";
   const mainElements = document.getElementsByTagName("main");
 
   for (let i = 0; i < mainElements.length; i++) {
@@ -84,11 +95,10 @@ function loadScriptsBySection(sectionName) {
   let scriptPaths = [];
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = [ "../../JS/universities.js"];
+      scriptPaths = ["../../JS/universities.js"];
       break;
     case "StudentRequest":
       scriptPaths = [
-
         "../../JS/studentRequest.js",
         "../../JS/html2pdf.bundle.min.js",
       ];
@@ -99,6 +109,9 @@ function loadScriptsBySection(sectionName) {
       break;
     case "ManageUsers":
       scriptPaths = ["../../JS/ManageUsers.js"];
+      break;
+    case "Funds":
+      scriptPaths = ["../../JS/Funds.js"];
       break;
   }
   loadScripts(scriptPaths);

@@ -9,7 +9,7 @@
     url("../Fonts/Quinfo/QuinfoBOLD.otf") format("opentype");
 }
 tr {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   letter-spacing: normal;
 }
 
@@ -26,6 +26,15 @@ body {
 .signout:hover {
   cursor: pointer;
 }
+
+p {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
 #overlay {
   display: none;
   position: fixed;
@@ -46,11 +55,11 @@ body {
 
   size: 3%;
 }
-#agree:hover{
-  background-color: #0CF404;
+#agree:hover {
+  background-color: #0cf404;
   cursor: pointer;
 }
-#disagree:hover{
+#disagree:hover {
   background-color: red;
   cursor: pointer;
 }
@@ -86,6 +95,7 @@ body {
   overflow-y: auto;
   transition: 0.3s;
   width: 0px;
+  z-index: 9999;
 }
 
 .sidebar h1 {
@@ -116,22 +126,16 @@ body {
   margin-right: 10px;
 }
 main {
-  /* transition: 0.4s;
-  transition: ease-in-out 3.3s; */
   font-size: 1rem;
   height: 100vh;
   margin-left: 12%;
-  
   padding: 5% 0.5% 0% 5%;
 }
 
 .mainChanged {
-
   font-size: 1rem;
   height: 100vh;
   margin-left: 0;
-  
-
 }
 section {
   height: 100vh;
@@ -157,6 +161,7 @@ section {
   border: none;
   outline: none;
   cursor: pointer;
+  z-index: 9999;
 }
 
 .hamburger {
@@ -213,6 +218,25 @@ section {
   background-color: black;
   width: 250px;
 }
+#submenu {
+  display: none;
+}
+
+/* #submenu li{
+  font-size: 0.5vw;
+  color: gray;
+} */
+#funds-tabs {
+  font-size: 1vw;
+  padding-left: 2vw;
+}
+#funds-tabs a {
+  color: gray;
+  cursor: pointer;
+}
+#funds-tabs a:hover {
+  color: green;
+}
 
 @media (max-width: 768px) {
   .sidebar {
@@ -223,4 +247,3 @@ section {
     left: 0;
   }
 }
-

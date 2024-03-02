@@ -1,14 +1,19 @@
 <section id="ManageUsers">
+  <h2>Manage Users</h2>
+  <p>Under this section, you can add and deactivate Users.</p>
+  <br />
   <span id="UsersSection"></span>
   <article class="overlay"></article>
+  <br /><br />
   <button id="NewButton" onclick="showAdmin()">Add New BBD Admin</button>
   <button id="NewButton" onclick="showHOD()">Add New University Admin</button>
   <span id="NewAdmin">
     <h2>REGISTER A BBD ADMIN</h2>
     <br />
     <br />
-    <br />
     <h5 id="responseMessageAdmin"></h5>
+    <br />
+    <br />
     <form id="admin-registration-form">
       <input
         placeholder="First Name"
@@ -54,7 +59,9 @@
       <br />
       <span id="buttons">
         <input type="submit" value="Create Admin" />
-        <button  id="cancel" >Cancel</button>
+
+        <button type="button" id="cancel">Cancel</button>
+
       </span>
     </form>
   </span>
@@ -68,7 +75,9 @@
     </select>
     <br />
     <br />
-
+    <h5 id="responseMessageHOD"></h5>
+    <br />
+    <br />
     <form id="registration-form" method="post">
       <input
         placeholder="First Name"
@@ -114,7 +123,11 @@
       <br />
       <span id="buttons">
         <input type="submit" value="Create Admin" />
-        <!-- <button id="cancel" onclick=" closePopup()">Cancel</button> -->
+
+        <button type="button" id="cancel" onclick=" closePopup('NewHOD')">
+          Cancel
+        </button>
+
       </span>
     </form>
   </span>
