@@ -199,6 +199,8 @@ function openPopup(row) {
       alert(`${data.FirstName}'s funding request Has been approved`);
       }
       hideModal('.modal');
+
+      closePopup();
       //reload section after approval
       loadSection("StudentRequest");
     });
@@ -206,6 +208,8 @@ function openPopup(row) {
     const cancelButton = document.querySelector('.cancel-button.approve');
       cancelButton.addEventListener("click", function() {
         hideModal('.approve-modal');
+
+        closePopup();
       });
   });
 
@@ -233,6 +237,7 @@ function openPopup(row) {
       alert(`${data.FirstName}'s funding request Has been rejected`);
       }
       hideModal('.modal');
+      closePopup();
       //reload section after approval
       loadSection("StudentRequest");
     });
@@ -240,6 +245,8 @@ function openPopup(row) {
     const cancelButton = document.querySelector('.cancel-button');
     cancelButton.addEventListener("click", function() {
       hideModal('.modal');
+
+      closePopup();
     });
 
   });
