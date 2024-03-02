@@ -23,8 +23,22 @@ td {
   text-align: left;
   padding: 8px;
 }
+#userDeactivateButtonCancel {
+  background-color: #921414;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 7%;
+  margin-bottom: 5%;
+  cursor: pointer;
+}
+#userDeactivateButtonCancel:hover {
+  background-color: #ff000d;
+  cursor: pointer;
+}
 
-#NewButton {
+.NewButton {
   background-color: #45a049;
   color: white;
   padding: 10px 20px;
@@ -34,27 +48,62 @@ td {
   margin-bottom: 5%;
   cursor: pointer;
 }
-#NewButton:hover {
+.NewButton:hover {
   background-color: #4caf50;
   cursor: pointer;
 }
+
+.ActivateButton {
+  background-color: #999999;
+  color: #ffffff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 25px;
+  width: 100px;
+  margin-top: 5px;
+}
+.ActivateButton:hover {
+  background-color: #0cf404;
+  cursor: pointer;
+}
+
 #registration-form {
   width: 100%;
 }
 #NewAdmin h2 {
   align-self: center;
 }
+
+#userButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#userDeactivate {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  width: 50vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
 #NewAdmin {
-    display: none;
-    position: fixed;
-    width: 50vw;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+  display: none;
+  position: fixed;
+  width: 50vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 #NewHOD {
   display: none;

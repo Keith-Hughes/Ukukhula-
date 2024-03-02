@@ -61,6 +61,7 @@ async function GetAllRequests() {
   const headerRow = document.createElement("tr");
 
   const keys = [
+    "id",
     "universityName",
     "firstName",
     "lastName",
@@ -76,6 +77,7 @@ async function GetAllRequests() {
     "PHONE NUMBER",
     "EMAIL",
     "STATUS",
+    "ACTION",
   ];
 
   columnHeadings.forEach((eachHeading) => {
@@ -89,13 +91,32 @@ async function GetAllRequests() {
   dataResponse.forEach((obj) => {
     const row = document.createElement("tr");
     keys.forEach((key) => {
-      const cell = document.createElement("td");
+      if (!key.includes("id")) {
+        const cell = document.createElement("td");
 
-      cell.textContent = obj[key];
-      row.appendChild(cell);
+        cell.textContent = obj[key];
+        row.appendChild(cell);
+      }
     });
 
     table.appendChild(row);
+    const actionCell = document.createElement("td");
+    const viewButton = document.createElement("button");
+    console.log(typeof obj["status"]);
+
+    if (obj["status"].toUpperCase().includes("INACTIVE")) {
+      viewButton.textContent = "ACTIVATE";
+    } else {
+      viewButton.textContent = "DEACTIVATE";
+    }
+
+    viewButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      showDeactivate(obj, viewButton);
+    });
+    viewButton.setAttribute("class", "ActivateButton");
+    actionCell.appendChild(viewButton);
+    row.appendChild(actionCell);
   });
 
   display.appendChild(table);
@@ -106,6 +127,49 @@ function showAdmin() {
   loadScripts(["../../JS/NewAdmin.js"]);
   document.getElementById("NewAdmin").style.display = "flex";
   document.getElementById("NewAdmin").style.flexDirection = "column";
+}
+function showDeactivate(obj, viewButton) {
+  document.getElementById("userDeactivate").style.display = "flex";
+  document.getElementById("userDeactivateButtonConfirm").style.display = "flex";
+  data =
+    "You are about to " +
+    viewButton.textContent +
+    " " +
+    obj["firstName"] +
+    " " +
+    obj["lastName"] +
+    " A HOD FROM " +
+    obj["universityName"];
+  document.getElementById("userDeactivateText").innerHTML = data;
+  document
+    .getElementById("userDeactivateButtonCancel")
+    .addEventListener("click", () => {
+      document.getElementById("userDeactivate").style.display = "none";
+      obj;
+    });
+
+  document
+    .getElementById("userDeactivateButtonConfirm")
+    .addEventListener("click", async () => {
+      userID = obj["id"];
+
+      Status = viewButton.textContent == "DEACTIVATE" ? "INACTIVE" : "ACTIVE";
+      document.getElementById("userDeactivateButtonConfirm").style.display =
+        "none";
+      responseData = await fetchData(
+        `http://localhost:5263/api/Admin/updateUserActivity?UserID=${userID}&Status=${Status}`,
+        "PUT"
+      );
+      console.log(responseData);
+
+      document.getElementById("userDeactivateResponseText").style.color =
+        "green";
+      document.getElementById("userDeactivateResponseText").innerHTML =
+        responseData["message"];
+      //   await setTimeout(() => {}, 4000);
+      //   document.getElementById("userDeactivate").style.display = "none";
+      loadSection("ManageUsers");
+    });
 }
 
 function showHOD() {
