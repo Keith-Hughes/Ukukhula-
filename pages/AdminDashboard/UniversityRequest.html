@@ -22,7 +22,7 @@
           <td class="col-title"><b>status:</b><span id="status"></span></td>
       </table>
       <article class="status-buttons" class="status-buttons">
-      <button id="approve" class="View-application-button" data-value= "university">Approve</button>
+      <button id="approve" class="View-application-button" data-value= "university" onclick="approve(id)">Approve</button>
       <button id="reject" class="View-application-button" data-value= "university">Reject</button>
       </article>
     </span>
@@ -31,21 +31,23 @@
   </article>
 
   <article class="filter-options">
+    <article class="onerow">
     <label for="universityFilter">Filter by University:</label>
     <select id="universityFilter" onchange="filterTable()">
         <option value="">All</option>
     </select>
-
-    <label for="statusFilter">Filter by Status:</label>
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" onchange="filterTable()">
+    
+</article>
+<article class="onerow">
+<label for="statusFilter">Filter by Status:</label>
     <select id="statusFilter" onchange="filterTable()">
         <option value="">All</option>
     </select>
-
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" onchange="filterTable()">
-
     <label for="endDate">End Date:</label>
     <input type="date" id="endDate" onchange="filterTable()">
+</article>
   </article>
   <button id="downloadButton" class="View-application-button">Download as PDF</button>
   <table id="UniversitY-request-table">

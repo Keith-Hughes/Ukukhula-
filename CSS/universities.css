@@ -142,3 +142,9 @@ td {
 button#cancel-button:hover{
   background-color: #501014;
 }
+
+.onerow{
+  display: inline-block;
+}
+
+
