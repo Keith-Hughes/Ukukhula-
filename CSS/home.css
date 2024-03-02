@@ -32,6 +32,10 @@ html {
     width: 20vw;
     min-width: fit-content;
   }
+
+  #Home img {
+    margin-top: 40px;
+  }
   
   #Home p {
     margin-top: 59px; /* Adjust the top margin to move the text down */

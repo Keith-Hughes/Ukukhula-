@@ -62,7 +62,7 @@ async function fetchUnivesities(){
     populateFilterOptions()
   } 
   populateTable();
-
+ 
 function openPopup(applications) {
     const popup = document.getElementById('popup');
     const overlay = document.getElementById('overlay');
