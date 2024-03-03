@@ -136,8 +136,17 @@ td {
   background-color: #c8323c;
 }
 
+#rejectButton{
+  background-color: #c8323c;
+}
+
 
 #reject:hover{
+  background-color: #5a070c;
+  cursor:pointer;
+}
+
+#rejectButton:hover{
   background-color: #5a070c;
   cursor:pointer;
 }
@@ -147,6 +156,7 @@ button#cancel-button:hover{
 }
 
 .onerow{
+
   display: inline-block;
 }
 

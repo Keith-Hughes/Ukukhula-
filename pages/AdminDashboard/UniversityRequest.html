@@ -6,27 +6,28 @@
   <article class="popup" id="popup">
     <h2>Application Details</h2>
     <span id="popupContent">
-    <table id="allRequests">
-      <tr class="row">
+      <table id="allRequests">
+        <tr class="row">
           <td class="col-title"><b>University Name:</b><span id="universityName"></span></td>
-          
+
           <td class="col-title"><b>Province:</b><span id="province"></span></td>
-          
+
           <td class="col-title"><b>Amount:</b><span id="amount"></span></td>
-    
-          <td class="col-title"><b>DateCreated:</b><span id="dateCreated"></span></td> 
-      </tr> 
-      <tr class="row">
-          <td class="col-title"><b>comment:</b><span id="comment"></span></td> 
-  
+
+          <td class="col-title"><b>DateCreated:</b><span id="dateCreated"></span></td>
+        </tr>
+        <tr class="row">
+          <td class="col-title"><b>comment:</b><span id="comment"></span></td>
+
           <td class="col-title"><b>status:</b><span id="status"></span></td>
+          </tr>
       </table>
-      <article class="status-buttons" class="status-buttons">
-      <button id="approveButton" class="View-application-button" data-value= "university" >Approve</button>
-      <button id="rejectButton" class="View-application-button" data-value= "university">Reject</button>
+      <article class="status-buttons">
+        <button id="approveButton" type="submit" class="View-application-button">Approve</button>
+        <button id="rejectButton" type="submit" class="View-application-button">Reject</button>
       </article>
     </span>
-    <button onclick="closePopup()" class ="View-application-button" id="cancel-button">Close</button>
+    <button onclick="closePopup()" class="View-application-button" id="cancel-button">Close</button>
     <button class="View-application-button" onclick="toggleEdit()">Edit</button>
   </article>
   <article class="modal" id="popup-content">
@@ -34,29 +35,29 @@
     <form id="modal-form">
       <label for="reject-reason">Reason:</label>
       <input type="text" id="reject-reason" name="reject-reason" required>
-      <button type="submit">Submit</button>
-      <button type="button" class="cancel-button">Cancel</button>
+      <button type="submit"  onclick="submitRejectComment()">Submit</button>
+      <button type="button" id="reject-cancel-button" class="cancel-button" onclick="closeRejectModal()">Cancel</button>
     </form>
   </article>
   <article class="filter-options">
     <article class="onerow">
-    <label for="universityFilter">Filter by University:</label>
-    <select id="universityFilter" onchange="filterTable()">
+      <label for="universityFilter">Filter by University:</label>
+      <select id="universityFilter" onchange="filterTable()">
         <option value="">All</option>
-    </select>
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" onchange="filterTable()">
-    
-</article>
-<article class="onerow">
-<label for="statusFilter">Filter by Status:</label>
-    <select id="statusFilter" onchange="filterTable()">
+      </select>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" onchange="filterTable()">
+
+    </article>
+    <article class="onerow">
+      <label for="statusFilter">Filter by Status:</label>
+      <select id="statusFilter" onchange="filterTable()">
         <option value="">All</option>
-    </select>
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" onchange="filterTable()">
-</article>
-</article>
+      </select>
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" onchange="filterTable()">
+    </article>
+  </article>
   <table id="UniversitY-request-table">
     <thead>
       <th>ID</th>
@@ -69,5 +70,3 @@
     <tbody></tbody>
   </table>
 </section>
-
-
