@@ -1,0 +1,108 @@
+<section id="StudentRequest">
+
+  <link rel="stylesheet" href="../../CSS/universities.css">
+  <link rel="stylesheet" href="../../CSS/students.css">
+  <h2>Student Applications</h2>
+  <article class="filter-options">
+    <label for="universityFilter">Filter by University:</label>
+    <select id="universityFilter" onchange="filterTable()">
+        <option value="">All</option>
+    </select>
+
+    <label for="statusFilter">Filter by Status:</label>
+    <select id="statusFilter" onchange="filterTable()">
+        <option value="">All</option>
+    </select>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" onchange="filterTable()">
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" onchange="filterTable()">
+  </article>
+  <button id="downloadButton" class="View-application-button">Download as PDF</button>
+  <br>
+  <p id="StudentRequestPARA">
+    <!-- This is where the Student Request Section stuff will go -->
+  </p>
+  <article class="overlay" id="overlay" onclick="closePopup()"></article>
+
+<article class="popup" id="popup">
+    <h2>Application Details</h2>
+    <span id="popupContent">
+      <table id="allRequests">
+
+
+        <tr class="row">
+            <td class="col-title"><b>Full Name:</b><span id="fullName"></span></td>
+            
+            <td class="col-title"><b>ID Number:</b><span id="idNumber"></span></td>
+            
+            <td class="col-title"><b>Contact Number:</b><span id="contact"></span></td>
+      
+            <td class="col-title"><b>Email:</b><span id="email"></span></td>  
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount" id="amount"><span></td>
+            
+            <td class="col-title"><b>Date Submitted:</b><span id="date-created"></span></td>
+            
+            <td class="col-title"><b>University:</b><span id="university"></span></td>
+      
+            <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade" id="grade"> ${}<span></td>  
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Age:</b><span id="age"></span></td>
+            
+            <td class="col-title"><b>Race:</b> <span id="race"></span></td>
+            
+            <td class="col-title"><b>Gender:</b> <span id="gender"></span></td>
+      
+      
+            <td class="col-title"><b>Document Status:</b><span id="document"></span></td>  
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Request Status</b>:</b><span id="status"></span></td>
+        </tr>
+        <tr class="row">
+            <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment" id="comment"><span></td> 
+              
+        </tr>
+        </table>
+        <article class=status-buttons id="status-buttons">
+        <button id="approve" type="submit" class="View-application-button" >Approve</button>
+        <button id="reject"  type="submit" class="View-application-button" >Reject</button>
+        </article>
+        <article class="document-buttons">
+          <button type="button" id="cv-button" data-info1="CV" data-downloadLik="" class="View-application-button">Download CV</button>
+          <button type="button" id="transcript-button" data-info1="Transcript" data-downloadLik="" class="View-application-button">Download Transcript</button>
+          <button type="button" id="id-button" data-info1="IDDocument" data-downloadLik="" class="View-application-button">Download ID</button>
+        </article>
+      </span>
+    <button onclick="closePopup()" class ="View-application-button">Close</button>
+    <button class="edit-button View-application-button" id="edit-request" onclick="toggleEdit()">Edit</button>
+</article>
+<article class="overlay2"></article>
+<article class="overlay"></article>
+
+  <article class="modal" id="popup-content">
+    <h2>Reason for Rejecting</h2>
+    <form id="modal-form">
+      <label for="reject-reason">Reason:</label>
+      <input type="text" id="reject-reason" name="reject-reason" required>
+      <button type="submit">Submit</button>
+      <button type="button" class="cancel-button">Cancel</button>
+    </form>
+  </article>
+
+  <article class="approve-modal">
+    <h2>Confirm Approval</h2>
+    <form id="confirm-form">
+      
+      
+      <button type="submit">Yes</button>
+      <button type="button" class="cancel-button approve">No</button>
+    </form>
+  </article>
+
+</section>
