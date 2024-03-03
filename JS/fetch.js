@@ -12,16 +12,11 @@ async function fetchData(url, methodName = "GET", body = null) {
     options.body = JSON.stringify(body);
   }
 
-  try {
+
     const response = await fetch(url, options);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    
     const data = await response.json();
+    console.log(`data from fetch: ${data}`);
     return data;
-  } catch (error) {
-    console.error("Fetch error:", error);
-    throw error;
-  }
 }
