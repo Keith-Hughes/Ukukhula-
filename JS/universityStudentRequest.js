@@ -2,16 +2,11 @@ if(globalResponseData === undefined){
 var globalResponseData = [];
 }
 
-//Global variables
-
-
-
-
 GetAllRequests();
 
 async function GetAllRequests() {
   
-  const response = await fetchData("http://localhost:5263/api/StudentFundRequest","GET",{})
+  const response = await fetchData(`http://localhost:5263/api/StudentFundRequest/get/${sessionStorage.getItem("universityId")}`,"GET",{})
 
   const dataResponse2 = response;
   globalResponseData = dataResponse2;

@@ -63,7 +63,10 @@ function toggleSubMenu(id) {
 function loadSection(sectionName) {
   document.querySelector(".sidebar").classList.toggle("active");
   document.querySelector(".toggle-btn").classList.toggle("active");
-  document.getElementById("sub-menu").style.display = "none";
+  const subMenu = document.getElementById("sub-menu");
+  if(subMenu!=null){
+    subMenu.style.display = "none";
+  }
   const mainElements = document.getElementsByTagName("main");
 
   for (let i = 0; i < mainElements.length; i++) {
@@ -115,6 +118,12 @@ function loadScriptsBySection(sectionName) {
       break;
     case "PopulateFunds":
       scriptPaths = ["../../JS/PopulateFunds.js"];
+      break;
+    case "StudentRequestUniversity":
+      scriptPaths = [
+        "../../JS/universityStudentRequest.js",
+        "../../JS/html2pdf.bundle.min.js",
+      ];
       break;
   }
   loadScripts(scriptPaths);

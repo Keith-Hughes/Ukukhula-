@@ -9,7 +9,7 @@ async function checkTokenValidity() {
   console.log(JsonToken);
   if (!JsonToken) {
     // Token is invalid or not present, redirect to login page
-
+    
     window.location.href = "../unauthorized.html";
 
     return;
