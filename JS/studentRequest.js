@@ -246,59 +246,10 @@ function openPopup(row) {
   const overlay = document.getElementById('overlay');
   const popupContent = document.getElementById('popupContent');
   
-<<<<<<< HEAD
-  // Set the content of the popup (you can fetch the actual data here)
-  popupContent.innerHTML = 
-
-  `<table id="allRequests">
-
-
-  <tr class="row">
-      <td class="col-title"><b>Full Name:</b> ${row.cells[1].textContent}</td>
-      
-      <td class="col-title"><b>ID Number:</b> ${row.cells[3].textContent}</td>
-      
-      <td class="col-title"><b>Contact Number:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["phoneNumber"]}</td>
-
-      <td class="col-title"><b>Email:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"]}</td>  
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount">${row.cells[4].textContent}<span></td>
-      
-      <td class="col-title"><b>Date Submitted:</b> ${row.cells[6].textContent}</td>
-      
-      <td class="col-title"><b>University:</b> ${row.cells[2].textContent}</td>
-
-      <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"]}<span></td>  
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Age:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"]}</td>
-      
-      <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
-      
-      <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
-
-
-      <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Request Status</b>:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"]}</td>
-  </tr>
-  <tr class="row">
-      <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"]}<span></td> 
-        
-  </tr>
-  </table>
-  <article class=status-buttons>
-  <button id="approve" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
-  <button id="reject" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
-  </article>`;
-=======
   populatePopUpTable(row);
   const status = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
   displayButtons(status);
   displayDocumentButtons(row.cells[0].textContent, row.cells[1].textContent);
->>>>>>> main
 
   // Show the overlay and fade in the popup
   overlay.style.display = 'block';
@@ -309,9 +260,6 @@ function openPopup(row) {
   const rejectBtn = document.getElementById("reject");
   const commentPopup = document.getElementById("popup-content");
 
-<<<<<<< HEAD
-  rejectBtn.addEventListener("click",async function(event){
-=======
   approveBtn.addEventListener("click", function(event){
     event.preventDefault();
     showModal('.approve-modal');
@@ -342,7 +290,6 @@ function openPopup(row) {
   });
 
   rejectBtn.addEventListener("click", function(event){
->>>>>>> main
     event.preventDefault();
     console.log(rejectBtn.getAttribute("data-value"));
     const commentElement = popupContent.querySelector('.editable-field[data-field="comment"]');
@@ -360,28 +307,6 @@ function openPopup(row) {
         alert("Please provide a reason for rejection.");
         return;
       }
-<<<<<<< HEAD
-
-      // Continue with your logic here
-      console.log(reason);
-
-      const options = {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body:"",
-      };
-
-      const response = await fetch("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason, options);
-      const data = await response.json();
-      console.log(data);
-
-      // Hide the modal after submission
-      document.querySelector('.modal').style.display = 'none';
-      document.querySelector('.overlay2').style.display = 'none';
-=======
       
       const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
       const requestID = data.ID
@@ -395,7 +320,6 @@ function openPopup(row) {
       closePopup();
       //reload section after approval
       loadSection("StudentRequest");
->>>>>>> main
     });
 
     const cancelButton = document.getElementById("cancel-button");
