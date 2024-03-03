@@ -130,6 +130,10 @@ function populatePopUpTable(row){
   document.getElementById("comment").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"];
   document.getElementById("reject").setAttribute("data-value", row.cells[0].textContent);
   document.getElementById("approve").setAttribute("data-value", row.cells[0].textContent);
+  document.getElementById("cv-button").setAttribute("data-info2", row.cells[0].textContent);
+  document.getElementById("transcript-button").setAttribute("data-info2", row.cells[0].textContent);
+  document.getElementById("id-button").setAttribute("data-info2", row.cells[0].textContent);
+
 
 }
 /**
@@ -163,6 +167,84 @@ function hideModal(modalSelector) {
   document.querySelector('.overlay2').style.display = 'none';
 }
 
+function initiateDownload(downloadLink, button) {
+  // Create a temporary link and trigger a download
+  const link = document.createElement('a');
+  link.href = downloadLink;
+  link.download = button.dataset.document;
+  link.click();
+}
+
+async function displayDocumentButtons(requestId, fullName){
+  const cvBtn = document.getElementById("cv-button");
+  const transcriptBtn = document.getElementById("transcript-button");
+  const idBtn = document.getElementById("id-button");
+  //hide all buttons by default
+  cvBtn.style.display = "none"
+  transcriptBtn.style.display = "none"
+  idBtn.style.display = "none"
+
+  const cvData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/cv");
+  if(cvData.ok){
+    cvBtn.style.display = "block"
+    const blob = await cvData.blob();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    cvBtn.dataset.document = fullName+"_CV.pdf";
+    cvBtn.dataset.downloadLink = link.href;
+    cvBtn.addEventListener('click', function () {
+      const downloadLink = cvBtn.dataset.downloadLink;
+      if (downloadLink) {
+          // Initiate download using the stored download link
+          initiateDownload(downloadLink, cvBtn);
+      } else {
+          console.error('Document information not fetched.');
+      }
+  });
+
+  }
+  
+  const trancriptData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/transcript");
+  if(trancriptData.ok){
+    transcriptBtn.style.display = "block"
+    const blob = await trancriptData.blob();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    transcriptBtn.dataset.document = fullName+"_Transcript.pdf";
+    transcriptBtn.dataset.downloadLink = link.href;
+    transcriptBtn.addEventListener('click', function () {
+      const downloadLink = transcriptBtn.dataset.downloadLink;
+      if (downloadLink) {
+          // Initiate download using the stored download link
+          initiateDownload(downloadLink, transcriptBtn);
+      } else {
+          console.error('Document information not fetched.');
+      }
+  });
+
+  }
+  
+  const idData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/IDDocument");
+    if(idData.ok){
+      idBtn.style.display = "block"
+    const blob = await idData.blob();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    idBtn.dataset.document = fullName+"_Transcript.pdf";
+    idBtn.dataset.downloadLink = link.href;
+    idBtn.addEventListener('click', function () {
+      const downloadLink = idBtn.dataset.downloadLink;
+      if (downloadLink) {
+          // Initiate download using the stored download link
+          initiateDownload(downloadLink, idBtn);
+      } else {
+          console.error('Document information not fetched.');
+      }
+  });
+
+  }
+}
+
 function openPopup(row) {
   checkTokenValidity();
   const overlay = document.getElementById('overlay');
@@ -171,6 +253,7 @@ function openPopup(row) {
   populatePopUpTable(row);
   const status = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
   displayButtons(status);
+  displayDocumentButtons(row.cells[0].textContent, row.cells[1].textContent);
 
   // Show the overlay and fade in the popup
   overlay.style.display = 'block';
@@ -184,7 +267,7 @@ function openPopup(row) {
   const approveBtn = document.getElementById("approve");
 
   approveBtn.addEventListener("click", function(event){
-    event.preventDefault();  
+    event.preventDefault();
     showModal('.approve-modal');
 
     const approveModal = document.getElementById("confirm-form");
@@ -208,7 +291,6 @@ function openPopup(row) {
     const cancelButton = document.querySelector('.cancel-button.approve');
       cancelButton.addEventListener("click", function() {
         hideModal('.approve-modal');
-
         closePopup();
       });
   });
