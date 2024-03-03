@@ -6,7 +6,7 @@ async function fetchUnivesities(){
     },
   };
   const response = await fetch(
-    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
+    config.apiUrl+"Admin/GetAllUniversityRequests",
     options
   );
   return await response.json();

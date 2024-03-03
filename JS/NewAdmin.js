@@ -45,7 +45,7 @@ async function registerAdmin(
       role: "BBD Admin",
     };
     const registerResponseObject = await fetch(
-      "http://localhost:5263/api/Auth/Register?universityID=" + universityID,
+      config.apiUrl+"Auth/Register?universityID=" + universityID,
       createOptions("POST", registerRequest)
     );
     const registerResponse = await registerResponseObject.json();
