@@ -81,6 +81,8 @@ document.getElementById("comment").innerHTML=application.comment;
 document.getElementById("status").innerHTML=application.status;
 
 const approveButton = document.getElementById("approveButton");
+const rejectButton = document.getElementById("rejectButton");
+rejectButton.addEventListener("click",async (event)=>{event.preventDefault(), await rejectWithMessage(application.requestID)});
 approveButton.addEventListener("click",async (event)=>{event.preventDefault();await approveApplication(application.requestID)});
     // Show the overlay and fade in the popup
     overlay.style.display = 'block';
@@ -92,6 +94,8 @@ approveButton.addEventListener("click",async (event)=>{event.preventDefault();aw
   
 async function approveApplication(requestId){
   try {
+    const confirmed = window.confirm("Are you sure you want to approve this application?");
+    if (!confirmed) return;
     const url = `http://localhost:5263/api/Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
     const data = await fetchData(url, "PUT",{});
     console.log(data);
@@ -99,6 +103,19 @@ async function approveApplication(requestId){
  } catch (error) {
     console.error("Failed to update request:", error);
  }
+}
+
+async function rejectWithMessage(requestId){
+
+  try {
+    const comment = prompt("Please provide a comment for rejection:");
+    if (!comment) return;
+    const url = `http://localhost:5263/api/Admin/rejectUniversityRequest?requestId=${requestId}&statusId=2&comment=${comment}`;
+    const data = await fetchData(url, "PUT",{});
+    console.log(data);
+  } catch (error) {
+    console.error("Failed to update request:", error);
+  }
 }
 
 

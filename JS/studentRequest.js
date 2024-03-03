@@ -1,17 +1,13 @@
+
 if(globalResponseData === undefined){
 var globalResponseData = [];
 }
-
-//Global variables
-
-
-
 
 GetAllRequests();
 
 async function GetAllRequests() {
   
-  const response = await fetchData("http://localhost:5263/api/StudentFundRequest","GET",{})
+  const response = await fetchData("http://localhost:5263/api/StudentFundRequest")
 
   const dataResponse2 = response;
   globalResponseData = dataResponse2;
@@ -53,7 +49,7 @@ async function GetAllRequests() {
 
   table.appendChild(headerRow);
 
-  globalResponseData.forEach((obj) => {
+  dataResponse2.forEach((obj) => {
     const row = document.createElement("tr");
     let fullName = "";
     keys.forEach((key) => {
@@ -107,70 +103,57 @@ function getUniqueColumnValues(table, columnIndex) {
   return values;
 }
 
-
-/**
- * Function Responsible for population data into the popUp table for a specific request.
- * Gets information from the current row and from the response data from the api.
- */
-function populatePopUpTable(row){
-
-  document.getElementById("fullName").innerHTML =  row.cells[1].textContent;
-  document.getElementById("idNumber").innerHTML =  row.cells[3].textContent;
-  document.getElementById("contact").innerHTML =  globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["phoneNumber"];
-  document.getElementById("email").innerHTML =  globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"];
-  document.getElementById("amount").innerHTML = row.cells[4].textContent;
-  document.getElementById("date-created").innerHTML = row.cells[6].textContent;
-  document.getElementById("university").innerHTML = row.cells[2].textContent;
-  document.getElementById("grade").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"];
-  document.getElementById("age").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"];
-  document.getElementById("race").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"];
-  document.getElementById("gender").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"];
-  document.getElementById("document").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"];
-  document.getElementById("status").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
-  document.getElementById("comment").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"];
-  document.getElementById("reject").setAttribute("data-value", row.cells[0].textContent);
-  document.getElementById("approve").setAttribute("data-value", row.cells[0].textContent);
-
-}
-/**
- * Function Responsible for displaying buttons or hidding based on status.
- * Status=Review buttons will be shown else hidden
- */
-function displayButtons(status){
-  const statusButtons = document.getElementById("status-buttons");
-  const editBtn = document.getElementById("edit-request")
-
-  //showing/hiding buttons based on status
-  if(status == "Review"){
-    statusButtons.style.display = "Flex";
-    editBtn.style.display="block"
-  }
-  else{
-    statusButtons.style.display = "none";
-    editBtn.style.display="none"
-  }
-}
-
-function showModal(modalSelector) {
-  const modal = document.querySelector(modalSelector);
-  modal.style.display = 'block';
-  document.querySelector('.overlay2').style.display = 'block';
-}
-
-function hideModal(modalSelector) {
-  const modal = document.querySelector(modalSelector);
-  modal.style.display = 'none';
-  document.querySelector('.overlay2').style.display = 'none';
-}
-
 function openPopup(row) {
-  checkTokenValidity();
-  const overlay = document.getElementById('overlay');
   const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+  const popupContent = document.getElementById('popupContent');
   
-  populatePopUpTable(row);
-  const status = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
-  displayButtons(status);
+  // Set the content of the popup (you can fetch the actual data here)
+  popupContent.innerHTML = 
+
+  `<table id="allRequests">
+
+
+  <tr class="row">
+      <td class="col-title"><b>Full Name:</b> ${row.cells[1].textContent}</td>
+      
+      <td class="col-title"><b>ID Number:</b> ${row.cells[3].textContent}</td>
+      
+      <td class="col-title"><b>Contact Number:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["phoneNumber"]}</td>
+
+      <td class="col-title"><b>Email:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"]}</td>  
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Amount Requested:</b> R<span class="editable-field" data-field="amount">${row.cells[4].textContent}<span></td>
+      
+      <td class="col-title"><b>Date Submitted:</b> ${row.cells[6].textContent}</td>
+      
+      <td class="col-title"><b>University:</b> ${row.cells[2].textContent}</td>
+
+      <td class="col-title"><b>Last Ave Grade:</b><span class="editable-field" data-field="grade"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["grade"]}<span></td>  
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Age:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["age"]}</td>
+      
+      <td class="col-title"><b>Race:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["raceName"]}</td>
+      
+      <td class="col-title"><b>Gender:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["genderName"]}</td>
+
+
+      <td class="col-title"><b>Document Status:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"]}</td>  
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Request Status</b>:</b> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"]}</td>
+  </tr>
+  <tr class="row">
+      <td class="col-title"><b>Comments:</b><span class="editable-field" data-field="comment"> ${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"]}<span></td> 
+        
+  </tr>
+  </table>
+  <article class=status-buttons>
+  <button id="approve" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
+  <button id="reject" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
+  </article>`;
 
   // Show the overlay and fade in the popup
   overlay.style.display = 'block';
@@ -178,75 +161,53 @@ function openPopup(row) {
   setTimeout(() => {
       popup.style.opacity = 1;
   }, 10);
-
-
   const rejectBtn = document.getElementById("reject");
-  const approveBtn = document.getElementById("approve");
+  const commentPopup = document.getElementById("popup-content");
 
-  approveBtn.addEventListener("click", function(event){
-    event.preventDefault();  
-    showModal('.approve-modal');
-
-    const approveModal = document.getElementById("confirm-form");
-    approveModal.addEventListener("submit",async function(event){
-      event.preventDefault();
-      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
-      const requestID = data.ID
-      if(requestID == 0){
-        alert(data.Comment);
-      }
-      else{
-      alert(`${data.FirstName}'s funding request Has been approved`);
-      }
-      hideModal('.modal');
-
-      closePopup();
-      //reload section after approval
-      loadSection("StudentRequest");
-    });
-
-    const cancelButton = document.querySelector('.cancel-button.approve');
-      cancelButton.addEventListener("click", function() {
-        hideModal('.approve-modal');
-
-        closePopup();
-      });
-  });
-
-  rejectBtn.addEventListener("click", function(event){
+  rejectBtn.addEventListener("click",async function(event){
     event.preventDefault();
-    showModal('.modal')
+    console.log(rejectBtn.getAttribute("data-value"));
+    const commentElement = popupContent.querySelector('.editable-field[data-field="comment"]');
+    const commentContent = commentElement.textContent.trim();
+    document.querySelector('.modal').style.display = 'block';
+    document.querySelector('.overlay2').style.display = 'block';
     const modalForm = document.getElementById("modal-form");
     modalForm.addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const reason = document.getElementById("reject-reason").value;
 
-      if (reason === "") {
+      if (reason == "") {
         // Handle the case when the reason is empty
         alert("Please provide a reason for rejection.");
         return;
       }
-      
-      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
-      const requestID = data.ID
-      if(requestID == 0){
-        alert(data.Comment);
-      }
-      else{
-      alert(`${data.FirstName}'s funding request Has been rejected`);
-      }
-      hideModal('.modal');
-      closePopup();
-      //reload section after approval
-      loadSection("StudentRequest");
+
+      // Continue with your logic here
+      console.log(reason);
+
+      const options = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body:"",
+      };
+
+      const response = await fetch("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason, options);
+      const data = await response.json();
+      console.log(data);
+
+      // Hide the modal after submission
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
     });
 
-    const cancelButton = document.querySelector('.cancel-button');
+    const cancelButton = document.getElementById("cancel-button");
     cancelButton.addEventListener("click", function() {
-      hideModal('.modal');
-
-      closePopup();
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
     });
 
   });
