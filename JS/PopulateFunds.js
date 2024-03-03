@@ -68,11 +68,11 @@ document
   .getElementById("populateFundsButton")
   .addEventListener("click", async () => {
     jsonData = await fetchData(
-      "http://localhost:5263/api/Admin/AllocateProjection",
+      config.apiUrl+"Admin/AllocateProjection",
       "GET"
     );
     universityJSON = await fetchData(
-      " http://localhost:5263/api/Admin/GetAllUniversities",
+      config.apiUrl+"Admin/GetAllUniversities",
       "GET"
     );
 

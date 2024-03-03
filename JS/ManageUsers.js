@@ -47,7 +47,7 @@ async function GetAllRequests() {
   };
 
   const response = await fetch(
-    "http://localhost:5263/api/Admin/GetUniversityUsers",
+    config.apiUrl+"Admin/GetUniversityUsers",
     options
   );
   const dataResponse = await response.json();
@@ -163,7 +163,7 @@ function showDeactivate(obj, viewButton) {
       document.getElementById("userDeactivateButtonConfirm").style.display =
         "none";
       responseData = await fetchData(
-        `http://localhost:5263/api/Admin/updateUserActivity?UserID=${userID}&Status=${Status}`,
+        config.apiUrl+`Admin/updateUserActivity?UserID=${userID}&Status=${Status}`,
         "PUT"
       );
       console.log(responseData);

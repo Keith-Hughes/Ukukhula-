@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       };
 
       const options = createOptions("POST", JSON.stringify(requestData));
-      fetch("http://localhost:5263/api/StudentFundRequest/create", options)
+      fetch(config.apiUrl+"StudentFundRequest/create", options)
         .then((respons) => respons.json())
         .then((data) => window.alert(data.message));
     });

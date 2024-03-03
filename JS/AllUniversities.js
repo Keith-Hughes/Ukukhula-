@@ -12,7 +12,7 @@ function createOptions(methodName, bodyMessage) {
 }
 async function getAllUniversity() {
   const response = await fetch(
-    "http://localhost:5263/api/Admin/GetAllUniversityRequests",
+    config.apiUrl+"Admin/GetAllUniversityRequests",
     createOptions("GET", {})
   );
   const dataResponse = await response.json();

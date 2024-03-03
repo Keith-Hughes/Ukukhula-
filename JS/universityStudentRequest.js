@@ -6,7 +6,7 @@ GetAllRequests();
 
 async function GetAllRequests() {
   
-  const response = await fetchData(`http://localhost:5263/api/StudentFundRequest/get/${sessionStorage.getItem("universityId")}`,"GET",{})
+  const response = await fetchData(config.apiUrl+`StudentFundRequest/get/${sessionStorage.getItem("universityId")}`,"GET",{})
 
   const dataResponse2 = response;
   globalResponseData = dataResponse2;
@@ -123,8 +123,6 @@ function populatePopUpTable(row){
   document.getElementById("document").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["documentStatus"];
   document.getElementById("status").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
   document.getElementById("comment").innerHTML = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["comment"];
-  document.getElementById("reject").setAttribute("data-value", row.cells[0].textContent);
-  document.getElementById("approve").setAttribute("data-value", row.cells[0].textContent);
   document.getElementById("cv-button").setAttribute("data-info2", row.cells[0].textContent);
   document.getElementById("transcript-button").setAttribute("data-info2", row.cells[0].textContent);
   document.getElementById("id-button").setAttribute("data-info2", row.cells[0].textContent);
@@ -136,16 +134,13 @@ function populatePopUpTable(row){
  * Status=Review buttons will be shown else hidden
  */
 function displayButtons(status){
-  const statusButtons = document.getElementById("status-buttons");
   const editBtn = document.getElementById("edit-request")
 
   //showing/hiding buttons based on status
   if(status == "Review"){
-    statusButtons.style.display = "Flex";
     editBtn.style.display="block"
   }
   else{
-    statusButtons.style.display = "none";
     editBtn.style.display="none"
   }
 }
@@ -179,7 +174,7 @@ async function displayDocumentButtons(requestId, fullName){
   transcriptBtn.style.display = "none"
   idBtn.style.display = "none"
 
-  const cvData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/cv");
+  const cvData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/cv");
   if(cvData.ok){
     cvBtn.style.display = "block"
     const blob = await cvData.blob();
@@ -199,7 +194,7 @@ async function displayDocumentButtons(requestId, fullName){
 
   }
   
-  const trancriptData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/transcript");
+  const trancriptData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/transcript");
   if(trancriptData.ok){
     transcriptBtn.style.display = "block"
     const blob = await trancriptData.blob();
@@ -219,7 +214,7 @@ async function displayDocumentButtons(requestId, fullName){
 
   }
   
-  const idData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/IDDocument");
+  const idData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/IDDocument");
     if(idData.ok){
       idBtn.style.display = "block"
     const blob = await idData.blob();
@@ -268,7 +263,7 @@ function openPopup(row) {
     const approveModal = document.getElementById("confirm-form");
     approveModal.addEventListener("submit",async function(event){
       event.preventDefault();
-      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
+      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
       const requestID = data.ID
       if(requestID == 0){
         alert(data.Comment);
@@ -305,7 +300,7 @@ function openPopup(row) {
         return;
       }
       
-      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
+      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
       const requestID = data.ID
       if(requestID == 0){
         alert(data.Comment);
