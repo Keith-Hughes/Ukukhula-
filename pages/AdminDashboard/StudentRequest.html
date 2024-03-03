@@ -70,8 +70,13 @@
         </tr>
         </table>
         <article class=status-buttons id="status-buttons">
-        <button id="approve" type="submit" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Approve</button>
-        <button id="reject"  type="submit" class="View-application-button" data-value=${globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["id"]}>Reject</button>
+        <button id="approve" type="submit" class="View-application-button" >Approve</button>
+        <button id="reject"  type="submit" class="View-application-button" >Reject</button>
+        </article>
+        <article class="document-buttons">
+          <button type="button" id="cv-button" data-info1="CV"></button>
+          <button type="button" id="transcript-button" data-info1="Transcript"></button>
+          <button type="button" id="id-button" data-info1="IDDocument"></button>
         </article>
       </span>
     <button onclick="closePopup()" class ="View-application-button">Close</button>
@@ -79,6 +84,7 @@
 </article>
 <article class="overlay2"></article>
 <article class="overlay"></article>
+
   <article class="modal" id="popup-content">
     <h2>Reason for Rejecting</h2>
     <form id="modal-form">
@@ -88,6 +94,7 @@
       <button type="button" class="cancel-button">Cancel</button>
     </form>
   </article>
+
   <article class="approve-modal">
     <h2>Confirm Approval</h2>
     <form id="confirm-form">

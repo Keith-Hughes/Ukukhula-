@@ -17,5 +17,6 @@ async function fetchData(url, methodName = "GET", body = null) {
 
     
     const data = await response.json();
+    console.log(`data from fetch: ${data}`);
     return data;
 }
