@@ -7,7 +7,6 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #302f2f;
-            background-image: url("/Images/loginBackground.jpg");
             margin: 0;
             padding: 0;
             display: flex;
@@ -29,7 +28,7 @@
             margin-bottom: 8px;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 8px;
             margin-bottom: 12px;
@@ -56,7 +55,7 @@
 <body>
 
     <form>
-        <h1>Application Form</h1> <!-- Added heading here -->
+        <h1>Application Form</h1>
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" required>
 
@@ -73,7 +72,18 @@
         <input type="text" id="universityName" name="universityName" required>
 
         <label for="province">Province:</label>
-        <input type="text" id="province" name="province" required>
+        <select id="province" name="province" required>
+            <option value="" disabled selected>Select Province</option>
+            <option value="Eastern Cape">Eastern Cape</option>
+            <option value="Free State">Free State</option>
+            <option value="Gauteng">Gauteng</option>
+            <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+            <option value="Limpopo">Limpopo</option>
+            <option value="Mpumalanga">Mpumalanga</option>
+            <option value="North West">North West</option>
+            <option value="Northern Cape">Northern Cape</option>
+            <option value="Western Cape">Western Cape</option>
+        </select>
 
         <label for="amount">Amount:</label>
         <input type="number" id="amount" name="amount" required>
