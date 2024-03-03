@@ -126,6 +126,7 @@ function populatePopUpTable(row){
   document.getElementById("cv-button").setAttribute("data-info2", row.cells[0].textContent);
   document.getElementById("transcript-button").setAttribute("data-info2", row.cells[0].textContent);
   document.getElementById("id-button").setAttribute("data-info2", row.cells[0].textContent);
+  document.getElementById("upload-documents").setAttribute("data-info2", row.cells[0].textContent);
 
 
 }
@@ -253,14 +254,13 @@ function openPopup(row) {
   }, 10);
 
 
-  const rejectBtn = document.getElementById("reject");
-  const approveBtn = document.getElementById("approve");
+  const uploadDocsBtn = document.getElementById("upload-documents");
 
-  approveBtn.addEventListener("click", function(event){
+  uploadDocsBtn.addEventListener("click", function(event){
     event.preventDefault();
-    showModal('.approve-modal');
+    showModal('.request-form');
 
-    const approveModal = document.getElementById("confirm-form");
+    const approveModal = document.getElementById("new-request");
     approveModal.addEventListener("submit",async function(event){
       event.preventDefault();
       const data = await fetchData(config.apiUrl+"StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
@@ -278,48 +278,6 @@ function openPopup(row) {
       loadSection("StudentRequest");
     });
 
-    const cancelButton = document.querySelector('.cancel-button.approve');
-      cancelButton.addEventListener("click", function() {
-        hideModal('.approve-modal');
-        closePopup();
-      });
-  });
-
-  rejectBtn.addEventListener("click", function(event){
-    event.preventDefault();
-    showModal('.modal')
-    const modalForm = document.getElementById("modal-form");
-    modalForm.addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const reason = document.getElementById("reject-reason").value;
-
-      if (reason === "") {
-        // Handle the case when the reason is empty
-        alert("Please provide a reason for rejection.");
-        return;
-      }
-      
-      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
-      const requestID = data.ID
-      if(requestID == 0){
-        alert(data.Comment);
-      }
-      else{
-      alert(`${data.firstName}'s funding request Has been rejected`);
-      }
-      hideModal('.modal');
-      closePopup();
-      //reload section after approval
-      loadSection("StudentRequest");
-    });
-
-    const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.addEventListener("click", function() {
-      hideModal('.modal');
-
-      closePopup();
-    });
 
   });
 }
@@ -403,15 +361,14 @@ function filterTable() {
 }
 
 function populateFilterOptions() {
-  let universityFilter = document.getElementById("universityFilter");
+
   let statusFilter = document.getElementById("statusFilter");
 
-  let universityValues = getUniqueColumnValues(
-    document.getElementById("StudentRequestTable"),2); 
+
   let statusValues = getUniqueColumnValues(
     document.getElementById("StudentRequestTable"),5); 
 
-  populateDropdown(universityFilter, universityValues);
+ 
   populateDropdown(statusFilter, statusValues);
 }
 
@@ -432,4 +389,61 @@ document.getElementById('downloadButton').addEventListener('click', () => {
 
 });
 
+document.getElementById("create-request").addEventListener("click", ()=>{
+  showModal(".modal");
+
+});
+
+const cancelButton = document.querySelector('.cancel-button.request');
+cancelButton.addEventListener("click", function() {
+  hideModal('.modal');
+  closePopup();
+});
+
+document
+.getElementById("request-form")
+.addEventListener("submit",async function (event) {
+  event.preventDefault();
+  //We need the university ID which we should
+  //find in session storage if the user is logged in
+  const UniversitId = parseInt(sessionStorage.getItem("universityId"));
+  console.log(UniversitId);
+  const requestData = {
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    email: document.getElementById("email").value,
+    phoneNumber: document.getElementById("phoneNumber").value,
+    raceName: document.getElementById("race").value,
+    genderName: document.getElementById("gender").value,
+    birthDate: document.getElementById("dob").value,
+    idNumber: document.getElementById("idNumber").value,
+    grade: parseInt(document.getElementById("lastAveGrade").value),
+    amount: parseInt(document.getElementById("amount").value),
+    universityID: UniversitId,
+  };
+
+  const responseData =  await fetchData(config.apiUrl+"StudentFundRequest/create", "POST", requestData)
+  if(requestData.isSuccess){
+  const cvFile = document.getElementById("cv").files[0];
+  const transcriptFile = document.getElementById("transcript").files[0];
+  const idDocumentFile = document.getElementById("idDocument").files[0];
+
+  const documentsFormData = new FormData();
+
+  if (cvFile) {
+      documentsFormData.append("cv", cvFile);
+  }
+
+  if (transcriptFile) {
+      documentsFormData.append("transcript", transcriptFile);
+  }
+
+  if (idDocumentFile) {
+      documentsFormData.append("idDocument", idDocumentFile);
+  }
+}
+
+
+
+});
 

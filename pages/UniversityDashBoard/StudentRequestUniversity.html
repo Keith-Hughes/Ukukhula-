@@ -16,7 +16,8 @@
     <label for="endDate">End Date:</label>
     <input type="date" id="endDate" onchange="filterTable()">
   </article>
-  <button id="downloadButton" class="View-application-button">Download as PDF</button>
+  <button id="downloadButton" class="View-application-button">Download </button>
+  <button type="button" id="create-request" class="View-application-button">New Request</button>
   <br>
   <p id="StudentRequestPARA">
     <!-- This is where the Student Request Section stuff will go -->
@@ -66,14 +67,16 @@
         </tr>
         </table>
     </span>
+    <article class="buttons">
         <article class=status-buttons id="status-buttons">
-        <button id="edit" type="submit" class="View-application-button" >Edit</button>
+        <button id="upload-documents" type="submit" class="View-application-button" >Add Documents</button>
         </article>
         <article class="document-buttons">
           <button type="button" id="cv-button" data-info1="CV" data-downloadLik="" class="View-application-button">Download CV</button>
           <button type="button" id="transcript-button" data-info1="Transcript" data-downloadLik="" class="View-application-button">Download Transcript</button>
           <button type="button" id="id-button" data-info1="IDDocument" data-downloadLik="" class="View-application-button">Download ID</button>
         </article>
+      </article>
      
     <button onclick="closePopup()" class ="View-application-button">Close</button>
     <button class="edit-button View-application-button" id="edit-request" onclick="toggleEdit()">Edit</button>
@@ -82,7 +85,143 @@
 <article class="overlay"></article>
 
   <article class="modal" id="popup-content">
-    
+    <article id="new-request" class="request-form">
+      <h2>Submit Bursary Request</h2>
+      <form id="request-form">
+
+          <article class="row">
+              <article class="col-1">
+                  <label for="firstName">First Name:</label>
+              </article>
+              <article class="col-2">
+                  <input type="text" id="firstName" name="firstName" required>
+              </article>
+          </article>
+
+          <article class="row">
+              <article class="col-1">
+                  <label for="lastName">Last Name:</label>
+              </article>
+              <article class="col-2">
+                  <input type="text" id="lastName" name="lastName" required>
+              </article>
+          </article>
+              
+          <artice class="row">
+              <article class="col-1">
+                  <label for="email">Email:</label>
+              </article>
+              <article class="col-2">
+                  <input type="email" id="email" name="email" required>
+              </article>
+          </artice>
+          
+          <article class="row">
+              <article class="col-1">
+                  <label for="phoneNumber">Phone Number:</label>
+              </article>
+              <article class="col-2">
+                  <input type="tel" id="phoneNumber" name="phoneNumber" required>
+              </article>
+          </article>
+             
+          <article class="row">
+              <article class="col-1">
+                  <label for="race">Race:</label>
+              </article>
+              <article class="col-2">
+                  <select id="race" name="race" required>
+                      <option value="black">Black</option>
+                      <option value="coloured">Coloured</option>
+                      <option value="indian">Indian</option>
+                  </select>
+              </article>
+          </article>
+          
+          <article class="row">
+              <article class="col-1">
+                  <label for="gender">Gender:</label>
+              </article>
+              <article class="col-2">
+                  <select id="gender" name="gender"  required>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                  </select>
+              </article>
+          </article>
+          
+          <article class="row">
+              <article class="col-1">
+                  <label for="dob">Date of Birth:</label>
+              </article>
+              <article class="col-2">
+                  <input type="date" id="dob" name="dob" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm") required>
+              </article>
+          </article>
+          
+          <article class="row">
+              <article class="col-1">
+                  <label for="idNumber">ID Number:</label>
+              </article>
+              <article class="col-2">
+                  <input type="text" id="idNumber" name="idNumber" required>
+              </article>
+          </article>
+             
+          <article class="row">
+              <article class="col-1">
+                  <label for="lastAveGrade">Last Average Grade:</label>
+              </article>
+              <article class="col-2">
+                  <input type="number" id="lastAveGrade" name="lastAveGrade" required>
+              </article>
+          </article>
+          
+          <article class="row">
+              <article class="col-1">
+                  <label for="amount">Amount:</label>
+              </article>
+              <article class="col-2">
+                  <input type="number" id="amount" name="amount" required>
+              </article>
+          </article>
+
+          <article class="row">
+              <article class="col-1">
+                  <label for="cv">CV (PDF only):</label>
+              </article>
+              <article class="col-2">
+                  <input type="file" id="cv" name="cv" accept=".pdf" >
+              </article>
+          </article>
+
+          <article class="row">
+              <article class="col-1">
+                  <label for="transcript">Transcript (PDF only):</label>
+              </article>
+              <article class="col-2">
+                  <input type="file" id="transcript" name="transcript" accept=".pdf" >
+              </article>
+          </article>
+
+          <article class="row">
+              <article class="col-1">
+                  <label for="idDocument">ID Document (PDF only):</label>
+              </article>
+              <article class="col-2">
+                  <input type="file" id="idDocument" name="idDocument" accept=".pdf" >
+              </article>
+          </article>
+          
+          <article class="row">
+              <button type="submit" id="submit">Submit</button>
+          </article>
+          <article class="row">
+            <button type="button" class="cancel-button request">Cancel</button>
+          </article>
+      </form>
+  </article>
   </article>
 
 </section>
