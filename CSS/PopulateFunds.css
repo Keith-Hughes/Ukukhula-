@@ -1,4 +1,4 @@
-#populateFundsButton {
+.populateFundsButton {
   align-items: center;
   background-color: #45a049;
   color: white;
@@ -7,10 +7,19 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
-
-
-#populateFundsButton:hover {
+.populateFundsButtonC{
+  align-items: center;
+  background-color: #9a1818;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.populateFundsButtonC:hover {
+  background-color: #ff0000;
+}
+.populateFundsButton:hover {
   background-color: #27de31;
 }
 
@@ -19,4 +28,50 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+#projectionAllocate {
+  border-radius: 25px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  background-color: azure;
+  position: fixed;
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.993); */
+  /* opacity: 0; */
+  /* transition: opacity 0.3s; */
+  /* z-index: 9998; */
+  width: 80%;
+  margin: 0 12px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow: scroll;
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #000000;
+  color: azure;
+}
+thead {
+  background-color: #000000;
+  color: azure;
+}
+td {
+  background-color: #ffffff;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
 }
