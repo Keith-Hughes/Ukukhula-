@@ -137,8 +137,13 @@ function loadScripts(scriptPaths) {
   let fetchScript = document.createElement("script");
   fetchScript.src = "../../JS/fetch.js";
   fetchScript.type = "text/javascript";
-  document.body.appendChild(script);
+  let configScript = document.createElement("script");
+  configScript.src = "../../JS/config.js";
+  configScript.type = "text/javascript";
   document.body.appendChild(fetchScript);
+  document.body.appendChild(configScript);
+  document.body.appendChild(script);
+
   checkTokenValidity();
   scriptPaths.forEach(function (scriptPath) {
     script = document.createElement("script");

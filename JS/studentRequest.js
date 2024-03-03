@@ -7,7 +7,7 @@ GetAllRequests();
 
 async function GetAllRequests() {
   
-  const response = await fetchData("http://localhost:5263/api/StudentFundRequest")
+  const response = await fetchData(config.apiUrl+"StudentFundRequest","GET",{})
 
   const dataResponse2 = response;
   globalResponseData = dataResponse2;
@@ -180,7 +180,7 @@ async function displayDocumentButtons(requestId, fullName){
   transcriptBtn.style.display = "none"
   idBtn.style.display = "none"
 
-  const cvData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/cv");
+  const cvData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/cv");
   if(cvData.ok){
     cvBtn.style.display = "block"
     const blob = await cvData.blob();
@@ -200,7 +200,7 @@ async function displayDocumentButtons(requestId, fullName){
 
   }
   
-  const trancriptData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/transcript");
+  const trancriptData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/transcript");
   if(trancriptData.ok){
     transcriptBtn.style.display = "block"
     const blob = await trancriptData.blob();
@@ -220,7 +220,7 @@ async function displayDocumentButtons(requestId, fullName){
 
   }
   
-  const idData = await fetch("http://localhost:5263/api/UploadDocument/get/"+requestId+"/IDDocument");
+  const idData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/IDDocument");
     if(idData.ok){
       idBtn.style.display = "block"
     const blob = await idData.blob();
@@ -267,7 +267,7 @@ function openPopup(row) {
     const approveModal = document.getElementById("confirm-form");
     approveModal.addEventListener("submit",async function(event){
       event.preventDefault();
-      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
+      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
       const requestID = data.ID
       if(requestID == 0){
         alert(data.Comment);
@@ -308,7 +308,7 @@ function openPopup(row) {
         return;
       }
       
-      const data = await fetchData("http://localhost:5263/api/StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
+      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
       const requestID = data.ID
       if(requestID == 0){
         alert(data.Comment);

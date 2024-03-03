@@ -34,7 +34,7 @@ if (universitiesDict === undefined) {
 async function getUniversityName() {
   try {
     const universitiesObject = await fetch(
-      "http://localhost:5263/api/Admin/GetAllUniversities",
+      config.apiUrl+"Admin/GetAllUniversities",
       createOptions("GET", {})
     );
     const universities = await universitiesObject.json();
@@ -80,7 +80,7 @@ async function registerAdmin(
         role: "University Admin",
       };
       const registerResponseObject = await fetch(
-        "http://localhost:5263/api/Auth/Register?universityID=" + universityID,
+        config.apiUrl+"Auth/Register?universityID=" + universityID,
         createOptions("POST", registerRequest)
       );
       const registerResponse = await registerResponseObject.json();

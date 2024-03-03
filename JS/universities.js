@@ -1,15 +1,15 @@
-async function fetchUnivesities() {
-	const options = {
-		method: "GET",
-		headers: {
-			Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-		},
-	};
-	const response = await fetch(
-		"http://localhost:5263/api/Admin/GetAllUniversityRequests",
-		options
-	);
-	return await response.json();
+async function fetchUnivesities(){
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  };
+  const response = await fetch(
+    config.apiUrl+"Admin/GetAllUniversityRequests",
+    options
+  );
+  return await response.json();
 }
 
 async function populateTable() {

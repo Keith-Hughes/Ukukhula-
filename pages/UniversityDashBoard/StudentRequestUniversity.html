@@ -4,11 +4,7 @@
   <link rel="stylesheet" href="../../CSS/students.css">
   <h2>Student Applications</h2>
   <article class="filter-options">
-    <label for="universityFilter">Filter by University:</label>
-    <select id="universityFilter" onchange="filterTable()">
-        <option value="">All</option>
-    </select>
-
+    
     <label for="statusFilter">Filter by Status:</label>
     <select id="statusFilter" onchange="filterTable()">
         <option value="">All</option>
@@ -69,16 +65,16 @@
               
         </tr>
         </table>
+    </span>
         <article class=status-buttons id="status-buttons">
-        <button id="approve" type="submit" class="View-application-button" >Approve</button>
-        <button id="reject"  type="submit" class="View-application-button" >Reject</button>
+        <button id="edit" type="submit" class="View-application-button" >Edit</button>
         </article>
         <article class="document-buttons">
           <button type="button" id="cv-button" data-info1="CV" data-downloadLik="" class="View-application-button">Download CV</button>
           <button type="button" id="transcript-button" data-info1="Transcript" data-downloadLik="" class="View-application-button">Download Transcript</button>
           <button type="button" id="id-button" data-info1="IDDocument" data-downloadLik="" class="View-application-button">Download ID</button>
         </article>
-      </span>
+     
     <button onclick="closePopup()" class ="View-application-button">Close</button>
     <button class="edit-button View-application-button" id="edit-request" onclick="toggleEdit()">Edit</button>
 </article>
@@ -86,23 +82,7 @@
 <article class="overlay"></article>
 
   <article class="modal" id="popup-content">
-    <h2>Reason for Rejecting</h2>
-    <form id="modal-form">
-      <label for="reject-reason">Reason:</label>
-      <input type="text" id="reject-reason" name="reject-reason" required>
-      <button type="submit">Submit</button>
-      <button type="button" class="cancel-button">Cancel</button>
-    </form>
-  </article>
-
-  <article class="approve-modal">
-    <h2>Confirm Approval</h2>
-    <form id="confirm-form">
-      
-      
-      <button type="submit">Yes</button>
-      <button type="button" class="cancel-button approve">No</button>
-    </form>
+    
   </article>
 
 </section>

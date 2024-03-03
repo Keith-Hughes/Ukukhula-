@@ -4,14 +4,14 @@
 // });
 
 response = fetchData(
-  " http://localhost:5263/api/Admin/getBudgetAndFunds",
+  config.apiUrl+"Admin/getBudgetAndFunds",
   "GET",
   {}
 );
 
 async function setData() {
   response = await fetchData(
-    " http://localhost:5263/api/Admin/getBudgetAndFunds",
+    config.apiUrl+"Admin/getBudgetAndFunds",
     "GET",
     {}
   );

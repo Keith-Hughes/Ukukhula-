@@ -36,7 +36,7 @@ function LoginFunction(event) {
         };
         //check if email is in our database.
         console.log("sending request to check email: " + email);
-        fetch("http://localhost:5263/api/Auth/Login", options)
+        fetch(config.apiUrl+"Auth/Login", options)
           .then((response) => response.json())
           .then((data) => checkResponse(data))
           .catch((err) => console.log(err));
