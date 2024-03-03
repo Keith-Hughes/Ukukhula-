@@ -23,13 +23,21 @@
       </table>
       <article class="status-buttons" class="status-buttons">
       <button id="approveButton" class="View-application-button" data-value= "university" >Approve</button>
-      <button id="reject" class="View-application-button" data-value= "university">Reject</button>
+      <button id="rejectButton" class="View-application-button" data-value= "university">Reject</button>
       </article>
     </span>
     <button onclick="closePopup()" class ="View-application-button" id="cancel-button">Close</button>
     <button class="View-application-button" onclick="toggleEdit()">Edit</button>
   </article>
-
+  <article class="modal" id="popup-content">
+    <h2>Reason for Rejecting</h2>
+    <form id="modal-form">
+      <label for="reject-reason">Reason:</label>
+      <input type="text" id="reject-reason" name="reject-reason" required>
+      <button type="submit">Submit</button>
+      <button type="button" class="cancel-button">Cancel</button>
+    </form>
+  </article>
   <article class="filter-options">
     <article class="onerow">
     <label for="universityFilter">Filter by University:</label>
@@ -48,8 +56,7 @@
     <label for="endDate">End Date:</label>
     <input type="date" id="endDate" onchange="filterTable()">
 </article>
-  </article>
-  <button id="downloadButton" class="View-application-button">Download as PDF</button>
+</article>
   <table id="UniversitY-request-table">
     <thead>
       <th>ID</th>
