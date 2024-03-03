@@ -3,10 +3,24 @@
   <p>Under this section, you can add and deactivate Users.</p>
   <br />
   <span id="UsersSection"></span>
+  <span id="userDeactivate">
+    <p id="userDeactivateText"></p>
+    <br />
+    <p id="userDeactivateResponseText"></p>
+    <br />
+    <span id="userButtons">
+      <button class="NewButton" id="userDeactivateButtonConfirm">
+        Confirm
+      </button>
+      <button id="userDeactivateButtonCancel">Cancel</button>
+    </span>
+  </span>
   <article class="overlay"></article>
   <br /><br />
-  <button id="NewButton" onclick="showAdmin()">Add New BBD Admin</button>
-  <button id="NewButton" onclick="showHOD()">Add New University Admin</button>
+  <button class="NewButton" onclick="showAdmin()">Add New BBD Admin</button>
+  <button class="NewButton" onclick="showHOD()">
+    Add New University Admin
+  </button>
   <span id="NewAdmin">
     <h2>REGISTER A BBD ADMIN</h2>
     <br />
