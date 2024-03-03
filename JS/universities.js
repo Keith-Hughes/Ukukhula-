@@ -118,10 +118,6 @@ async function rejectWithMessage(requestId){
   }
 }
 
-
-
-
-
 function closePopup() {
     const popup = document.getElementById('popup');
     const overlay = document.getElementById('overlay');
