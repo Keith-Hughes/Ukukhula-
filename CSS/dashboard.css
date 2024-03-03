@@ -227,8 +227,8 @@ section {
   color: gray;
 } */
 #funds-tabs {
-  font-size: 1vw;
-  padding-left: 2vw;
+  font-size: 15px;
+  padding-left: 20px;
 }
 #funds-tabs a {
   color: gray;
