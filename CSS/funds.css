@@ -34,7 +34,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 8vh 8vh rgba(0, 0, 0, 0.162);
+  box-shadow: 0 0 20px lime, 0 0 40px lime, 0 0 60px lime;
 }
 
 h4 {

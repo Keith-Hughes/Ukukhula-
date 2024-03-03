@@ -113,6 +113,9 @@ function loadScriptsBySection(sectionName) {
     case "Funds":
       scriptPaths = ["../../JS/Funds.js"];
       break;
+    case "PopulateFunds":
+      scriptPaths = ["../../JS/PopulateFunds.js"];
+      break;
   }
   loadScripts(scriptPaths);
 }
