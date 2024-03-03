@@ -93,8 +93,15 @@ async function GetAllRequests() {
     keys.forEach((key) => {
       if (!key.includes("id")) {
         const cell = document.createElement("td");
-
-        cell.textContent = obj[key];
+          cell.textContent = obj[key];
+          if (key === "status") {
+              // Set color based on status value
+              if (obj["status"].toUpperCase().includes("INACTIVE")) {
+                  cell.style.color = "red";
+              } else {
+                  cell.style.color = "green";
+              }
+          }
         row.appendChild(cell);
       }
     });
@@ -145,7 +152,6 @@ function showDeactivate(obj, viewButton) {
     .getElementById("userDeactivateButtonCancel")
     .addEventListener("click", () => {
       document.getElementById("userDeactivate").style.display = "none";
-      obj;
     });
 
   document
@@ -166,9 +172,7 @@ function showDeactivate(obj, viewButton) {
         "green";
       document.getElementById("userDeactivateResponseText").innerHTML =
         responseData["message"];
-      //   await setTimeout(() => {}, 4000);
-      //   document.getElementById("userDeactivate").style.display = "none";
-      loadSection("ManageUsers");
+      document.getElementById("userDeactivateText").innerHTML = "";
     });
 }
 
