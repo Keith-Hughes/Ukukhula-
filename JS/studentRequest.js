@@ -230,7 +230,7 @@ async function displayDocumentButtons(requestId, fullName){
     const blob = await idData.blob();
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    idBtn.dataset.document = fullName+"_Transcript.pdf";
+    idBtn.dataset.document = fullName+"_ID.pdf";
     idBtn.dataset.downloadLink = link.href;
     idBtn.addEventListener('click', function () {
       const downloadLink = idBtn.dataset.downloadLink;
@@ -437,26 +437,9 @@ function populateDropdown(selectElement, values) {
 
 document.getElementById('downloadButton').addEventListener('click', () => {
   const table = document.getElementById('StudentRequestPARA');
-  console.log("Table retreived" +table);
   
-  // Options for pdf generation
-  // const pdfOptions = {
-  //     margin: 10,
-  //     filename: 'table-export.pdf',
-  //     html2canvas: { scale: 2 },
-  //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  // };
-  console.log("options created");
   html2pdf().from(table).save();
-  // Use html2pdf.js to generate PDF
-  // html2pdf().from(table).set(pdfOptions).outputPdf().then(pdf => {
-  //     // Trigger the download
-  //     const blob = new Blob([pdf], { type: 'application/pdf' });
-  //     const link = document.createElement('a');
-  //     link.href = URL.createObjectURL(blob);
-  //     link.download = pdfOptions.filename;
-  //     link.click();
-  // });
+
 });
 
-document.getElementById
+
