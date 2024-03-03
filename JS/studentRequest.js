@@ -196,7 +196,7 @@ function openPopup(row) {
         alert(data.Comment);
       }
       else{
-      alert(`${data.FirstName}'s funding request Has been approved`);
+      alert(`${data.firstName}'s funding request Has been approved`);
       }
       hideModal('.modal');
 
@@ -234,7 +234,7 @@ function openPopup(row) {
         alert(data.Comment);
       }
       else{
-      alert(`${data.FirstName}'s funding request Has been rejected`);
+      alert(`${data.firstName}'s funding request Has been rejected`);
       }
       hideModal('.modal');
       closePopup();
