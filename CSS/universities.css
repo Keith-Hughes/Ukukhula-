@@ -26,7 +26,7 @@ td {
   padding: 8px;
 }
 
-.View-application-button {
+.View-application-button{
   background-color: #999999;
   color: #ffffff;
   border: none;
@@ -77,6 +77,10 @@ td {
   .row{
     flex-direction: column;
   }
+  #popup{
+    height: 80vh;
+    overflow-y: auto;
+  }
 
 }
 
@@ -100,8 +104,7 @@ td {
   z-index: 998;
   width:80%;
   margin:20px 12px;
-  overflow-y: auto;
-  height: 85vh;
+  height: auto;
 
 }
 
@@ -131,7 +134,8 @@ td {
 }
 
 .status-buttons{
-  margin: 12px;
+  padding: 8px 1px;
+  margin: 5px 0;
   
 }
 #reject{

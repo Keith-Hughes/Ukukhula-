@@ -125,6 +125,10 @@ button.cancel-button:hover{
       width: 100%;
       margin-top: 0;
     }
+    #popup{
+      height: 80vh;
+      overflow-y: auto;
+    }
 
   }
 
@@ -132,7 +136,6 @@ button.cancel-button:hover{
   .modal, .approve-modal{
     display: none;
     position: fixed;
-    height:80vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -142,7 +145,7 @@ button.cancel-button:hover{
     z-index: 1000;
     overflow-y: auto;
     border-radius: 12px;
-    width: 80vw;
+    width: 60vw;
   }
   .overlay2 {
     display: none;
