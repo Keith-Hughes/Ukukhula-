@@ -13,6 +13,7 @@ async function fetchUnivesities() {
 }
 
 async function populateTable() {
+  showLoadingScreen();
   const tbody = document.querySelector("#UniversitY-request-table tbody");
   tbody.innerHTML = "";
   //const response =
@@ -219,4 +220,14 @@ function openRejectModal() {
 function closeRejectModal() {
   const modal = document.getElementById("popup-content");
   modal.style.display = "none";
+}
+
+function showLoadingScreen(){
+  document.getElementById("loading-screen").style.display = "block";
+  document.getElementById("loading-video").style.display = "block";
+}
+
+function closeLoadingScreen(){
+  document.getElementById("loading-screen").style.display = "none";
+  document.getElementById("loading-video").style.display = "none";
 }
