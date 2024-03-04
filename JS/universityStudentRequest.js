@@ -6,7 +6,7 @@ GetAllRequests();
 
 async function GetAllRequests() {
   
-  const response = await fetchData(config.apiUrl+`StudentFundRequest/get/${sessionStorage.getItem("universityId")}`,"GET",{})
+  const response = await fetchData(config.apiUrl+`StudentFundRequest/get/${sessionStorage.getItem("universityId")}`)
 
   const dataResponse2 = response;
   globalResponseData = dataResponse2;
@@ -275,7 +275,7 @@ function openPopup(row) {
 
       closePopup();
       //reload section after approval
-      loadSection("StudentRequest");
+      loadSection("universityStudentRequest");
     });
 
 
