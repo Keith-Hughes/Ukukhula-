@@ -94,6 +94,7 @@ function getUniversityByID(id, universityJSON = Array) {
 document
   .getElementById("populateFundsButton")
   .addEventListener("click", async () => {
+    showLoadingScreen();
     jsonData = await fetchData(
       config.apiUrl + "Admin/AllocateProjection",
       "GET"
@@ -124,11 +125,16 @@ document
     document
       .getElementById("confirmAllocateButton")
       .addEventListener("click", async () => {
-        await fetchData("http://localhost:5263/api/Admin/allocateBuget", "POST", {});
+        await fetchData(
+          "http://localhost:5263/api/Admin/allocateBuget",
+          "POST",
+          {}
+        );
         document.getElementById("ResponseText").style.color = "green";
         document.getElementById("ResponseText").innerHTML =
           "CONGRATULATIONS! you have allocated funds to all universities and have no more funds to disperse";
         document.getElementById("populateFundsButton").style.display = "none";
         document.getElementById("projectionAllocate").style.display = "none";
       });
+    closeLoadingScreen();
   });

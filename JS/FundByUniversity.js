@@ -21,6 +21,7 @@ async function StartFill() {
   document.getElementById("Fund-form").addEventListener("submit", async (e) => {
     try {
       e.preventDefault();
+      showLoadingScreen();
       const budget = document.getElementById("Budget").value;
       const universityID = getKeyByValue(
         universitiesDict,
@@ -48,6 +49,7 @@ async function StartFill() {
           {}
         );
       }
+      closeLoadingScreen();
 
       if (result == 4) {
         document.getElementById("ResponseText").style.color = "green";

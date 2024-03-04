@@ -140,3 +140,13 @@ function loadScripts(scriptPaths) {
     document.body.appendChild(script);
   });
 }
+
+function showLoadingScreen(){
+  document.getElementById("loading-screen").style.display = "block";
+  document.getElementById("loading-video").style.display = "block";
+}
+
+function closeLoadingScreen(){
+  document.getElementById("loading-screen").style.display = "none";
+  document.getElementById("loading-video").style.display = "none";
+}

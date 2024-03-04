@@ -5,7 +5,7 @@ var globalResponseData = [];
 GetAllRequests();
 
 async function GetAllRequests() {
-  
+  showLoadingScreen();
   const response = await fetchData(config.apiUrl+"StudentFundRequest","GET",{})
 
   const dataResponse2 = response;
@@ -68,6 +68,7 @@ async function GetAllRequests() {
         row.appendChild(cell);
       }
     });
+    closeLoadingScreen();
     const actionCell = document.createElement("td");
     const viewButton = document.createElement("button");
       viewButton.textContent = "View Application";
