@@ -1,4 +1,4 @@
-async function fetchUnivesities(pageNumber, pageSize){
+async function fetchUnivesities(){
   const options = {
     method: "GET",
     headers: {
@@ -6,19 +6,19 @@ async function fetchUnivesities(pageNumber, pageSize){
     },
   };
   const response = await fetch(
-    `${config.apiUrl}Admin/GetAllUniversityRequests?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    `${config.apiUrl}Admin/GetAllUniversityRequests`,
     options
   );
   return await response.json();
 }
 
-async function populateTable(pageNumber, pageSize) {
+async function populateTable() {
 	const tbody = document.querySelector("#UniversitY-request-table tbody");
   tbody.innerHTML = '';
-  const response = await fetchUnivesities(pageNumber,pageSize);
-const applications = response.data;
-const totalPages = response.totalPages;
-	applications.forEach((application) => {
+//const response = 
+const applications = await fetchUnivesities();
+
+applications.forEach((application) => {
 		const tr = document.createElement("tr");
 
 		const requestID = document.createElement("td");
@@ -64,10 +64,9 @@ const totalPages = response.totalPages;
 		tr.appendChild(actionCell);
 		tbody.appendChild(tr);
 	});
-  displayPaginationLinks(totalPages);
 	populateFilterOptions();
 }
-populateTable(1,10);
+populateTable();
 
 function openPopup(application) {
 	const popup = document.getElementById("popup");
@@ -138,11 +137,6 @@ async function rejectWithMessage(requestId) {
 		console.error("Failed to update request:", error);
 	}
 }
-
-async function submitRejectComment(){
-
-}
-
 
 function closePopup() {
 	const popup = document.getElementById("popup");
@@ -230,19 +224,4 @@ function openRejectModal() {
 function closeRejectModal() {
   const modal = document.getElementById("popup-content");
   modal.style.display = "none";
-}
-
-function displayPaginationLinks(totalPages) {
-  console.log(totalPages); 
-  const pagination = document.getElementById('pagination');
-  pagination.innerHTML = ''; 
-  for (let i = 1; i <= totalPages; i++) {
-    const link = document.createElement('span');
-    link.classList.add('pagination-link');
-    link.textContent = i;
-    link.addEventListener('click', () => {
-      populateTable(i, 10);
-    });
-    pagination.appendChild(link);
-  }
 }
