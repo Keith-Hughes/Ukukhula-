@@ -1,4 +1,4 @@
-"../../JS/NewAdmin.js";
+"../JS/NewAdmin.js";
 function loadScripts(scriptPaths) {
   scriptPaths.forEach(function (scriptPath) {
     var script = document.createElement("script");
