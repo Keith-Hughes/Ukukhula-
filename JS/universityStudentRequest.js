@@ -126,6 +126,7 @@ function populatePopUpTable(row){
   document.getElementById("cv-button").setAttribute("data-info2", row.cells[0].textContent);
   document.getElementById("transcript-button").setAttribute("data-info2", row.cells[0].textContent);
   document.getElementById("id-button").setAttribute("data-info2", row.cells[0].textContent);
+  document.getElementById("upload-documents").setAttribute("data-info2", row.cells[0].textContent);
 
 
 }
@@ -253,14 +254,13 @@ function openPopup(row) {
   }, 10);
 
 
-  const rejectBtn = document.getElementById("reject");
-  const approveBtn = document.getElementById("approve");
+  const uploadDocsBtn = document.getElementById("upload-documents");
 
-  approveBtn.addEventListener("click", function(event){
+  uploadDocsBtn.addEventListener("click", function(event){
     event.preventDefault();
-    showModal('.approve-modal');
+    showModal('.request-form');
 
-    const approveModal = document.getElementById("confirm-form");
+    const approveModal = document.getElementById("new-request");
     approveModal.addEventListener("submit",async function(event){
       event.preventDefault();
       const data = await fetchData(config.apiUrl+"StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
@@ -278,48 +278,6 @@ function openPopup(row) {
       loadSection("StudentRequest");
     });
 
-    const cancelButton = document.querySelector('.cancel-button.approve');
-      cancelButton.addEventListener("click", function() {
-        hideModal('.approve-modal');
-        closePopup();
-      });
-  });
-
-  rejectBtn.addEventListener("click", function(event){
-    event.preventDefault();
-    showModal('.modal')
-    const modalForm = document.getElementById("modal-form");
-    modalForm.addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const reason = document.getElementById("reject-reason").value;
-
-      if (reason === "") {
-        // Handle the case when the reason is empty
-        alert("Please provide a reason for rejection.");
-        return;
-      }
-      
-      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + rejectBtn.getAttribute("data-value") + "/reject?comment="+reason,"POST", "");
-      const requestID = data.ID
-      if(requestID == 0){
-        alert(data.Comment);
-      }
-      else{
-      alert(`${data.firstName}'s funding request Has been rejected`);
-      }
-      hideModal('.modal');
-      closePopup();
-      //reload section after approval
-      loadSection("StudentRequest");
-    });
-
-    const cancelButton = document.querySelector('.cancel-button');
-    cancelButton.addEventListener("click", function() {
-      hideModal('.modal');
-
-      closePopup();
-    });
 
   });
 }
@@ -402,16 +360,32 @@ function filterTable() {
   }
 }
 
+function validateDate() {
+  // Get the selected date from the input
+  const selectedDate = new Date(document.getElementById("dob").value);
+
+  // Calculate the maximum allowed birth date for a person not older than 35
+  const maxBirthDate = new Date();
+  maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 35);
+  console.log(maxBirthDate);
+  console.log(selectedDate);
+  // Check if the selected date is within the allowed range
+  if (selectedDate < maxBirthDate) {
+      alert("Person must be 35 years or younger.");
+      // Clear the selected date or take appropriate action
+      document.getElementById("dob").value = "";
+  }
+}
+
 function populateFilterOptions() {
-  let universityFilter = document.getElementById("universityFilter");
+
   let statusFilter = document.getElementById("statusFilter");
 
-  let universityValues = getUniqueColumnValues(
-    document.getElementById("StudentRequestTable"),2); 
+
   let statusValues = getUniqueColumnValues(
     document.getElementById("StudentRequestTable"),5); 
 
-  populateDropdown(universityFilter, universityValues);
+ 
   populateDropdown(statusFilter, statusValues);
 }
 
@@ -431,5 +405,86 @@ document.getElementById('downloadButton').addEventListener('click', () => {
   html2pdf().from(table).save();
 
 });
+
+document.getElementById("create-request").addEventListener("click", ()=>{
+  showModal(".modal");
+
+});
+
+document.querySelector('.cancel-button.request').addEventListener("click", function() {
+  hideModal('.modal');
+  closePopup();
+});
+
+document
+.getElementById("request-form")
+.addEventListener("submit",async function (event) {
+  event.preventDefault();
+  //We need the university ID which we should
+  //find in session storage if the user is logged in
+  const UniversitId = parseInt(sessionStorage.getItem("universityId"));
+  console.log(UniversitId);
+  const requestData = {
+    FirstName: document.getElementById("firstName").value,
+    LastName: document.getElementById("lastName").value,
+    Email: document.getElementById("email-request").value,
+    PhoneNumber: document.getElementById("phoneNumber").value,
+    RaceName: document.getElementById("raceName").value,
+    GenderName: document.getElementById("genderName").value,
+    BirthDate: document.getElementById("dob").value,
+    IDNumber: document.getElementById("idNumber-request").value,
+    Grade: parseInt(document.getElementById("lastAveGrade").value),
+    Amount: parseInt(document.getElementById("amount-request").value),
+    UniversityID: UniversitId,
+  };
+
+  const responseData =  await fetchData(config.apiUrl+"StudentFundRequest/create", "POST", requestData)
+  console.log(responseData);
+  if(responseData.isSuccess){
+  console.log(responseData);
+  const requestID = responseData.studentRequestID;
+  const cvFile = document.getElementById("cv").files[0];
+  const transcriptFile = document.getElementById("transcript").files[0];
+  const idDocumentFile = document.getElementById("idDocument").files[0];
+
+  const documentsFormData = new FormData();
+
+  if (cvFile) {
+      documentsFormData.append("CV", cvFile);
+  }
+
+  if (transcriptFile) {
+      documentsFormData.append("Transcript", transcriptFile);
+  }
+
+  if (idDocumentFile) {
+      documentsFormData.append("IDDocument", idDocumentFile);
+  }
+
+  if(cvFile || transcriptFile || idDocumentFile){
+    const response = await fetch(config.apiUrl+"UploadDocument/"+requestID+"/upload", {
+      method: "POST",
+      body: documentsFormData,
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      }
+    });
+    
+    if(response.ok){
+      hideModal('.modal');
+      alert("Successfully Submited");
+      loadSection("universityStudentRequest");
+    }
+  }
+
+  hideModal('.modal');
+  alert(responseData.message);
+  loadSection("universityStudentRequest");
+
+  }
+});
+
+
+
 
 
