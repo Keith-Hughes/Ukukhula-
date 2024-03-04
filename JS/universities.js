@@ -107,7 +107,7 @@ function openPopup(application) {
 
 async function approveApplication(requestId) {
 	try {
-		const url = `http://localhost:5263/api/Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
+		const url = `${config.apiUrl}Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
 		await fetchData(url, "PUT", {});
     closePopup();
 	} catch (error) {
@@ -122,10 +122,11 @@ async function rejectWithMessage(requestId) {
     rejectSubmit.addEventListener("click", async (event) => {
       event.preventDefault();
       const comment = document.getElementById("reject-reason").value;
-      const url = `http://localhost:5263/api/Admin/rejectUniversityRequest?requestId=${requestId}&statusId=2&comment=${comment}`;
+      const url = `${config.apiUrl}Admin/rejectUniversityRequest?requestId=${requestId}&statusId=2&comment=${comment}`;
       await fetchData(url, "PUT", {});
       closeRejectModal();
       closePopup();
+      await populateTable()
     });
   } catch (error) {
     console.error("Failed to update request:", error);
@@ -157,17 +158,16 @@ function getUniqueColumnValues(table, columnIndex) {
 }
 
 function filterTable() {
-  // Get selected values from filters
+
   let universityFilter = document.getElementById("universityFilter").value;
   let statusFilter = document.getElementById("statusFilter").value;
   let startDate = document.getElementById("startDate").value;
   let endDate = document.getElementById("endDate").value;
 
-  // Get the table and rows
   let table = document.getElementById("UniversitY-request-table");
   let rows = table.getElementsByTagName("tr");
 
-  // Loop through all table rows, hide those that don't match the filter criteria
+
   for (let i = 1; i < rows.length; i++) {
     let row = rows[i];
     let university = row.cells[1].textContent;
