@@ -57,6 +57,12 @@ article {
   border-radius: 10px;
   width: 40%;
   flex-wrap: wrap;
+  transition: background-color 0.3s ease; /* Add transition for smooth color change */
+}
+
+/* Add hover effect */
+.flex-item:hover {
+  background-color: #524b4b; /* Change background color on hover */
 }
 
 .something {
