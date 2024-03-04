@@ -125,6 +125,11 @@ function loadScriptsBySection(sectionName) {
         "../../JS/html2pdf.bundle.min.js",
       ];
       break;
+      case "FundByUniversity":
+        scriptPaths = [
+          "../../JS/FundByUniversity.js"
+        ];
+        break;
   }
   loadScripts(scriptPaths);
 }
