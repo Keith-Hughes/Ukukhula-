@@ -1,0 +1,121 @@
+*{
+    font-family:'Quinfo_bold',sans-serif;
+    letter-spacing: 1px;
+    font-size: 17px;
+
+}
+
+h2 {
+    font-size: calc(20px + 2vw);
+}
+
+@font-face {
+    font-family: "Quinfo_bold";
+    src: local("Quinfo_bold"),
+      url("../Fonts/Quinfo/QuinfoBOLD.otf") format("opentype");
+  }
+
+
+#unauthorized{
+    display: none;
+    background-color: azure;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 20px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border-radius: 12px;
+    width: 60vw;
+    box-shadow: 0 0 10px 3px #000; /* Updated box-shadow with black color */
+}
+
+
+body{
+    background-repeat: no-repeat;
+    background-color: #ba00000e; /* Set your desired background color (e.g., red) */
+    background-image: url("../Images/dashboardBackground.jpg");
+
+    background-blend-mode: color-burn;
+    background-position: left top;
+}
+
+#upload-form{
+    background-color: azure;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 20px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border-radius: 12px;
+    width: 60vw;
+    box-shadow: 0 0 10px 3px #000; /* Updated box-shadow with black color */
+}
+
+
+
+.row{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1vh; 
+  }
+  
+
+.col-1 {
+    float: left;
+    width: 50%;
+    margin-top: 6px;
+}
+
+.col-2 {
+    float: left;
+    width: 50%;
+    margin-top: 6px;
+}
+
+  @media screen and (max-width: 820px) {
+    .col-1, .col-2, button[type=submit],button.cancel-button,.filter-options label, .document-buttons {
+      width: 100%;
+      margin-top: 0;
+    }
+    .row{
+        flex-direction: column;
+        margin-top: 5vh;
+      }
+}
+
+button[type=submit] {
+    background-color: #08dd01;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px auto;
+  }
+
+  button[type=submit]:hover {
+    background-color: #046e00;
+    
+  }
+  button.cancel-button{
+    background-color: #c8323c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    margin: 5px auto;
+
+}
+
+button.cancel-button:hover{
+    background-color: #501014;  
+}
+

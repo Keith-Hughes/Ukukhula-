@@ -214,6 +214,9 @@ async function displayDocumentButtons(requestId, fullName){
   });
 
   }
+  else{
+    console.log("No Transcript for User")
+  }
   
   const idData = await fetch(config.apiUrl+"UploadDocument/get/"+requestId+"/IDDocument");
     if(idData.ok){
@@ -360,22 +363,7 @@ function filterTable() {
   }
 }
 
-function validateDate() {
-  // Get the selected date from the input
-  const selectedDate = new Date(document.getElementById("dob").value);
 
-  // Calculate the maximum allowed birth date for a person not older than 35
-  const maxBirthDate = new Date();
-  maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 35);
-  console.log(maxBirthDate);
-  console.log(selectedDate);
-  // Check if the selected date is within the allowed range
-  if (selectedDate < maxBirthDate) {
-      alert("Person must be 35 years or younger.");
-      // Clear the selected date or take appropriate action
-      document.getElementById("dob").value = "";
-  }
-}
 
 function populateFilterOptions() {
 
@@ -442,7 +430,7 @@ document
   console.log(responseData);
   if(responseData.isSuccess){
   console.log(responseData);
-  const requestID = responseData.studentRequestID;
+  const requestID = responseData.id;
   const cvFile = document.getElementById("cv").files[0];
   const transcriptFile = document.getElementById("transcript").files[0];
   const idDocumentFile = document.getElementById("idDocument").files[0];
@@ -473,13 +461,13 @@ document
     if(response.ok){
       hideModal('.modal');
       alert("Successfully Submited");
-      loadSection("universityStudentRequest");
+      loadSection("StudentRequestUniversity");
     }
   }
 
   hideModal('.modal');
   alert(responseData.message);
-  loadSection("universityStudentRequest");
+  loadSection("StudentRequestUniversity");
 
   }
 });
