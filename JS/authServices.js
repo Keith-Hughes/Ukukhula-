@@ -32,7 +32,7 @@ async function checkTokenValidity() {
   console.log(JsonToken.exp);
   if (JsonToken.exp && JsonToken.exp < currentTimestamp) {
     // Token has expired, redirect to login page
-    window.location.href = "../../login/";
+    window.location.href = "../login/";
     return;
   }
 }

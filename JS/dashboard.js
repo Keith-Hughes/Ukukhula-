@@ -42,7 +42,7 @@ function showLogoutMessage() {
 
 function logout() {
   sessionStorage.clear();
-  location.href = "../../index.html";
+  location.href = "../index.html";
 }
 
 function closeLogoutMessage() {
@@ -98,35 +98,32 @@ function loadScriptsBySection(sectionName) {
   let scriptPaths = [];
   switch (sectionName) {
     case "UniversityRequest":
-      scriptPaths = ["../../JS/universities.js"];
+      scriptPaths = ["../JS/universities.js"];
       break;
     case "StudentRequest":
-      scriptPaths = [
-        "../../JS/studentRequest.js",
-        "../../JS/html2pdf.bundle.min.js",
-      ];
+      scriptPaths = ["../JS/studentRequest.js", "../JS/html2pdf.bundle.min.js"];
 
       break;
     case "Universities":
-      scriptPaths = ["../../JS/AllUniversities.js"];
+      scriptPaths = ["../JS/AllUniversities.js"];
       break;
     case "ManageUsers":
-      scriptPaths = ["../../JS/ManageUsers.js"];
+      scriptPaths = ["../JS/ManageUsers.js"];
       break;
     case "Funds":
-      scriptPaths = ["../../JS/Funds.js"];
+      scriptPaths = ["../JS/Funds.js"];
       break;
     case "PopulateFunds":
-      scriptPaths = ["../../JS/PopulateFunds.js"];
+      scriptPaths = ["../JS/PopulateFunds.js"];
       break;
     case "StudentRequestUniversity":
       scriptPaths = [
-        "../../JS/universityStudentRequest.js",
-        "../../JS/html2pdf.bundle.min.js",
+        "../JS/universityStudentRequest.js",
+        "../JS/html2pdf.bundle.min.js",
       ];
       break;
     case "FundByUniversity":
-      scriptPaths = ["../../JS/FundByUniversity.js"];
+      scriptPaths = ["../JS/FundByUniversity.js"];
       break;
   }
   loadScripts(scriptPaths);
