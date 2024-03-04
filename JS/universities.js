@@ -114,6 +114,7 @@ async function approveApplication(requestId) {
 		if (!confirmed) return;
 		const url = `http://localhost:5263/api/Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
 		const data = await fetchData(url, "PUT", {});
+    closePopup();
 	} catch (error) {
 		console.error("Failed to update request:", error);
 	}
