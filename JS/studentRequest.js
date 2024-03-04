@@ -1,3 +1,4 @@
+
 if(globalResponseData === undefined){
 var globalResponseData = [];
 }
@@ -48,7 +49,7 @@ async function GetAllRequests() {
 
   table.appendChild(headerRow);
 
-  globalResponseData.forEach((obj) => {
+  dataResponse2.forEach((obj) => {
     const row = document.createElement("tr");
     let fullName = "";
     keys.forEach((key) => {
@@ -241,9 +242,9 @@ async function displayDocumentButtons(requestId, fullName){
 }
 
 function openPopup(row) {
-  checkTokenValidity();
-  const overlay = document.getElementById('overlay');
   const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+  const popupContent = document.getElementById('popupContent');
   
   populatePopUpTable(row);
   const status = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["fundRequestStatus"];
@@ -256,10 +257,8 @@ function openPopup(row) {
   setTimeout(() => {
       popup.style.opacity = 1;
   }, 10);
-
-
   const rejectBtn = document.getElementById("reject");
-  const approveBtn = document.getElementById("approve");
+  const commentPopup = document.getElementById("popup-content");
 
   approveBtn.addEventListener("click", function(event){
     event.preventDefault();
@@ -292,14 +291,18 @@ function openPopup(row) {
 
   rejectBtn.addEventListener("click", function(event){
     event.preventDefault();
-    showModal('.modal')
+    console.log(rejectBtn.getAttribute("data-value"));
+    const commentElement = popupContent.querySelector('.editable-field[data-field="comment"]');
+    const commentContent = commentElement.textContent.trim();
+    document.querySelector('.modal').style.display = 'block';
+    document.querySelector('.overlay2').style.display = 'block';
     const modalForm = document.getElementById("modal-form");
     modalForm.addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const reason = document.getElementById("reject-reason").value;
 
-      if (reason === "") {
+      if (reason == "") {
         // Handle the case when the reason is empty
         alert("Please provide a reason for rejection.");
         return;
@@ -319,11 +322,10 @@ function openPopup(row) {
       loadSection("StudentRequest");
     });
 
-    const cancelButton = document.querySelector('.cancel-button');
+    const cancelButton = document.getElementById("cancel-button");
     cancelButton.addEventListener("click", function() {
-      hideModal('.modal');
-
-      closePopup();
+      document.querySelector('.modal').style.display = 'none';
+      document.querySelector('.overlay2').style.display = 'none';
     });
 
   });
