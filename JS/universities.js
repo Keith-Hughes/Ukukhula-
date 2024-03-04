@@ -64,6 +64,7 @@ async function populateTable() {
     actionCell.appendChild(viewButton);
     tr.appendChild(actionCell);
     tbody.appendChild(tr);
+    closeLoadingScreen();
   });
   populateFilterOptions();
 }
@@ -222,12 +223,3 @@ function closeRejectModal() {
   modal.style.display = "none";
 }
 
-function showLoadingScreen(){
-  document.getElementById("loading-screen").style.display = "block";
-  document.getElementById("loading-video").style.display = "block";
-}
-
-function closeLoadingScreen(){
-  document.getElementById("loading-screen").style.display = "none";
-  document.getElementById("loading-video").style.display = "none";
-}
