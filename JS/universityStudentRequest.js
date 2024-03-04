@@ -257,11 +257,11 @@ function openPopup(row) {
   }, 10);
 
 
-  const uploadDocsBtn = document.getElementById("upload-documents");
+  const documentsLinkBtn = document.getElementById("upload-documents");
 
-  uploadDocsBtn.addEventListener("click", function(event){
+  documentsLinkBtn.addEventListener("click", function(event){
     event.preventDefault();
-    showModal('.request-form');
+    showLoadingScreen();
 
     const approveModal = document.getElementById("new-request");
     approveModal.addEventListener("submit",async function(event){
@@ -269,10 +269,10 @@ function openPopup(row) {
       const data = await fetchData(config.apiUrl+"StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
       const requestID = data.ID
       if(requestID == 0){
-        alert(data.Comment);
+        displayResponse("Failed",`${data.Comment}`);
       }
       else{
-      alert(`${data.firstName}'s funding request Has been approved`);
+      displayResponse("Approved",`${data.firstName}'s funding request Has been approved`);
       }
       hideModal('.modal');
 
@@ -334,7 +334,6 @@ function saveEditedContent() {
 
 function filterTable() {
   // Get selected values from filters
-  let universityFilter = document.getElementById("universityFilter").value;
   let statusFilter = document.getElementById("statusFilter").value;
   let startDate = document.getElementById("startDate").value;
   let endDate = document.getElementById("endDate").value;
@@ -346,16 +345,14 @@ function filterTable() {
   // Loop through all table rows, hide those that don't match the filter criteria
   for (let i = 1; i < rows.length; i++) {
     let row = rows[i];
-    let university = row.cells[2].textContent;
     let status = row.cells[5].textContent;
     let date = row.cells[6].textContent;
 
-    let universityMatch =
-      universityFilter === "" || university === universityFilter;
+    
     let statusMatch = statusFilter === "" || status === statusFilter;
     let dateInRange = (startDate === '' || date >= startDate) && (endDate === '' || date <= endDate);
 
-    if (universityMatch && statusMatch && dateInRange) {
+    if (statusMatch && dateInRange) {
       row.style.display = ""; // Show the row
     } else {
       row.style.display = "none"; // Hide the row
@@ -425,7 +422,7 @@ document
     Amount: parseInt(document.getElementById("amount-request").value),
     UniversityID: UniversitId,
   };
-
+  showLoadingScreen();
   const responseData =  await fetchData(config.apiUrl+"StudentFundRequest/create", "POST", requestData)
   console.log(responseData);
   if(responseData.isSuccess){
@@ -460,18 +457,32 @@ document
     
     if(response.ok){
       hideModal('.modal');
-      alert("Successfully Submited");
+      alert("Documents Submited");
       loadSection("StudentRequestUniversity");
     }
   }
-
+  closeLoadingScreen();
   hideModal('.modal');
-  alert(responseData.message);
-  loadSection("StudentRequestUniversity");
-
+  displayResponse('Submission', responseData.message, () => {
+    loadSection("StudentRequestUniversity");
+  });
   }
 });
 
+function displayResponse(title, message, callback){
+
+  const responseModal = document.querySelector('.response-modal');
+  document.getElementById('response-title').innerText = title;
+  document.getElementById('response-message').innerText = message;
+  responseModal.style.display = "block";
+
+  setTimeout(() => {
+    responseModal.style.display = "none";
+    if (callback && typeof callback === 'function') {
+      callback();
+    }
+  }, 5000);
+}
 
 
 

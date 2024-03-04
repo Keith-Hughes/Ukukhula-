@@ -133,7 +133,7 @@ button.cancel-button:hover{
   }
 
 
-  .modal, .approve-modal{
+  .modal, .approve-modal, .response-modal{
     display: none;
     position: fixed;
     top: 50%;
@@ -147,6 +147,11 @@ button.cancel-button:hover{
     border-radius: 12px;
     width: 60vw;
   }
+  .response-modal{
+    box-shadow: 0 20px 15px rgba(1, 165, 9, 0.781);
+
+  }
+  
   .overlay2 {
     display: none;
     position: fixed;
