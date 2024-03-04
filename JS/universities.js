@@ -13,6 +13,7 @@ async function fetchUnivesities() {
 }
 
 async function populateTable() {
+  showLoadingScreen();
   const tbody = document.querySelector("#UniversitY-request-table tbody");
   tbody.innerHTML = "";
   //const response =
@@ -63,6 +64,7 @@ async function populateTable() {
     actionCell.appendChild(viewButton);
     tr.appendChild(actionCell);
     tbody.appendChild(tr);
+    closeLoadingScreen();
   });
   populateFilterOptions();
 }
@@ -107,6 +109,7 @@ function openPopup(application) {
 
 async function approveApplication(requestId) {
 	try {
+    
 		const url = `${config.apiUrl}Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
 		await fetchData(url, "PUT", {});
     closePopup();
@@ -219,3 +222,4 @@ function closeRejectModal() {
   const modal = document.getElementById("popup-content");
   modal.style.display = "none";
 }
+
