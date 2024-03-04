@@ -60,9 +60,9 @@ function checkResponse(responseData) {
     if (responseData.role === "University Admin") {
       sessionStorage.setItem("universityId", responseData.universityID);
       console.log(sessionStorage.getItem("universityId"));
-      location.href = "./pages/UniversityDashBoard/";
+      location.href = "../UniversityDashBoard/";
     } else {
-      location.href = "./pages/AdminDashboard/";
+      location.href = "../AdminDashboard/";
     }
   }
 }
