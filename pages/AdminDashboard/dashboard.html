@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../CSS/dashboard.css" />
+
     <script src="../../JS/authServices.js"></script>
     <script src="../../JS/dashboard.js"></script>
   </head>
@@ -74,12 +75,50 @@
       />
     </nav>
     <main id="main-content">
-      <h2>Ukukhula Dashboard</h2>
-      <p>This is where the main Dashboard stuff will go</p>
+      <section id="Home">
+        <link rel="stylesheet" href="../../CSS/home.css" />
+        <h2>Ukukhula Home</h2>
+        <header>
+          <h1 id="appText">Application Information</h1>
+        </header>
+
+        <p>2024 applications now open!</p>
+
+        <section class="something">
+          <article>
+            <h2>General Information</h2>
+            <ul>
+              <li>UNIVERSITIES AVAILABLE: <b>39</b></li>
+              <li>TOTAL BURSARY AMOUNT : <b>R 1,000,000</b></li>
+              <li>TOTAL APPROVED APPLICATIONS: <b>14</b></li>
+              <li>TOTAL REJECTED APPLICATIONS: <b>13</b></li>
+            </ul>
+          </article>
+
+          <article>
+            <h2>Criteria for eligibility</h2>
+            <ul>
+              <li>AGE CAP: <b>35</b></li>
+              <li>RACE: <b>Black, Indian, Coloured</b></li>
+              <li>GRADE: <b>65% or Above</b></li>
+            </ul>
+          </article>
+
+          <article class="flex-container">
+            <article class="flex-item">
+              <h2>Approved applicants</h2>
+              <p>74%</p>
+            </article>
+
+            <article class="flex-item">
+              <h2>Rejected applicants</h2>
+              <p>26%</p>
+            </article>
+          </article>
+        </section>
+      </section>
     </main>
-    <section>
-      <footer>All rights Reserved</footer>
-    </section>
+    <section></section>
 
     <button class="toggle-btn active"><span class="hamburger"></span></button>
     <span id="overlay"></span>
