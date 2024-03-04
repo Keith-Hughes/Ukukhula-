@@ -136,8 +136,17 @@ td {
   background-color: #c8323c;
 }
 
+#rejectButton{
+  background-color: #c8323c;
+}
+
 
 #reject:hover{
+  background-color: #5a070c;
+  cursor:pointer;
+}
+
+#rejectButton:hover{
   background-color: #5a070c;
   cursor:pointer;
 }
@@ -145,3 +154,15 @@ td {
 button#cancel-button:hover{
   background-color: #501014;
 }
+
+.onerow{
+
+  display: inline-block;
+}
+
+.pagination-link {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+
