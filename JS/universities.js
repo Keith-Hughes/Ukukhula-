@@ -114,7 +114,6 @@ async function approveApplication(requestId) {
 		if (!confirmed) return;
 		const url = `http://localhost:5263/api/Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
 		const data = await fetchData(url, "PUT", {});
-		console.log(data);
 	} catch (error) {
 		console.error("Failed to update request:", error);
 	}
@@ -131,6 +130,8 @@ async function rejectWithMessage(requestId) {
       const comment = document.getElementById("reject-reason").value;
       const url = `http://localhost:5263/api/Admin/rejectUniversityRequest?requestId=${requestId}&statusId=2&comment=${comment}`;
       await fetchData(url, "PUT", {});
+      closeRejectModal();
+      closePopup();
     })
 		
 	} catch (error) {
