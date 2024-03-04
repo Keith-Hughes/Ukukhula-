@@ -6,7 +6,7 @@ GetAllRequests();
 
 async function GetAllRequests() {
   
-  const response = await fetchData(config.apiUrl+`StudentFundRequest/get/${sessionStorage.getItem("universityId")}`)
+  const response = await fetchData(`${config.apiUrl}StudentFundRequest/get/${sessionStorage.getItem("universityId")}`)
 
   const dataResponse2 = response;
   globalResponseData = dataResponse2;
