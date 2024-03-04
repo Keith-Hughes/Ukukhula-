@@ -35,7 +35,7 @@
     <form id="modal-form">
       <label for="reject-reason">Reason:</label>
       <input type="text" id="reject-reason" name="reject-reason" required>
-      <button type="submit"  onclick="submitRejectComment()">Submit</button>
+      <button type="submit"  id="submitRejection">Submit</button>
       <button type="button" id="reject-cancel-button" class="cancel-button" onclick="closeRejectModal()">Cancel</button>
     </form>
   </article>
@@ -57,7 +57,8 @@
       <label for="endDate">End Date:</label>
       <input type="date" id="endDate" onchange="filterTable()">
     </article>
-  </article>
+  </article> 
+  <article id="pagination"></article>
   <table id="UniversitY-request-table">
     <thead>
       <th>ID</th>
@@ -67,6 +68,8 @@
       <th>Date Created</th>
       <th>Action</th>
     </thead>
-    <tbody></tbody>
+    <tbody></tbody>  
+   
   </table>
+
 </section>

@@ -1,4 +1,4 @@
-async function fetchUnivesities(){
+async function fetchUnivesities(pageNumber, pageSize){
   const options = {
     method: "GET",
     headers: {
@@ -6,15 +6,18 @@ async function fetchUnivesities(){
     },
   };
   const response = await fetch(
-    config.apiUrl+"Admin/GetAllUniversityRequests",
+    `${config.apiUrl}Admin/GetAllUniversityRequests?pageNumber=${pageNumber}&pageSize=${pageSize}`,
     options
   );
   return await response.json();
 }
 
-async function populateTable() {
-	const applications = await fetchUnivesities();
+async function populateTable(pageNumber, pageSize) {
 	const tbody = document.querySelector("#UniversitY-request-table tbody");
+  tbody.innerHTML = '';
+  const response = await fetchUnivesities(pageNumber,pageSize);
+const applications = response.data;
+const totalPages = response.totalPages;
 	applications.forEach((application) => {
 		const tr = document.createElement("tr");
 
@@ -61,9 +64,10 @@ async function populateTable() {
 		tr.appendChild(actionCell);
 		tbody.appendChild(tr);
 	});
+  displayPaginationLinks(totalPages);
 	populateFilterOptions();
 }
-populateTable();
+populateTable(1,10);
 
 function openPopup(application) {
 	const popup = document.getElementById("popup");
@@ -118,18 +122,27 @@ async function approveApplication(requestId) {
 }
 
 async function rejectWithMessage(requestId) {
+
 	try {
-		const modal = document.getElementById("popup-content");
-		modal.style.display = "block";
-		const comment = prompt("Please provide a comment for rejection:");
-		if (!comment) return;
-		const url = `http://localhost:5263/api/Admin/rejectUniversityRequest?requestId=${requestId}&statusId=2&comment=${comment}`;
-		const data = await fetchData(url, "PUT", {});
-		console.log(data);
+		openRejectModal()
+    const rejectSubmit = document.getElementById("submitRejection");
+    rejectSubmit.addEventListener("click",async (event)=>{
+      event.preventDefault();
+      alert("called")
+      const comment = document.getElementById("reject-reason").value;
+      const url = `http://localhost:5263/api/Admin/rejectUniversityRequest?requestId=${requestId}&statusId=2&comment=${comment}`;
+      await fetchData(url, "PUT", {});
+    })
+		
 	} catch (error) {
 		console.error("Failed to update request:", error);
 	}
 }
+
+async function submitRejectComment(){
+
+}
+
 
 function closePopup() {
 	const popup = document.getElementById("popup");
@@ -181,9 +194,9 @@ function filterTable() {
 			(endDate === "" || date <= endDate);
 
 		if (universityMatch && statusMatch && dateInRange) {
-			row.style.display = ""; // Show the row
+			row.style.display = ""; 
 		} else {
-			row.style.display = "none"; // Hide the row
+			row.style.display = "none"; 
 		}
 	}
 }
@@ -200,7 +213,6 @@ function populateFilterOptions() {
 	populateDropdown(statusFilter, statusValues);
 }
 
-// Helper function to populate a dropdown with options
 function populateDropdown(selectElement, values) {
 	values.forEach(function (value) {
 		let option = document.createElement("option");
@@ -210,7 +222,27 @@ function populateDropdown(selectElement, values) {
 	});
 }
 
-function closeRejectModal() {
+function openRejectModal() {
   const modal = document.getElementById('popup-content');
-  modal.style.display = 'none';
+  modal.style.display = 'block';
+}
+
+function closeRejectModal() {
+  const modal = document.getElementById("popup-content");
+  modal.style.display = "none";
+}
+
+function displayPaginationLinks(totalPages) {
+  console.log(totalPages); 
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = ''; 
+  for (let i = 1; i <= totalPages; i++) {
+    const link = document.createElement('span');
+    link.classList.add('pagination-link');
+    link.textContent = i;
+    link.addEventListener('click', () => {
+      populateTable(i, 10);
+    });
+    pagination.appendChild(link);
+  }
 }

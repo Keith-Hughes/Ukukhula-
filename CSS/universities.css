@@ -160,4 +160,9 @@ button#cancel-button:hover{
   display: inline-block;
 }
 
+.pagination-link {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 
