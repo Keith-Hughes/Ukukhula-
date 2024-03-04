@@ -5,7 +5,7 @@
 
 }
 
-h2 {
+h2, #student-name {
     font-size: calc(20px + 2vw);
 }
 
@@ -13,6 +13,21 @@ h2 {
     font-family: "Quinfo_bold";
     src: local("Quinfo_bold"),
       url("../Fonts/Quinfo/QuinfoBOLD.otf") format("opentype");
+  }
+
+  #popup-content{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 20px 15px rgba(12, 153, 42, 0.685);
+    z-index: 1000;
+    overflow-y: auto;
+    border-radius: 12px;
+    width: 60vw;
   }
 
 
