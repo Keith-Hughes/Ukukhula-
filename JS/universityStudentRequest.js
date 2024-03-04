@@ -360,6 +360,23 @@ function filterTable() {
   }
 }
 
+function validateDate() {
+  // Get the selected date from the input
+  const selectedDate = new Date(document.getElementById("dob").value);
+
+  // Calculate the maximum allowed birth date for a person not older than 35
+  const maxBirthDate = new Date();
+  maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 35);
+  console.log(maxBirthDate);
+  console.log(selectedDate);
+  // Check if the selected date is within the allowed range
+  if (selectedDate < maxBirthDate) {
+      alert("Person must be 35 years or younger.");
+      // Clear the selected date or take appropriate action
+      document.getElementById("dob").value = "";
+  }
+}
+
 function populateFilterOptions() {
 
   let statusFilter = document.getElementById("statusFilter");
@@ -394,8 +411,7 @@ document.getElementById("create-request").addEventListener("click", ()=>{
 
 });
 
-const cancelButton = document.querySelector('.cancel-button.request');
-cancelButton.addEventListener("click", function() {
+document.querySelector('.cancel-button.request').addEventListener("click", function() {
   hideModal('.modal');
   closePopup();
 });
@@ -409,21 +425,24 @@ document
   const UniversitId = parseInt(sessionStorage.getItem("universityId"));
   console.log(UniversitId);
   const requestData = {
-    firstName: document.getElementById("firstName").value,
-    lastName: document.getElementById("lastName").value,
-    email: document.getElementById("email").value,
-    phoneNumber: document.getElementById("phoneNumber").value,
-    raceName: document.getElementById("race").value,
-    genderName: document.getElementById("gender").value,
-    birthDate: document.getElementById("dob").value,
-    idNumber: document.getElementById("idNumber").value,
-    grade: parseInt(document.getElementById("lastAveGrade").value),
-    amount: parseInt(document.getElementById("amount").value),
-    universityID: UniversitId,
+    FirstName: document.getElementById("firstName").value,
+    LastName: document.getElementById("lastName").value,
+    Email: document.getElementById("email-request").value,
+    PhoneNumber: document.getElementById("phoneNumber").value,
+    RaceName: document.getElementById("raceName").value,
+    GenderName: document.getElementById("genderName").value,
+    BirthDate: document.getElementById("dob").value,
+    IDNumber: document.getElementById("idNumber-request").value,
+    Grade: parseInt(document.getElementById("lastAveGrade").value),
+    Amount: parseInt(document.getElementById("amount-request").value),
+    UniversityID: UniversitId,
   };
 
   const responseData =  await fetchData(config.apiUrl+"StudentFundRequest/create", "POST", requestData)
-  if(requestData.isSuccess){
+  console.log(responseData);
+  if(responseData.isSuccess){
+  console.log(responseData);
+  const requestID = responseData.studentRequestID;
   const cvFile = document.getElementById("cv").files[0];
   const transcriptFile = document.getElementById("transcript").files[0];
   const idDocumentFile = document.getElementById("idDocument").files[0];
@@ -431,19 +450,41 @@ document
   const documentsFormData = new FormData();
 
   if (cvFile) {
-      documentsFormData.append("cv", cvFile);
+      documentsFormData.append("CV", cvFile);
   }
 
   if (transcriptFile) {
-      documentsFormData.append("transcript", transcriptFile);
+      documentsFormData.append("Transcript", transcriptFile);
   }
 
   if (idDocumentFile) {
-      documentsFormData.append("idDocument", idDocumentFile);
+      documentsFormData.append("IDDocument", idDocumentFile);
   }
-}
 
+  if(cvFile || transcriptFile || idDocumentFile){
+    const response = await fetch(config.apiUrl+"UploadDocument/"+requestID+"/upload", {
+      method: "POST",
+      body: documentsFormData,
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      }
+    });
+    
+    if(response.ok){
+      hideModal('.modal');
+      alert("Successfully Submited");
+      loadSection("universityStudentRequest");
+    }
+  }
 
+  hideModal('.modal');
+  alert(responseData.message);
+  loadSection("universityStudentRequest");
 
+  }
 });
+
+
+
+
 
