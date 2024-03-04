@@ -36,7 +36,7 @@ function LoginFunction(event) {
         };
         //check if email is in our database.
         console.log("sending request to check email: " + email);
-        fetch(config.apiUrl+"Auth/Login", options)
+        fetch(config.apiUrl + "Auth/Login", options)
           .then((response) => response.json())
           .then((data) => checkResponse(data))
           .catch((err) => console.log(err));
@@ -60,9 +60,9 @@ function checkResponse(responseData) {
     if (responseData.role === "University Admin") {
       sessionStorage.setItem("universityId", responseData.universityID);
       console.log(sessionStorage.getItem("universityId"));
-      location.href = "./pages/UniversityDashBoard/dashboardUniversity.html";
+      location.href = "./pages/UniversityDashBoard/";
     } else {
-      location.href = "./pages/AdminDashboard/dashboard.html";
+      location.href = "./pages/AdminDashboard/";
     }
   }
 }

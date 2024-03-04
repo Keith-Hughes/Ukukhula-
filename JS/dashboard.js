@@ -64,7 +64,7 @@ function loadSection(sectionName) {
   document.querySelector(".sidebar").classList.toggle("active");
   document.querySelector(".toggle-btn").classList.toggle("active");
   const subMenu = document.getElementById("sub-menu");
-  if(subMenu!=null){
+  if (subMenu != null) {
     subMenu.style.display = "none";
   }
   const mainElements = document.getElementsByTagName("main");
@@ -125,29 +125,15 @@ function loadScriptsBySection(sectionName) {
         "../../JS/html2pdf.bundle.min.js",
       ];
       break;
-      case "FundByUniversity":
-        scriptPaths = [
-          "../../JS/FundByUniversity.js"
-        ];
-        break;
+    case "FundByUniversity":
+      scriptPaths = ["../../JS/FundByUniversity.js"];
+      break;
   }
   loadScripts(scriptPaths);
 }
 
 function loadScripts(scriptPaths) {
   //Load the AuthService script before all other scripts
-  let script = document.createElement("script");
-  script.src = "../../JS/authServices.js";
-  script.type = "text/javascript";
-  let fetchScript = document.createElement("script");
-  fetchScript.src = "../../JS/fetch.js";
-  fetchScript.type = "text/javascript";
-  let configScript = document.createElement("script");
-  configScript.src = "../../JS/config.js";
-  configScript.type = "text/javascript";
-  document.body.appendChild(configScript);
-  document.body.appendChild(fetchScript);
-  document.body.appendChild(script);
 
   checkTokenValidity();
   scriptPaths.forEach(function (scriptPath) {
