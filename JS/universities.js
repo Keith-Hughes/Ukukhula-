@@ -107,6 +107,7 @@ function openPopup(application) {
 
 async function approveApplication(requestId) {
 	try {
+    
 		const url = `${config.apiUrl}Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
 		await fetchData(url, "PUT", {});
     closePopup();
