@@ -108,12 +108,8 @@ function openPopup(application) {
 
 async function approveApplication(requestId) {
 	try {
-		const confirmed = window.confirm(
-			"Are you sure you want to approve this application?"
-		);
-		if (!confirmed) return;
 		const url = `http://localhost:5263/api/Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
-		const data = await fetchData(url, "PUT", {});
+		await fetchData(url, "PUT", {});
     closePopup();
 	} catch (error) {
 		console.error("Failed to update request:", error);
@@ -121,7 +117,6 @@ async function approveApplication(requestId) {
 }
 
 async function rejectWithMessage(requestId) {
-
 	try {
 		openRejectModal()
     const rejectSubmit = document.getElementById("submitRejection");
