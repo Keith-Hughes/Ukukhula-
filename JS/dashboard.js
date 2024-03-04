@@ -145,8 +145,8 @@ function loadScripts(scriptPaths) {
   let configScript = document.createElement("script");
   configScript.src = "../../JS/config.js";
   configScript.type = "text/javascript";
-  document.body.appendChild(fetchScript);
   document.body.appendChild(configScript);
+  document.body.appendChild(fetchScript);
   document.body.appendChild(script);
 
   checkTokenValidity();
