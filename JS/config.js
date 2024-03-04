@@ -1,5 +1,5 @@
 const config = {
-    apiUrl: 'http://localhost:5263/api/',
+    apiUrl: 'https://ukukhulabms.azurewebsites.net/api/',
     // other configuration settings
   };
   

@@ -47,14 +47,14 @@ async function GetAllRequests() {
   };
 
   const response = await fetch(
-    config.apiUrl+"Admin/GetUniversityUsers",
+    config.apiUrl + "Admin/GetUniversityUsers",
     options
   );
   const dataResponse = await response.json();
   // globalResponseData = dataResponse;
 
   const display = document.getElementById("UsersSection");
-
+  console.log(dataResponse);
   const table = document.createElement("table");
   table.setAttribute("id", "UsersTable");
 
@@ -93,15 +93,15 @@ async function GetAllRequests() {
     keys.forEach((key) => {
       if (!key.includes("id")) {
         const cell = document.createElement("td");
-          cell.textContent = obj[key];
-          if (key === "status") {
-              // Set color based on status value
-              if (obj["status"].toUpperCase().includes("INACTIVE")) {
-                  cell.style.color = "red";
-              } else {
-                  cell.style.color = "green";
-              }
+        cell.textContent = obj[key];
+        if (key === "status") {
+          // Set color based on status value
+          if (obj["status"].toUpperCase().includes("INACTIVE")) {
+            cell.style.color = "red";
+          } else {
+            cell.style.color = "green";
           }
+        }
         row.appendChild(cell);
       }
     });
@@ -163,7 +163,8 @@ function showDeactivate(obj, viewButton) {
       document.getElementById("userDeactivateButtonConfirm").style.display =
         "none";
       responseData = await fetchData(
-        config.apiUrl+`Admin/updateUserActivity?UserID=${userID}&Status=${Status}`,
+        config.apiUrl +
+          `Admin/updateUserActivity?UserID=${userID}&Status=${Status}`,
         "PUT"
       );
       console.log(responseData);
