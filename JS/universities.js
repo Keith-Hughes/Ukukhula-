@@ -109,10 +109,12 @@ function openPopup(application) {
 
 async function approveApplication(requestId) {
 	try {
-    
+
+    if(!confirm("Are you sure you want to approve?")) return;
 		const url = `${config.apiUrl}Admin/updateUniversityRequest?requestId=${requestId}&statusId=1`;
 		await fetchData(url, "PUT", {});
     closePopup();
+    populateTable();
 	} catch (error) {
 		console.error("Failed to update request:", error);
 	}
