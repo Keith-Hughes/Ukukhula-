@@ -3,15 +3,13 @@
 //   // if respo
 // });
 
-response = fetchData(
-  config.apiUrl+"Admin/getBudgetAndFunds",
-  "GET",
-  {}
-);
+response = fetchData(config.apiUrl + "Admin/getBudgetAndFunds", "GET", {});
 
 async function setData() {
+  showLoadingScreen();
+
   response = await fetchData(
-    config.apiUrl+"Admin/getBudgetAndFunds",
+    config.apiUrl + "Admin/getBudgetAndFunds",
     "GET",
     {}
   );
@@ -38,6 +36,8 @@ async function setData() {
     style: "currency",
     currency: "ZAR",
   });
+
+  closeLoadingScreen();
 }
 
 setData();

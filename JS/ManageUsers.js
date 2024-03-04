@@ -39,6 +39,7 @@ function createOptions(methodName, bodyMessage) {
 GetAllRequests();
 
 async function GetAllRequests() {
+  showLoadingScreen();
   const options = {
     method: "GET",
     headers: {
@@ -127,6 +128,7 @@ async function GetAllRequests() {
   });
 
   display.appendChild(table);
+  closeLoadingScreen();
   return dataResponse;
 }
 

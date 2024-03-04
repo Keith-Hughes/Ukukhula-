@@ -11,8 +11,9 @@ function createOptions(methodName, bodyMessage) {
   };
 }
 async function getAllUniversity() {
+  showLoadingScreen();
   const response = await fetch(
-    config.apiUrl+"Admin/GetAllUniversityRequests",
+    config.apiUrl + "Admin/GetAllUniversityRequests",
     createOptions("GET", {})
   );
   const dataResponse = await response.json();
@@ -75,6 +76,7 @@ async function getAllUniversity() {
     table.appendChild(row);
   });
   display.appendChild(table);
+  closeLoadingScreen();
   populateFilterOptions();
 }
 function getUniqueColumnValues(table, columnIndex) {
