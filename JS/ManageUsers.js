@@ -134,6 +134,7 @@ async function GetAllRequests() {
 
 function showAdmin() {
   loadScripts(["../JS/NewAdmin.js"]);
+  document.getElementById("overlay2").style.display = "block";
   document.getElementById("NewAdmin").style.display = "flex";
   document.getElementById("NewAdmin").style.flexDirection = "column";
 }
@@ -181,11 +182,13 @@ function showDeactivate(obj, viewButton) {
 
 function showHOD() {
   loadScripts(["../JS/NewHOD.js"]);
+  document.getElementById("overlay2").style.display = "block";
   document.getElementById("NewHOD").style.display = "flex";
   document.getElementById("NewHOD").style.flexDirection = "column";
 }
 
 function closePopup(form) {
+  document.getElementById("overlay2").style.display = "none";
   document.getElementById("responseMessageHOD").innerHTML = "";
   document.getElementById("responseMessageAdmin").innerHTML = "";
   removeScript(["../JS/" + form + ".js"]);

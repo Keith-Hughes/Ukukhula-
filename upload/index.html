@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <title>Upload-Documents</title>
-<html >
-    
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet" href="../CSS/upload.css" />
+<link rel="icon" href="../Images/Ukukhula-Logo-pic.png" />
 <script src="../JS/config.js"></script>
 <script src="../JS/upload.js"></script>
 </head>
 
+  <body>
+    <section id="Greeting">
+      <h2>
+        Welcome <span id="student-name"></span>. You have been selected for
+        funding
+      </h2>
+    </section>
+    <section>
+      <h4>
+        One step closer to securing your future. Please upload all documents
+        below in pdf format
+      </h4>
+    </section>
+    <section id="upload-form">
+      <form>
+        <article class="row">
+          <article class="col-1">
+            <label for="cv">CV (PDF only):</label>
+          </article>
+          <article class="col-2">
+            <input type="file" id="cv" name="cv" accept=".pdf" />
+          </article>
+        </article>
 
+<<<<<<< Updated upstream
     <body>
         <section id="Greeting">
             <h2>Welcome <span id="student-name"></span>. You have been selected for funding</h2>
@@ -62,3 +86,41 @@
 
 
 </html>
+=======
+        <article class="row">
+          <article class="col-1">
+            <label for="transcript">Transcript (PDF only):</label>
+          </article>
+          <article class="col-2">
+            <input
+              type="file"
+              id="transcript"
+              name="transcript"
+              accept=".pdf"
+            />
+          </article>
+        </article>
+
+        <article class="row">
+          <article class="col-1">
+            <label for="idDocument">ID Document (PDF only):</label>
+          </article>
+          <article class="col-2">
+            <input
+              type="file"
+              id="idDocument"
+              name="idDocument"
+              accept=".pdf"
+            />
+          </article>
+        </article>
+
+        <article class="row">
+          <button type="submit" id="submit">Submit</button>
+          <button type="button" class="cancel-button request">Cancel</button>
+        </article>
+      </form>
+    </section>
+  </body>
+</html>
+>>>>>>> Stashed changes
