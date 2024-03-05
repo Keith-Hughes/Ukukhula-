@@ -95,6 +95,16 @@ h2 {
   border-radius: 12px;
   size: 3%;
 }
+#myPieChart{
+  height: 50px;
+  width: 50px;
+}
+
+#pie{
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+}
 #logout-message {
   background-image: url("../Images/loginBackground.jpg");
   position: fixed;
