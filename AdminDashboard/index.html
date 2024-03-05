@@ -11,6 +11,8 @@
     <script src="../JS/dashboard.js"></script>
     <script src="../JS/config.js"></script>
     <script src="../JS/fetch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/DashboardChart.js"></script>
   </head>
   <body>
     <span id="loading-screen">
@@ -85,48 +87,11 @@
       />
     </nav>
     <main id="main-content">
-      <section id="Home">
-        <link rel="stylesheet" href="../CSS/home.css" />
-        <h2>Ukukhula Home</h2>
-        <header>
-          <h1 id="appText">Application Information</h1>
-        </header>
-
-        <p>2024 applications now open!</p>
-
-        <section class="something">
-          <article>
-            <h2>General Information</h2>
-            <ul>
-              <li>UNIVERSITIES AVAILABLE: <b>39</b></li>
-              <li>TOTAL BURSARY AMOUNT : <b>R 1,000,000</b></li>
-              <li>TOTAL APPROVED APPLICATIONS: <b>14</b></li>
-              <li>TOTAL REJECTED APPLICATIONS: <b>13</b></li>
-            </ul>
-          </article>
-
-          <article>
-            <h2>Criteria for eligibility</h2>
-            <ul>
-              <li>AGE CAP: <b>35</b></li>
-              <li>RACE: <b>Black, Indian, Coloured</b></li>
-              <li>GRADE: <b>65% or Above</b></li>
-            </ul>
-          </article>
-
-          <article class="flex-container">
-            <article class="flex-item">
-              <h2>Approved applicants</h2>
-              <p>74%</p>
-            </article>
-
-            <article class="flex-item">
-              <h2>Rejected applicants</h2>
-              <p>26%</p>
-            </article>
-          </article>
-        </section>
-      </section>
+      <h2>UKUKHULA HOME</h2>
+      <br /><br />
+      <canvas id="myPieChart" width="100" height="100"
+        ><br /><br /><br
+      /></canvas>
     </main>
     <section></section>
 

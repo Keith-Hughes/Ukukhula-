@@ -53,6 +53,11 @@ p {
 h2 {
   text-align: center;
 }
+#charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 #overlay {
   display: none;
