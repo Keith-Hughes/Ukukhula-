@@ -31,7 +31,7 @@ function showLogoutMessage() {
   // Create a div element for the message
   document.getElementById("overlay").style.display = "block";
 
-  var logoutMessage = document.createElement("div");
+  var logoutMessage = document.createElement("span");
   logoutMessage.id = "logout-message";
   logoutMessage.innerHTML =
     '<p>Do you want to log out? <br><br></p><button id="agree" onclick="logout()">Yes</button><button onclick="closeLogoutMessage()" id="disagree">No</button>';
@@ -42,7 +42,7 @@ function showLogoutMessage() {
 
 function logout() {
   sessionStorage.clear();
-  location.href = "../index.html";
+  location.href = "../";
 }
 
 function closeLogoutMessage() {
@@ -141,12 +141,12 @@ function loadScripts(scriptPaths) {
   });
 }
 
-function showLoadingScreen(){
+function showLoadingScreen() {
   document.getElementById("loading-screen").style.display = "block";
   document.getElementById("loading-video").style.display = "block";
 }
 
-function closeLoadingScreen(){
+function closeLoadingScreen() {
   document.getElementById("loading-screen").style.display = "none";
   document.getElementById("loading-video").style.display = "none";
 }

@@ -44,8 +44,9 @@ async function registerAdmin(
       email: emailText,
       role: "BBD Admin",
     };
+
     const registerResponseObject = await fetch(
-      config.apiUrl+"Auth/Register?universityID=" + universityID,
+      config.apiUrl + "Auth/Register?universityID=" + universityID,
       createOptions("POST", registerRequest)
     );
     const registerResponse = await registerResponseObject.json();
@@ -56,6 +57,7 @@ async function registerAdmin(
       const errorMessage =
         "Error registering BBD Admin : A user with the same email or phone number alreadly exists.";
       document.getElementById("responseMessageAdmin").innerHTML = errorMessage;
+      makeButtonsClickable();
       return;
     }
     document.getElementById("responseMessageAdmin").style.color = "green";
@@ -66,6 +68,7 @@ async function registerAdmin(
       lastNameText +
       " as a BBD Admin";
     document.getElementById("admin-registration-form").reset();
+    makeButtonsClickable();
   } catch (error) {
     // const errorMessage = "Error registering BBD Admin:" + error;
     if (JSON.stringify(error).includes("Error inserting into contacts table")) {
@@ -78,6 +81,7 @@ document
   .getElementById("admin-registration-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
+    makeButtonsUnclickable();
     let firstNameInput = document.getElementById("admin-first-name");
     if (!/^[A-Za-z]+$/.test(firstNameInput.value)) {
       document.getElementById("admin-first-name-error").textContent =
@@ -109,11 +113,29 @@ document
       firstNameInput.value,
       lastNameInput.value
     );
-
-
   });
 
-  document.getElementById("cancel").addEventListener("click", function(event){
-    event.preventDefault();
-    closePopup("NewAdmin");
-  })
+document.getElementById("cancel").addEventListener("click", function (event) {
+  event.preventDefault();
+  closePopup("NewAdmin");
+});
+
+function makeButtonsUnclickable() {
+  let createAdminButton = document.getElementById("createAdminButton");
+  let cancelButton = document.getElementById("cancel");
+
+  createAdminButton.disabled = true;
+  cancelButton.disabled = true;
+  createAdminButton.classList.add("disabled");
+  cancelButton.classList.add("disabled");
+}
+
+function makeButtonsClickable() {
+  let createAdminButton = document.getElementById("createAdminButton");
+  let cancelButton = document.getElementById("cancel");
+
+  createAdminButton.disabled = false;
+  cancelButton.disabled = false;
+  createAdminButton.classList.remove("disabled");
+  cancelButton.classList.remove("disabled");
+}

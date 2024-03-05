@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="../Images/Ukukhula-Logo-pic.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/ApplyNow.css" />
+    <script src="../JS/config.js"></script>
+ 
+    <script src="../JS/ApplyNow.js"></script>
+
+    <title>Application Form</title>
+  </head>
+  <body>
+    <span id="loading-screen">
+      <img
+        id="loading-video"
+        src="../Images/Ukukhula-Logo.gif"
+        alt="loading gif"
+      />
+    </span>
+
+    <form id="ApplyUniversity">
+      <h1>Application Form</h1>
+      <p id="ResponseText"></p>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="contactNumber">Contact Number:</label>
+      <input
+        type="tel"
+        id="contactNumber"
+        name="contactNumber"
+        required
+        pattern="0[6-8][0-9]{8}"
+        title="Please enter a 10-digit phone number starting with 0, where the second digit is 6, 7, or 8"
+        maxlength="10"
+      />
+
+      <label for="universityName">University Name:</label>
+      <input
+        type="text"
+        id="universityName"
+        name="universityName"
+        required
+        pattern="(?:^|\s)University(?:\s[A-Z][a-z]*)*"
+      />
+
+      <label for="province">Province:</label>
+      <select id="province" name="province" required>
+        <option value="" disabled selected>Select Province</option>
+        <option value="Eastern Cape">Eastern Cape</option>
+        <option value="Free State">Free State</option>
+        <option value="Gauteng">Gauteng</option>
+        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+        <option value="Limpopo">Limpopo</option>
+        <option value="Mpumalanga">Mpumalanga</option>
+        <option value="North West">North West</option>
+        <option value="Northern Cape">Northern Cape</option>
+        <option value="Western Cape">Western Cape</option>
+      </select>
+
+      <label for="amount">Amount:</label>
+      <input
+        type="text"
+        id="amount"
+        name="amount"
+        required
+        pattern="\d{1,6}"
+        title="Please enter a positive number with a maximum of 6 digits"
+      />
+
+      <button type="submit">Submit</button>
+      <button id="Cancel" onclick="cancelForm()">Cancel</button>
+    </form>
+
+    <script></script>
+  </body>
+</html>

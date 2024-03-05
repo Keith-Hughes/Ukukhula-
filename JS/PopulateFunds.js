@@ -9,7 +9,7 @@ function createOptions(methodName, bodyMessage) {
     bodyTemp: bodyMessage,
   };
 }
-function createTable(data, universityJSON) {
+function createTable(data, universityJSON, confirmButton, cancelButton) {
   const tableDiv = document.getElementById("projectionAllocate");
   const table = document.createElement("table");
   const headerRow = table.insertRow();
@@ -28,6 +28,12 @@ function createTable(data, universityJSON) {
       "There are pending universities, make sure that all universities have been responed to for this year.(press CANCEL to go back) <br /><br />";
 
     tableDiv.appendChild(preText);
+    document.getElementById("projectionAllocate").appendChild(confirmButton);
+    document.getElementById("projectionAllocate").appendChild(cancelButton);
+    confirmButton.textContent = "CONFIRM";
+    cancelButton.textContent = "CANCEL";
+    document.getElementById("confirmAllocateButton").style.display = "none";
+    closeLoadingScreen();
   } else {
     // Adding headers
     for (let key in data[0]) {
@@ -78,6 +84,10 @@ function createTable(data, universityJSON) {
     tableDiv.appendChild(preText);
 
     tableDiv.appendChild(table);
+    document.getElementById("projectionAllocate").appendChild(confirmButton);
+    document.getElementById("projectionAllocate").appendChild(cancelButton);
+    confirmButton.textContent = "CONFIRM";
+    cancelButton.textContent = "CANCEL";
   }
 }
 function getUniversityByID(id, universityJSON = Array) {
@@ -104,18 +114,15 @@ document
       "GET"
     );
 
-    document.getElementById("projectionAllocate").style.display = "flex";
-    createTable(jsonData, universityJSON);
     const confirmButton = document.createElement("button");
     const cancelButton = document.createElement("button");
     confirmButton.setAttribute("class", "populateFundsButton");
     confirmButton.setAttribute("id", "confirmAllocateButton");
     cancelButton.setAttribute("class", "populateFundsButtonC");
     cancelButton.setAttribute("id", "cancelAllocateButton");
-    document.getElementById("projectionAllocate").appendChild(confirmButton);
-    document.getElementById("projectionAllocate").appendChild(cancelButton);
-    confirmButton.textContent = "CONFIRM";
-    cancelButton.textContent = "CANCEL";
+    document.getElementById("projectionAllocate").style.display = "flex";
+    createTable(jsonData, universityJSON, confirmButton, cancelButton);
+
     document
       .getElementById("cancelAllocateButton")
       .addEventListener("click", () => {
