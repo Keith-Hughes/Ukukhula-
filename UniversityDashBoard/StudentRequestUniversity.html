@@ -84,7 +84,7 @@
 <article class="overlay2"></article>
 <article class="overlay"></article>
 
-  <article class="modal" id="popup-content">
+  <article class="modal-request modal" id="popup-content">
     <article id="new-request" class="request-form">
       <h2>Submit Bursary Request</h2>
       <form id="request-form">
@@ -121,7 +121,8 @@
                   <label for="phoneNumber">Phone Number:</label>
               </article>
               <article class="col-2">
-                  <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                  <input type="tel" id="phoneNumber" name="phoneNumber" pattern="0[6-8][0-9]{8}"
+                  title="Please enter a 10-digit phone number starting with 0, where the second digit is 6, 7, or 8" required>
               </article>
           </article>
              

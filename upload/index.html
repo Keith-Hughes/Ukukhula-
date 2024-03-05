@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="../CSS/upload.css" />
+<script src="../JS/config.js"></script>
 <script src="../JS/upload.js"></script>
 </head>
 
@@ -15,16 +16,16 @@
             <h2>Welcome <span id="student-name"></span>. You have been selected for funding</h2>
         </section>
         <section>
-            <h4>One step closer to securing your future. Please upload all documents below in pdf format</h4>
+            <h4>Please upload all documents below in pdf format</h4>
         </section>
 <section id="upload-form">
-<form >
+<form id="document-form">
 <article class="row">
     <article class="col-1">
         <label for="cv">CV (PDF only):</label>
     </article>
     <article class="col-2">
-        <input type="file" id="cv" name="cv" accept=".pdf" >
+        <input type="file" id="cv" name="cv" accept=".pdf" required>
     </article>
 </article>
 
@@ -33,7 +34,7 @@
         <label for="transcript">Transcript (PDF only):</label>
     </article>
     <article class="col-2">
-        <input type="file" id="transcript" name="transcript" accept=".pdf" >
+        <input type="file" id="transcript" name="transcript" accept=".pdf" required>
     </article>
 </article>
 
@@ -42,7 +43,7 @@
         <label for="idDocument">ID Document (PDF only):</label>
     </article>
     <article class="col-2">
-        <input type="file" id="idDocument" name="idDocument" accept=".pdf" >
+        <input type="file" id="idDocument" name="idDocument" accept=".pdf" required>
     </article>
 </article>
 
@@ -52,6 +53,10 @@
 </article>
 
 </form>
+</section>
+<section id="popup-content">
+    <h2>Success</h2>
+    <p>Documents Have Been Uploaded SuccessFully</p>
 </section>
 </body>
 

@@ -259,27 +259,22 @@ function openPopup(row) {
 
   const documentsLinkBtn = document.getElementById("upload-documents");
 
-  documentsLinkBtn.addEventListener("click", function(event){
+  documentsLinkBtn.addEventListener("click",async function(event){
     event.preventDefault();
     showLoadingScreen();
+    const tokenResponse = await fetch(`${config.apiUrl}Token/generate`);
+    if(tokenResponse.ok){
+      const tokenData = await tokenResponse.json();
+      const token = tokenData.token;
+      const baseUrl = 'http://127.0.0.1:5500/upload/';//change to azure api
+      const url = new URL(baseUrl);
+      url.searchParams.set('requestID', row.cells[0].textContent);
+      url.searchParams.set('token', token);
+      url.searchParams.set('fullName', row.cells[1].textContent);
+      console.log('Created URL:', url.href);
+    }
+    closeLoadingScreen();
 
-    const approveModal = document.getElementById("new-request");
-    approveModal.addEventListener("submit",async function(event){
-      event.preventDefault();
-      const data = await fetchData(config.apiUrl+"StudentFundRequest/" + approveBtn.getAttribute("data-value") + "/approve","PUT", "");
-      const requestID = data.ID
-      if(requestID == 0){
-        displayResponse("Failed",`${data.Comment}`);
-      }
-      else{
-      displayResponse("Approved",`${data.firstName}'s funding request Has been approved`);
-      }
-      hideModal('.modal');
-
-      closePopup();
-      //reload section after approval
-      loadSection("universityStudentRequest");
-    });
 
 
   });
