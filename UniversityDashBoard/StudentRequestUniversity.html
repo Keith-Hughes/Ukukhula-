@@ -177,7 +177,7 @@
                   <label for="lastAveGrade">Last Average Grade:</label>
               </article>
               <article class="col-2">
-                  <input type="number" id="lastAveGrade" name="lastAveGrade" required>
+                  <input type="number" max="100" min="81" pattern="\d{1,3}" id="lastAveGrade" name="lastAveGrade" required>
               </article>
           </article>
           
@@ -186,7 +186,7 @@
                   <label for="amount-request">Amount:</label>
               </article>
               <article class="col-2">
-                  <input type="number" id="amount-request" name="amount-request" required>
+                  <input type="number" max="125000" min="1" id="amount-request" pattern="\d{1,6}" name="amount-request" required>
               </article>
           </article>
 
