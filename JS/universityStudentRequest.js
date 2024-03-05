@@ -262,21 +262,38 @@ function openPopup(row) {
   documentsLinkBtn.addEventListener("click",async function(event){
     event.preventDefault();
     showLoadingScreen();
-    const tokenResponse = await fetch(`${config.apiUrl}Token/generate`);
+    try{
+    const tokenResponse = await fetch(`${config.apiUrl}Token/generate`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
     if(tokenResponse.ok){
       const tokenData = await tokenResponse.json();
       const token = tokenData.token;
-      const baseUrl = 'http://127.0.0.1:5500/upload/';//change to azure api
+      const baseUrl = 'https://ukukhula-bursary-management-final.github.io/Ukukhula-/upload/';//change to azure api
       const url = new URL(baseUrl);
       url.searchParams.set('requestID', row.cells[0].textContent);
       url.searchParams.set('token', token);
       url.searchParams.set('fullName', row.cells[1].textContent);
+      const emailTemplate = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ukukhula Bursary Notification</title><style>body {font-family: Arial, sans-serif;margin: 0;padding: 0;background-color: #f4f4f4;color: #333;}.container {max-width: 600px;margin: 20px auto;background-color: #fff;padding: 20px;border-radius: 5px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);}h1 {color: #3498db;}p {margin-bottom: 20px;}.cta-button {display: inline-block;padding: 10px 20px;background-color: #3498db;color: #fff;text-decoration: none;border-radius: 3px;}.cta-button:hover {background-color: #2980b9;}</style></head><body><div class="container"><h1>Congratulations! You\'ve Been Selected for the Ukukhula Bursary</h1><p>Dear ${row.cells[1].textContent},</p><p>We are pleased to inform you that you have been selected for the Ukukhula Bursary. This is a great achievement, and we believe in your potential to excel.</p><p>To proceed with the bursary process, please upload the required documents using the link below:</p><p><a href="${url.href}" class="cta-button">Upload Documents</a></p><p>Thank you for your commitment, and we look forward to supporting your education journey.</p><p>Best regards,<br>Ukukhula Bursary Committee</p></div></body></html>`;
+
+
+      const StudentEmail = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"];
+      const emailResponse = await fetchData(config.apiUrl+"Email/send?subject=Ukukhula Bursary Notification&"+"message="+emailTemplate+"&toEmail="+StudentEmail+"&toName="+row.cells[1].textContent, "POST", {})
       console.log('Created URL:', url.href);
+      alert("Upload link sent to "+row.cells[1].textContent);
     }
     closeLoadingScreen();
 
 
-
+  }
+  catch(error){
+    alert("unexpected error. please try again")
+    closeLoadingScreen();
+  }
   });
 }
 
