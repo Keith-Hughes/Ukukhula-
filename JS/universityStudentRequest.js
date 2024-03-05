@@ -282,7 +282,19 @@ function openPopup(row) {
 
 
       const StudentEmail = globalResponseData.filter(function(request){return request["idNumber"] == row.cells[3].textContent})[0]["email"];
-      const emailResponse = await fetchData(config.apiUrl+"Email/send?subject=Ukukhula Bursary Notification&"+"message="+emailTemplate+"&toEmail="+StudentEmail+"&toName="+row.cells[1].textContent, "POST", {})
+      const urlencoded = encodeURIComponent(url.href);
+const encodedSubject = encodeURIComponent("Ukukhula Bursary Notification");
+const encodedToEmail = encodeURIComponent(StudentEmail);
+const encodedToName = encodeURIComponent(row.cells[1].textContent);
+
+const emailResponse = await fetch(`${config.apiUrl}Email/send?subject=Link&message=${urlencoded}&toEmail=${encodedToEmail}&toName=${encodedToName}`,{
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+  },
+});
+
       console.log('Created URL:', url.href);
       alert("Upload link sent to "+row.cells[1].textContent);
     }
@@ -291,6 +303,7 @@ function openPopup(row) {
 
   }
   catch(error){
+    console.log(error)
     alert("unexpected error. please try again")
     closeLoadingScreen();
   }
